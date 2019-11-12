@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class Id {
 	private static Random r = new Random();
-	
     public  static  String gerarId(int opcao) {
         String id = new String();
         

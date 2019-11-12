@@ -5,16 +5,18 @@ import java.util.Date;
 public class Usuario {
 	private String nome;
 	private String cpf;
+	private String login;
 	private String senha;
 	private Date dataNas;
-	private Id id;
+	private String id;
+	static Id a = new Id();
 	
-	
-	public Usuario(String nome, String cpf, String senha, Date dataNas) {
+	public Usuario(String nome, String cpf, String senha, String login, Date dataNas) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.senha = senha;
 		this.dataNas = dataNas;
+		
 	}
 
 	public Usuario(String nome2, String cpf2, String senha2) {
@@ -46,18 +48,26 @@ public class Usuario {
 		this.dataNas = dataNas;
 	}
 
-	public Id getId() {
+	public String getId() {
 		return id;
 	}
-
-	public void setId(Id id) {
-		this.id = id;
+	
+	public void setId(int opcao) {
+		this.id = Id.gerarId(opcao);
 	}
 
 	@Override
 	public String toString() {
 		return "Usuario [getNome()=" + getNome() + ", getCpf()=" + getCpf() + ", getSenha()=" + getSenha()
 				+ ", getDataNas()=" + getDataNas() + "]";
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 	
 	
