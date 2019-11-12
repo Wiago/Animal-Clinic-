@@ -6,12 +6,10 @@ import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 public class ControladorUsuarios {
 	private RepositorioUsuarios repositorio;
 	
-	public boolean Cadastrar(Usuario u) {
+	public void Cadastrar(Usuario u) {
 		if(u != null) {
-			return repositorio.cadastrar(u);
+			repositorio.cadastrar(u);
 		}
-		else {
-			return false;
-		}
+		
 	}
 }
