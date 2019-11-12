@@ -12,8 +12,8 @@ public class Animal extends Usuario {
 	public Genero genero;
 	public TempoDeVida tempoDeVida;
 	
-	public Animal(String nome, String cpf, String senha, Date dataNas, Usuario Dono) {
-		super(nome, cpf, senha, dataNas);
+	public Animal(String nome, String cpf, String senha, Usuario Dono) {
+		super(nome, cpf, senha);
 		this.Dono = Dono;
 	}
 

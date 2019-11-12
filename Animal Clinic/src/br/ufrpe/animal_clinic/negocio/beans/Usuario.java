@@ -7,6 +7,7 @@ public class Usuario {
 	private String cpf;
 	private String senha;
 	private Date dataNas;
+	private Id id;
 	
 	
 	public Usuario(String nome, String cpf, String senha, Date dataNas) {
@@ -14,6 +15,10 @@ public class Usuario {
 		this.cpf = cpf;
 		this.senha = senha;
 		this.dataNas = dataNas;
+	}
+
+	public Usuario(String nome2, String cpf2, String senha2) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getNome() {
@@ -41,6 +46,13 @@ public class Usuario {
 		this.dataNas = dataNas;
 	}
 
+	public Id getId() {
+		return id;
+	}
+
+	public void setId(Id id) {
+		this.id = id;
+	}
 
 	@Override
 	public String toString() {
