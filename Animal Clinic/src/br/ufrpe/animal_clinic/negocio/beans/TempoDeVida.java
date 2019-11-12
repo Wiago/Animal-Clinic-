@@ -1,5 +1,5 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
 public enum TempoDeVida {
-	Filhote, Adulto, Idoso;
+	FILHOTE, ADULTO, IDOSO;
 }
