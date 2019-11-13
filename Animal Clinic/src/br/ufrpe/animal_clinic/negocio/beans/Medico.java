@@ -8,8 +8,8 @@ public class Medico extends Usuario {
 	private String especialidade;
 	private ArrayList <Animal> pacientesDoDia = new ArrayList();
 
-	public Medico(String nome, String cpf, String senha, Date dataNas) {
-		super(nome, cpf, senha, dataNas);
+	public Medico(String nome, String cpf, String senha,String login, Date dataNas) {
+		super(nome, cpf, senha, login, dataNas);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -44,7 +44,10 @@ public class Medico extends Usuario {
 			}
 		}
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "["+this.getNome()+" , "+especialidade+ "]";
+	}
 	
 }

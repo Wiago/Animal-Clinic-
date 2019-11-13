@@ -58,8 +58,8 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [getNome()=" + getNome() + ", getCpf()=" + getCpf() + ", getSenha()=" + getSenha()
-				+ ", getDataNas()=" + getDataNas() + "]";
+		return "Usuário [Nome = " + getNome() + ", CPF = " + getCpf() + ", Senha = " + getSenha()
+				+ ", Data de Nascimento = " + getDataNas() + "]";
 	}
 
 	public String getLogin() {

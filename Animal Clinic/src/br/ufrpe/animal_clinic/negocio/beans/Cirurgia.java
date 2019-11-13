@@ -31,7 +31,7 @@ public class Cirurgia {
 
 	@Override
 	public String toString() {
-		return "Cirurgia [getAnimal()=" + getAnimal() + ", getMedico()=" + getMedico() + ", getData()=" + getData()
+		return "Cirurgia [Animal =" + getAnimal() + ", Medico =" + getMedico() + ", Data =" + getData()
 				+ "]";
 	}
 	

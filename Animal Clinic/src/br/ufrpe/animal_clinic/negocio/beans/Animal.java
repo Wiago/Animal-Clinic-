@@ -112,8 +112,13 @@ public class Animal {
 		this.tempoDeVida = tempoDeVida; 
 	} 
  
- 
- 
+	
+	@Override
+	public String toString() {
+		return "Animal [Nome = " + nome + ", Dono = " + dono + "; " + alimentacao + "; " + especie
+				+ "; " + genero + "; " + tempoDeVida + "]";
+	}
+
 	@Override 
 	public boolean equals(Object obj) { 
 		if (this == obj) 
