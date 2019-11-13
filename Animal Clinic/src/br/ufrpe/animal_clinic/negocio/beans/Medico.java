@@ -8,8 +8,13 @@ public class Medico extends Usuario {
 	private String especialidade;
 	private ArrayList <Animal> pacientesDoDia = new ArrayList();
 
+<<<<<<< Updated upstream
 	public Medico(String nome, String cpf, String senha,String login, Date dataNas) {
 		super(nome, cpf, senha, login, dataNas);
+=======
+	public Medico(String nome, String cpf, String senha, Date dataNas) {
+		super(nome, cpf, senha, senha, dataNas);
+>>>>>>> Stashed changes
 		// TODO Auto-generated constructor stub
 	}
 
