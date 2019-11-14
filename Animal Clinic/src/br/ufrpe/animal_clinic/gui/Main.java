@@ -7,6 +7,10 @@ import br.ufrpe.animal_clinic.negocio.beans.Animal;
 import br.ufrpe.animal_clinic.negocio.beans.Atendente;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
+import br.ufrpe.animal_clinic.negocio.beans.Alimentacao;
+import br.ufrpe.animal_clinic.negocio.beans.Especie;
+import br.ufrpe.animal_clinic.negocio.beans.Genero;
+import br.ufrpe.animal_clinic.negocio.beans.TempoDeVida;
 
 public class Main {
 
@@ -20,7 +24,9 @@ public class Main {
 		Medico a = new Medico("Pedro","111.111.111-11","pedrinho123","1111",data1);
 		Usuario dono = new Usuario("Claudio","222.222.222-22","clau895","2222",data3);
 		Atendente b = new Atendente("Fernanda","333.333.333-33","fer555","5555",data2);
-		Animal c = new Animal("Scooby",dono,CARNIVORO,CANINO,MACHO,ADULTO);
+		Animal c = new Animal("Scooby",dono,Alimentacao.CARNIVORO,Especie.CANINO,Genero.MACHO,TempoDeVida.ADULTO);
+		
+		
 		
 
 	}

@@ -6,6 +6,7 @@ public class Cirurgia {
 	private Animal animal;
 	private Medico medico;
 	private Date data;
+	private Id id;
 	
 	public Cirurgia(Animal animal, Medico medico, Date data) {
 		this.animal = animal;
@@ -28,6 +29,12 @@ public class Cirurgia {
 	public void setData(Date data) {
 		this.data = data;
 	}
+	
+	public Id getId() {
+		return id;
+	}
+	
+	
 
 	@Override
 	public String toString() {

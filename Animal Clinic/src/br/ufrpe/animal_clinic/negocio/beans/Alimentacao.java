@@ -1,8 +1,13 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
 public enum Alimentacao {
-	CARNIVORO, HERBIVORO, ONIVORO; 
-	 
+	CARNIVORO(1), HERBIVORO(2), ONIVORO(3); 
+	
+	public int idAlimentacao;
+	
+	Alimentacao(int idAlimentacao){
+		this.idAlimentacao = idAlimentacao;
+	}
 	/*public String nome; 
 	Alimentacao(String nome){ 
 		this.nome = nome; 
