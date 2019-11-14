@@ -2,7 +2,7 @@ package br.ufrpe.animal_clinic.dados;
 
 import java.util.ArrayList;
 
-import br.ufrpe.animal_clinic.exception.UsuarioExisteException;
+import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
 
@@ -19,7 +19,7 @@ public class RepositorioProntuarios {
     }
 
 
-	public void cadastrar(Prontuario p) throws UsuarioExisteException{
+	public void cadastrar(Prontuario p) throws ExisteException{
 		
 		try {
             procurar(p.getId());

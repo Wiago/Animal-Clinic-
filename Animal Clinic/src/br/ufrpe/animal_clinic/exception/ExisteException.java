@@ -1,6 +1,6 @@
 package br.ufrpe.animal_clinic.exception;
 
-public class UsuarioExisteException  extends Exception{
+public class ExisteException  extends Exception{
 	
 /**
 	 * 
@@ -8,7 +8,7 @@ public class UsuarioExisteException  extends Exception{
 	private static final long serialVersionUID = 1L;
 
 
-	public UsuarioExisteException() {
+	public ExisteException() {
     }
     
     public String getMessage() {

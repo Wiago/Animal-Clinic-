@@ -38,6 +38,8 @@ public class Prontuario {
 	public void setId() {
 		this.id = a.gerarId(6);
 	}
+
+	
 	
 	
 	
