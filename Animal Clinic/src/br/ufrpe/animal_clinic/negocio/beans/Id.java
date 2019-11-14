@@ -27,6 +27,12 @@ public class Id {
             case 5: // Exame
             	id+=opcao;
             	id+=random();
+            case 6: // Prontuario
+            	id+=opcao;
+            	id+=random();
+            case 7: // Cirurgia
+            	id+=opcao;
+            	id+=random();
             default:
                 break;
         }

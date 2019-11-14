@@ -3,7 +3,7 @@ package br.ufrpe.animal_clinic.dados;
 import java.util.ArrayList;
 
 import br.ufrpe.animal_clinic.exception.UsuarioExisteException;
-import br.ufrpe.animal_clinic.exception.UsuarioNullException;
+import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class RepositorioUsuarios {
@@ -23,14 +23,14 @@ public class RepositorioUsuarios {
 		
 		try {
             procurar(u.getId());
-        } catch (UsuarioNullException ex) {
+        } catch (NullException ex) {
             usuarios.add(u);
         }
 
 	}
 
 	
-	public Usuario procurar(String id) throws UsuarioNullException{
+	public Usuario procurar(String id) throws NullException{
 		Usuario u = null;
 		boolean continuar = true;
 
@@ -42,7 +42,7 @@ public class RepositorioUsuarios {
 	    }
 
 		if (u == null) {
-            UsuarioNullException e = new UsuarioNullException();
+            NullException e = new NullException();
             throw e;
         }
 	    
@@ -50,12 +50,12 @@ public class RepositorioUsuarios {
 	}
 
 
-	public void remover(String id) throws UsuarioNullException {
+	public void remover(String id) throws NullException {
 		try {
 			Usuario u = procurar(id);
 			usuarios.remove(u);
-		}catch(UsuarioNullException ex){
-			UsuarioNullException e = new UsuarioNullException();
+		}catch(NullException ex){
+			NullException e = new NullException();
             throw e;
 		}
         

@@ -55,13 +55,7 @@ public class Usuario {
 	public void setId(int opcao) {
 		this.id = Id.gerarId(opcao);
 	}
-
-	@Override
-	public String toString() {
-		return "Usuário [Nome = " + getNome() + ", CPF = " + getCpf() + ", Senha = " + getSenha()
-				+ ", Data de Nascimento = " + getDataNas() + "]";
-	}
-
+	
 	public String getLogin() {
 		return login;
 	}
@@ -70,6 +64,12 @@ public class Usuario {
 		this.login = login;
 	}
 	
+
+	@Override
+	public String toString() {
+		return "Usuário [Nome = " + getNome() + ", CPF = " + getCpf() + ", Senha = " + getSenha()
+				+ ", Data de Nascimento = " + getDataNas() + "]";
+	}
 	
 	
 }

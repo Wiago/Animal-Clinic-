@@ -6,6 +6,8 @@ public class Prontuario {
 	private Animal animal;
 	private Medico medico;
 	private Date data;
+	private String id;
+	static Id a = new Id();
 	
 	public Prontuario(Animal animal, Medico medico, Date data) {
 		this.animal = animal;
@@ -27,6 +29,14 @@ public class Prontuario {
 
 	public Medico getMedico() {
 		return medico;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId() {
+		this.id = a.gerarId(6);
 	}
 	
 	

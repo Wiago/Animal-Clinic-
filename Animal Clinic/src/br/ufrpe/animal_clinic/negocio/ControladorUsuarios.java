@@ -11,38 +11,38 @@ import java.util.ArrayList;
 
 import br.ufrpe.animal_clinic.dados.RepositorioUsuarios;
 import br.ufrpe.animal_clinic.exception.UsuarioExisteException;
-import br.ufrpe.animal_clinic.exception.UsuarioNullException;
+import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class ControladorUsuarios {
 	private RepositorioUsuarios repositorio;
 	
-	public void cadastrar(Usuario u) throws UsuarioExisteException, UsuarioNullException {
+	public void cadastrar(Usuario u) throws UsuarioExisteException, NullException {
 		
 		if(u != null) {
 			repositorio.cadastrar(u);
 		}else {
-			UsuarioNullException e = new UsuarioNullException();
+			NullException e = new NullException();
             throw e;
 		}
 		
 	}
 	
-	public void alterarLogin(Usuario u, String login) throws UsuarioNullException {
+	public void alterarLogin(Usuario u, String login) throws NullException {
 		if(u != null) {
 			Usuario u1 = procurar(u.getId());
 			u1.setLogin(login);
 		}else {
-			UsuarioNullException e = new UsuarioNullException();
+			NullException e = new NullException();
             throw e;
 		}
 	} 
 	
-	public void remover(Usuario u) throws UsuarioNullException{
+	public void remover(Usuario u) throws NullException{
 		repositorio.remover(u.getId());
 	}
 	
-	public Usuario procurar(String id) throws UsuarioNullException {
+	public Usuario procurar(String id) throws NullException {
         return this.repositorio.procurar(id);
     }
 	
