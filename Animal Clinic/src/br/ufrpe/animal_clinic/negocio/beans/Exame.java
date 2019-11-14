@@ -6,6 +6,8 @@ public class Exame {
 	private Animal animal;
 	private Medico medico;
 	private Date data;
+	private String id;
+	static Id a = new Id();
 	
 	public Exame(Animal animal, Medico medico, Date data) {
 		this.animal = animal;
@@ -27,6 +29,14 @@ public class Exame {
 	}
 	public Animal getAnimal() {
 		return animal;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId() {
+		this.id = Id.gerarId(5);
 	}
 
 	@Override
