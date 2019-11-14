@@ -7,9 +7,16 @@ import br.ufrpe.animal_clinic.negocio.beans.Exame;
 
 public class ControladorExames {
 	private RepositorioExames repositorio;
-	
-	public void criarProntuario(Exame e) throws NullException, ExisteException {
 		
+	public ControladorExames() {
+		repositorio = new RepositorioExames(10);
+	}
+	public RepositorioExames getRepositorio() {
+		return repositorio;
+	}
+
+
+	public void criarExame(Exame e) throws NullException, ExisteException {
 		if(e != null) {
 			repositorio.cadastrar(e);
 		}else {
@@ -19,10 +26,10 @@ public class ControladorExames {
 		
 	}
 	
-	public void alterarProntuar(Exame e) throws NullException {
+	public void alterarExame(Exame e) throws NullException {
 		if(e != null) {
 			Exame e1 = procurar(e.getId());
-			
+			//TO-DO
 		}else {
 			NullException c = new NullException();
             throw c;

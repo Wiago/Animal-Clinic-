@@ -20,14 +20,18 @@ public class RepositorioExames {
 	}
 	
 	
-	public void cadastrar(Exame e) throws ExisteException{
-		
-		try {
-	        procurar(e.getId());
-	    } catch (NullException ex) {
-	        exames.add(e);
-	    }
-	
+	public ArrayList<Exame> getExames() {
+		return exames;
+	}
+
+	public void cadastrar(Exame e) throws ExisteException, NullException{
+			//Exame exame = procurar(e.getId());
+			if(e != null) {
+				exames.add(e);
+			}
+			else {
+				throw new NullException();
+			}
 	}
 	
 	

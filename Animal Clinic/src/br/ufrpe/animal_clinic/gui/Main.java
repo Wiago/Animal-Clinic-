@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
+import br.ufrpe.animal_clinic.exception.ExisteException;
+import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Alimentacao;
 import br.ufrpe.animal_clinic.negocio.beans.Animal;
 import br.ufrpe.animal_clinic.negocio.beans.Atendente;
@@ -16,11 +18,12 @@ import br.ufrpe.animal_clinic.negocio.beans.Alimentacao;
 import br.ufrpe.animal_clinic.negocio.beans.Especie;
 import br.ufrpe.animal_clinic.negocio.beans.Genero;
 import br.ufrpe.animal_clinic.negocio.beans.TempoDeVida;
+import br.ufrpe.animal_clinic.dados.RepositorioExames;
 
 public class Main {
 
-	public static void main(String[] args) throws ParseException {
-		
+	public static void main(String[] args) throws ParseException, ExisteException, NullException {
+		RepositorioExames a1 = new RepositorioExames(null);
 		DateFormat f = DateFormat.getDateInstance();
 		Date data1 = f.parse("12/01/1995");
 		Date data2 = f.parse("01/09/1980");
@@ -33,7 +36,11 @@ public class Main {
 		Atendente b = new Atendente("Fernanda","333.333.333-33","fer555","5555",data2);
 		Animal c = new Animal("Scooby",dono,Alimentacao.CARNIVORO,Especie.CANINO,Genero.MACHO,TempoDeVida.ADULTO);
 		
-		b.marcarConsulta(data4, c, a);
+		a.setEspecialidade("Cachorros");
+		b.marcarExame(data4, c, a);
+		System.out.println(b.getControladorExames().getRepositorio().getExames());
+		
+		
 	}
 
 }
