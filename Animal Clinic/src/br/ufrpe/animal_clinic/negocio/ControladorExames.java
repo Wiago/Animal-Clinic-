@@ -6,10 +6,18 @@ import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Exame;
 
 public class ControladorExames {
+	private static ControladorExames instancia;
 	private RepositorioExames repositorio;
 		
-	public ControladorExames() {
+	private ControladorExames() {
 		repositorio = new RepositorioExames(10);
+	}
+	
+	public static ControladorExames getInstancia() {
+		if(instancia == null) {
+			instancia = new ControladorExames();
+		}
+		return instancia;
 	}
 	public RepositorioExames getRepositorio() {
 		return repositorio;

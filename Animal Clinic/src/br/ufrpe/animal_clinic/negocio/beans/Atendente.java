@@ -4,21 +4,24 @@ import br.ufrpe.animal_clinic.negocio.ControladorExames;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.ControladorCirurgia;
+import br.ufrpe.animal_clinic.negocio.ControladorConsultas;
 import br.ufrpe.animal_clinic.negocio.ControladorProntuarios;
 
 public class Atendente extends Usuario {
 	private ControladorExames conExame;
 	private ControladorCirurgia conCirurg;
 	private ControladorProntuarios conPront;
+	private ControladorConsultas conCons;
 	
 	public Atendente(String nome, String cpf, String senha, String login, Date dataNas) {
 		super(nome, cpf, senha, login, dataNas);
 		
 		// TODO - OS CONTROLADORES SÃO SINGLETON!!!
 		
-		conExame = new ControladorExames();
-		conCirurg = new ControladorCirurgia();
-		conPront = new ControladorProntuarios();
+		conExame = ControladorExames.getInstancia();
+		conCirurg = ControladorCirurgia.getInstancia();
+		conPront = ControladorProntuarios.getInstancia();
+		conCons = ControladorConsultas.getInstancia();
 	}
 
 	

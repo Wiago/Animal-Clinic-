@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import br.ufrpe.animal_clinic.dados.RepositorioCirurgia;
 import br.ufrpe.animal_clinic.dados.RepositorioUsuarios;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
@@ -16,6 +17,18 @@ import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class ControladorUsuarios {
 	private RepositorioUsuarios repositorio;
+	private static ControladorUsuarios instancia;
+	
+	private ControladorUsuarios() {
+		repositorio = new RepositorioUsuarios(10);
+	}
+	
+	public static ControladorUsuarios getInstancia() {
+		if(instancia == null) {
+			instancia = new ControladorUsuarios();
+		}
+		return instancia;
+	}
 	
 	public void cadastrar(Usuario u) throws ExisteException, NullException {
 		

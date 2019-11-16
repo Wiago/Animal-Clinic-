@@ -23,7 +23,6 @@ import br.ufrpe.animal_clinic.dados.RepositorioExames;
 public class Main {
 
 	public static void main(String[] args) throws ParseException, ExisteException, NullException {
-		RepositorioExames a1 = new RepositorioExames(null);
 		DateFormat f = DateFormat.getDateInstance();
 		Date data1 = f.parse("12/01/1995");
 		Date data2 = f.parse("01/09/1980");

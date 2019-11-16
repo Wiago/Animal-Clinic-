@@ -10,7 +10,7 @@ import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
 public class RepositorioProntuarios {
 	ArrayList<Prontuario> prontuario = new ArrayList<Prontuario>(10);
 	
-	public void repositorioProntuario(int tamanho) {
+	public RepositorioProntuarios(int tamanho) {
         this.prontuario = new ArrayList<Prontuario>(tamanho);
     }
 
