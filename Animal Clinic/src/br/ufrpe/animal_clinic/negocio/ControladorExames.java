@@ -1,8 +1,11 @@
 package br.ufrpe.animal_clinic.negocio;
 
+import java.util.Date;
+
 import br.ufrpe.animal_clinic.dados.RepositorioExames;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
+import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 import br.ufrpe.animal_clinic.negocio.beans.Exame;
 
 public class ControladorExames {
@@ -33,8 +36,18 @@ public class ControladorExames {
 		}
 		
 	}
+	public void remarcarExame(Exame e, Date dataNova) throws NullException, ExisteException {
+		if(this.procurar(e.getId()) != null) {
+			Exame ex = new Exame(e.getAnimal(), e.getMedico(), dataNova);
+			repositorio.remover(e.getId());
+			repositorio.cadastrar(ex);
+		}
+		else {
+			throw new NullException();
+		}
+	}
 	
-	public void alterarExame(Exame e) throws NullException {
+	/*public void alterarExame(Exame e) throws NullException {
 		if(e != null) {
 			Exame e1 = procurar(e.getId());
 			//TO-DO
@@ -42,7 +55,7 @@ public class ControladorExames {
 			NullException c = new NullException();
             throw c;
 		}
-	} 
+	} */
 	
 	public void remover(Exame e) throws NullException{
 		repositorio.remover(e.getId());

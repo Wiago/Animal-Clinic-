@@ -6,6 +6,7 @@ public class Consulta {
 	private Animal animal;
 	private Medico medico;
 	private Date data;
+	private Id id;
 	
 	public Consulta(Animal animal, Medico medico, Date data) {
 		this.animal = animal;
@@ -29,6 +30,10 @@ public class Consulta {
 	}
 	public void setData(Date data) {
 		this.data = data;
+	}
+	
+	public Id getId() {
+		return id;
 	}
 
 	@Override

@@ -21,6 +21,9 @@ public class ControladorProntuarios {
 		return instancia;
 	}
 	
+	public RepositorioProntuarios getRepositorio() {
+		return repositorio;
+	}
 	
 	public void criarProntuario(Prontuario p) throws NullException, ExisteException {
 		

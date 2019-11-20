@@ -41,10 +41,10 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public Date getDataNas() {
+	public Date getData() {
 		return dataNas;
 	}
-	public void setDataNas(Date dataNas) {
+	public void setData(Date dataNas) {
 		this.dataNas = dataNas;
 	}
 
@@ -68,7 +68,7 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuário [Nome = " + getNome() + ", CPF = " + getCpf() + ", Senha = " + getSenha()
-				+ ", Data de Nascimento = " + getDataNas() + "]";
+				+ ", Data de Nascimento = " + getData() + "]";
 	}
 	
 	

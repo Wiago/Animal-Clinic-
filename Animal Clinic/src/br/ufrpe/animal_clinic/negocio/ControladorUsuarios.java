@@ -30,6 +30,10 @@ public class ControladorUsuarios {
 		return instancia;
 	}
 	
+	public RepositorioUsuarios getRepositorio() {
+		return repositorio;
+	}
+	
 	public void cadastrar(Usuario u) throws ExisteException, NullException {
 		
 		if(u != null) {
@@ -59,15 +63,15 @@ public class ControladorUsuarios {
         return this.repositorio.procurar(id);
     }
 	
-	public void salvarDados(String file) throws IOException {
+	/*public void salvarDados(String file) throws IOException {
         File arquivo = new File(file);
         FileOutputStream fos = new FileOutputStream(arquivo);
         ObjectOutputStream ous = new ObjectOutputStream(fos);
         ous.writeObject(this.repositorio.getDados());
         ous.close();
-    }
+    }*/
 	
-	public void carregarDados(String file) {
+	/*public void carregarDados(String file) {
         
         File arquivo = new File(file);
         FileInputStream fis;
@@ -87,7 +91,7 @@ public class ControladorUsuarios {
         } catch (FileNotFoundException ex) {
             this.repositorio = new RepositorioUsuarios(15);
         }
-    }
+    }*/
 	
 	public ArrayList<Usuario> getDados() {
         return this.repositorio.getDados();

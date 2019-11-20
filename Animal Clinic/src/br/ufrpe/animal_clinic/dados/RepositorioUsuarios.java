@@ -1,9 +1,11 @@
 package br.ufrpe.animal_clinic.dados;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
+import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class RepositorioUsuarios {
@@ -65,4 +67,17 @@ public class RepositorioUsuarios {
 	public ArrayList<Usuario> getDados() {
 	        return usuarios;
 	}
+	
+	public ArrayList<Usuario> listarPorData(Date d) throws NullException{
+		  ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
+	      for (Usuario usuario : usuarios) {
+	    	  if(usuario.getData().equals(d)) {
+	    		  listaUsuarios.add(usuario);
+	    	  }
+	      }
+	      if(listaUsuarios.size() == 0) {
+	    	  throw new NullException();
+	      }
+	      return listaUsuarios;
+	  }
 }

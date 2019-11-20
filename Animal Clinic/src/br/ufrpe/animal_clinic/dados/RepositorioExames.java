@@ -1,9 +1,12 @@
 package br.ufrpe.animal_clinic.dados;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
+import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
+import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 import br.ufrpe.animal_clinic.negocio.beans.Exame;
 
 
@@ -25,9 +28,18 @@ public class RepositorioExames {
 	}
 
 	public void cadastrar(Exame e) throws ExisteException, NullException{
-			//Exame exame = procurar(e.getId());
-			if(e != null) {
-				exames.add(e);
+			Exame exame = e;
+			if(exames.size() > 0 && exame != null) {
+				exame = procurar(e.getId());
+				if(exame == null) {
+					exames.add(exame);
+				}
+				else {
+					throw new ExisteException();
+				}
+			}
+			if(exames.size() == 0 && exame != null) {
+				exames.add(exame);
 			}
 			else {
 				throw new NullException();
@@ -54,6 +66,23 @@ public class RepositorioExames {
 	    return e;
 	}
 	
+	public Exame procurar(Exame e) throws NullException {
+		 Exame get = null;
+	     boolean continuar = true;
+	     for (int i = 0; i < exames.size() && continuar == true; i++) {
+	    	 get = exames.get(i);
+	    	 if(get.getId().equals(e.getId())) { 
+	    		 continuar = false;
+	    	 }
+	    	 else {
+	    		 get = null;
+	    	 }
+	     }
+	     if (get == null) {
+          throw new NullException();
+	     }
+	     return get;
+	  }
 	
 	public void remover(String id) throws NullException {
 		try {
@@ -71,6 +100,17 @@ public class RepositorioExames {
 	        return exames;
 	}
 		
-	
+	public ArrayList<Exame> listarPorData(Date d) throws NullException{
+		  ArrayList<Exame> listaExames = new ArrayList<Exame>();
+	      for (Exame exame : exames) {
+	    	  if(exame.getData().equals(d)) {
+	    		  listaExames.add(exame);
+	    	  }
+	      }
+	      if(listaExames.size() == 0) {
+	    	  throw new NullException();
+	      }
+	      return listaExames;
+	  }
 
 }

@@ -15,16 +15,11 @@ public class Atendente extends Usuario {
 	
 	public Atendente(String nome, String cpf, String senha, String login, Date dataNas) {
 		super(nome, cpf, senha, login, dataNas);
-		
-		// TODO - OS CONTROLADORES SÃO SINGLETON!!!
-		
 		conExame = ControladorExames.getInstancia();
 		conCirurg = ControladorCirurgia.getInstancia();
 		conPront = ControladorProntuarios.getInstancia();
 		conCons = ControladorConsultas.getInstancia();
 	}
-
-	
 	
 	public ControladorExames getControladorExames() {
 		return conExame;
@@ -38,12 +33,13 @@ public class Atendente extends Usuario {
 		return conPront;
 	}
 
-	public void marcarConsulta(Date data, Animal animal, Medico medico) {
-		//TODO
+	public void marcarConsulta(Date data, Animal animal, Medico medico) throws NullException, ExisteException {
+		Consulta co = new Consulta(animal, medico, data);
+		conCons.criarConsulta(co);
 	}
 	
-	public void remarcarConsulta(Consulta consulta, Date novaData) {
-		//TODO
+	public void remarcarConsulta(Consulta consulta, Date novaData) throws NullException {
+		conCons.remarcarConsulta(consulta, novaData);
 	}
 	
 	public void marcarExame(Date data, Animal animal, Medico medico) throws ExisteException, NullException{
@@ -51,8 +47,8 @@ public class Atendente extends Usuario {
 		conExame.criarExame(ex);
 	}
 	
-	public void remarcarExame(Exame exame, Date novaData) {
-		
+	public void remarcarExame(Exame exame, Date novaData) throws NullException, ExisteException {
+		conExame.remarcarExame(exame, novaData);
 	}
 	
 	public void marcarCastracao(Animal animal, Medico medico, Date data) {
