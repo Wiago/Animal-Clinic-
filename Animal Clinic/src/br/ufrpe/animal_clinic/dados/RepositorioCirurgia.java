@@ -19,24 +19,28 @@ public class RepositorioCirurgia {
 		 this.cirurgias = cirurgias;
 	 }
 	    
-	 public void cadastrar(Cirurgia c) {
-		 try {
-	         this.procurar(c);
-	     } catch (NullException ex) {
-	    	 cirurgias.add(c);
-	     }
+	 public void cadastrar(Cirurgia c) throws ExisteException, NullException{
+			 if(cirurgias.size() == 0) {
+				 cirurgias.add(c);
+			 }
+			 else {
+				 Cirurgia c1 = this.procurar(c);
+				 if(c1 == null) {
+					 cirurgias.add(c);
+				 }
+				 else {
+					 throw new ExisteException();
+				 }
+			 }
 	 }
 	     
 	 public Cirurgia procurar(Cirurgia c) throws NullException {
 		 Cirurgia get = null;
 	     boolean continuar = true;
 	     for (int i = 0; i < cirurgias.size() && continuar == true; i++) {
-	    	 get = cirurgias.get(i);
-	    	 if(get.getId().equals(c.getId())) { 
+	    	 if(cirurgias.get(i).getId().equals(c.getId())) { 
+	    		 get = cirurgias.get(i);
 	    		 continuar = false;
-	    	 }
-	    	 else {
-	    		 get = null;
 	    	 }
 	     }
 	     if (get == null) {
@@ -44,16 +48,14 @@ public class RepositorioCirurgia {
 	     }
 	     return get;
 	  }
+	 
 	 public Cirurgia procurar(String id) throws NullException {
 		 Cirurgia get = null;
 	     boolean continuar = true;
 	     for (int i = 0; i < cirurgias.size() && continuar == true; i++) {
-	    	 get = cirurgias.get(i);
-	    	 if(get.getId().equals(id)) { 
+	    	 if(cirurgias.get(i).getId().equals(id)) { 
+	    		 get = cirurgias.get(i);
 	    		 continuar = false;
-	    	 }
-	    	 else {
-	    		 get = null;
 	    	 }
 	     }
 	     if (get == null) {

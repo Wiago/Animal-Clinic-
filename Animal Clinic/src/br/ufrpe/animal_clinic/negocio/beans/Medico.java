@@ -10,8 +10,13 @@ public class Medico extends Usuario {
 
 	public Medico(String nome, String cpf, String senha,String login, Date dataNas) {
 		super(nome, cpf, senha, login, dataNas);
+		this.setId(2);
 	}
 
+	public String getId() {
+		return getId();
+	}
+	
 	public String getEspecialidade() {
 		return especialidade;
 	}

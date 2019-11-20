@@ -47,7 +47,7 @@ public class ControladorCirurgia {
 		}
 	} */
 	
-	public void remarcarCirurgia(Cirurgia c, Date dataNova) throws NullException {
+	public void remarcarCirurgia(Cirurgia c, Date dataNova) throws NullException, ExisteException {
 		if(this.procurar(c) != null) {
 			Cirurgia cir = new Cirurgia(c.getAnimal(), c.getMedico(), dataNova);
 			repositorio.remover(c);

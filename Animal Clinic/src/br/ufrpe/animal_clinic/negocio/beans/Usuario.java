@@ -16,7 +16,7 @@ public class Usuario {
 		this.cpf = cpf;
 		this.senha = senha;
 		this.dataNas = dataNas;
-		
+		this.setId(3);
 	}
 
 	public Usuario(String nome2, String cpf2, String senha2) {

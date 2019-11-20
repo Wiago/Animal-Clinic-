@@ -13,6 +13,7 @@ public class Prontuario {
 		this.animal = animal;
 		this.medico = medico;
 		this.data = data;
+		this.setId();
 	}
 
 	public Date getData() {
@@ -36,11 +37,15 @@ public class Prontuario {
 	}
 
 	public void setId() {
-		this.id = a.gerarId(6);
+		this.id = Id.gerarId(6);
 	}
 
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Prontuário [Médico =" + getMedico().getNome()+ "," + getMedico().getEspecialidade() 
+				+ "; Data=" + getData() + "; "
+				+ "Animal=" + getAnimal().getNome() + "," + getAnimal().getTempoDeVida() + "," +getAnimal().getEspecie() + "," +getAnimal().getGenero() + "," +getAnimal().getAlimentacao() + "; Dono = " +getAnimal().getDono().getNome() + "," +getAnimal().getDono().getCpf() + "." + "]\n\n";
+	}
+
 	
 }

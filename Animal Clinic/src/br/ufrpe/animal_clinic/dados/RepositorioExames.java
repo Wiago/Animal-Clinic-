@@ -50,7 +50,6 @@ public class RepositorioExames {
 	public Exame procurar(String id) throws NullException{
 		Exame e = null;
 		boolean continuar = true;
-	
 		for (int j = 0; j < exames.size() && continuar; j++) {
 			if (exames.get(j).getId().equals(id)) {
 				e = exames.get(j);

@@ -6,12 +6,14 @@ public class Consulta {
 	private Animal animal;
 	private Medico medico;
 	private Date data;
-	private Id id;
+	private String id;
+	static Id a = new Id();
 	
 	public Consulta(Animal animal, Medico medico, Date data) {
 		this.animal = animal;
 		this.medico = medico;
 		this.data = data;
+		this.setId();
 	}	
 	
 	public Animal getAnimal() {
@@ -32,14 +34,18 @@ public class Consulta {
 		this.data = data;
 	}
 	
-	public Id getId() {
+	public String getId() {
 		return id;
+	}
+	public void setId() {
+		this.id = Id.gerarId(4);
 	}
 
 	@Override
 	public String toString() {
-		return "Consulta [getAnimal()=" + getAnimal() + ", getMedico()=" + getMedico() + ", getData()=" + getData()
-				+ "]";
+		return "Consulta [Médico =" + getMedico().getNome()+ "," + getMedico().getEspecialidade() 
+				+ "; Data=" + getData() + "; "
+				+ "Animal=" + getAnimal().getNome() + "," + getAnimal().getTempoDeVida() + "," +getAnimal().getEspecie() + "," +getAnimal().getGenero() + "," +getAnimal().getAlimentacao() + "; Dono = " +getAnimal().getDono().getNome() + "," +getAnimal().getDono().getCpf() + "." + "]\n\n";
 	}
 	
 	

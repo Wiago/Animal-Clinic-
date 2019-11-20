@@ -15,27 +15,39 @@ public class Atendente extends Usuario {
 	
 	public Atendente(String nome, String cpf, String senha, String login, Date dataNas) {
 		super(nome, cpf, senha, login, dataNas);
+		this.setId(1);
 		conExame = ControladorExames.getInstancia();
 		conCirurg = ControladorCirurgia.getInstancia();
 		conPront = ControladorProntuarios.getInstancia();
 		conCons = ControladorConsultas.getInstancia();
 	}
 	
+	public String getId() {
+		return getId();
+	}
+	
 	public ControladorExames getControladorExames() {
 		return conExame;
 	}
 
-	public ControladorCirurgia getControladorCirurgia() {
+	public ControladorCirurgia getControladorCirurgias() {
 		return conCirurg;
 	}
 
 	public ControladorProntuarios getControladorProntuarios() {
 		return conPront;
 	}
+	
+	public ControladorConsultas getControladorConsultas() {
+		return conCons;
+	}
 
 	public void marcarConsulta(Date data, Animal animal, Medico medico) throws NullException, ExisteException {
 		Consulta co = new Consulta(animal, medico, data);
 		conCons.criarConsulta(co);
+	}
+	public void marcarConsulta(Consulta con) throws NullException, ExisteException {
+		conCons.criarConsulta(con);
 	}
 	
 	public void remarcarConsulta(Consulta consulta, Date novaData) throws NullException {
@@ -46,17 +58,23 @@ public class Atendente extends Usuario {
 		Exame ex = new Exame(animal,medico,data);
 		conExame.criarExame(ex);
 	}
+	public void marcarExame(Exame ex) throws ExisteException, NullException{
+		conExame.criarExame(ex);
+	}
 	
 	public void remarcarExame(Exame exame, Date novaData) throws NullException, ExisteException {
 		conExame.remarcarExame(exame, novaData);
 	}
 	
-	public void marcarCastracao(Animal animal, Medico medico, Date data) throws NullException, ExisteException {
+	public void marcarCastracao(Date data, Animal animal, Medico medico) throws NullException, ExisteException {
 		Cirurgia cir = new Cirurgia(animal, medico, data);
 		conCirurg.criarCirurgia(cir);
 	}
+	public void marcarCastracao(Cirurgia cir) throws NullException, ExisteException {
+		conCirurg.criarCirurgia(cir);
+	}
 	
-	public void remarcarCastracao(Cirurgia cirurgia, Date novaData) throws NullException {
+	public void remarcarCastracao(Cirurgia cirurgia, Date novaData) throws NullException, ExisteException {
 		conCirurg.remarcarCirurgia(cirurgia, novaData);
 	}
 	
