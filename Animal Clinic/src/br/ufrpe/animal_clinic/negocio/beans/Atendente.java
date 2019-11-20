@@ -51,12 +51,13 @@ public class Atendente extends Usuario {
 		conExame.remarcarExame(exame, novaData);
 	}
 	
-	public void marcarCastracao(Animal animal, Medico medico, Date data) {
-		
+	public void marcarCastracao(Animal animal, Medico medico, Date data) throws NullException, ExisteException {
+		Cirurgia cir = new Cirurgia(animal, medico, data);
+		conCirurg.criarCirurgia(cir);
 	}
 	
-	public void remarcarCastracao(Cirurgia cirurgia, Date novaData) {
-		
+	public void remarcarCastracao(Cirurgia cirurgia, Date novaData) throws NullException {
+		conCirurg.remarcarCirurgia(cirurgia, novaData);
 	}
 	
 }

@@ -1,5 +1,7 @@
 package br.ufrpe.animal_clinic.negocio;
 
+import java.util.Date;
+
 import br.ufrpe.animal_clinic.dados.RepositorioCirurgia;
 import br.ufrpe.animal_clinic.dados.RepositorioExames;
 import br.ufrpe.animal_clinic.exception.ExisteException;
@@ -35,7 +37,7 @@ public class ControladorCirurgia {
 		
 	}
 	
-	public void alterarCirurgia(Cirurgia c) throws NullException {
+	/*public void alterarCirurgia(Cirurgia c) throws NullException {
 		if(c != null) {
 			Cirurgia c1 = this.procurar(c);
 			//TO-DO
@@ -43,7 +45,18 @@ public class ControladorCirurgia {
 			NullException exc = new NullException();
             throw exc;
 		}
-	} 
+	} */
+	
+	public void remarcarCirurgia(Cirurgia c, Date dataNova) throws NullException {
+		if(this.procurar(c) != null) {
+			Cirurgia cir = new Cirurgia(c.getAnimal(), c.getMedico(), dataNova);
+			repositorio.remover(c);
+			repositorio.cadastrar(cir);
+		}
+		else {
+			throw new NullException();
+		}
+	}
 	
 	public void remover(Cirurgia c) throws NullException{
 		repositorio.remover(c);
