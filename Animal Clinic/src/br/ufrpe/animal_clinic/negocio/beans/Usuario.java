@@ -2,6 +2,9 @@ package br.ufrpe.animal_clinic.negocio.beans;
 
 import java.util.Date;
 
+import br.ufrpe.animal_clinic.exception.ExisteException;
+import br.ufrpe.animal_clinic.exception.NullException;
+
 public class Usuario {
 	private String nome;
 	private String cpf;
@@ -70,6 +73,5 @@ public class Usuario {
 		return "Usuário [Nome = " + getNome() + ", CPF = " + getCpf() + ", Senha = " + getSenha()
 				+ ", Data de Nascimento = " + getData() + "]";
 	}
-	
 	
 }

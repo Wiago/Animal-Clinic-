@@ -3,6 +3,7 @@ package br.ufrpe.animal_clinic.gui;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Scanner;
 
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
@@ -64,6 +65,29 @@ public class Main {
 		b.remarcarConsulta(b.getControladorConsultas().getRepositorio().getDados().get(0), data5);
 		//System.out.println(b.getControladorConsultas().getRepositorio().getDados());
 		
+		Scanner scanner = new Scanner(System.in);
+		boolean d = true;
+		while(d == true) {
+			System.out.println("########### Seja Bem Vindo ###########");
+			System.out.println("##                                  ##");
+			System.out.println("## 1- Login                         ##");
+			System.out.println("## 2- Cadastro                      ##");
+			System.out.println("## 3- Sair                          ##");
+			System.out.println("##                                  ##");
+			System.out.println("#######################################");
+			
+			String op = scanner.nextLine();
+			switch(op) {
+				case "1":
+					break;
+				case "2":
+					break;
+				case "3":
+					d = false;
+					break;
+			}
+			
+		}
 		
 	}
 
