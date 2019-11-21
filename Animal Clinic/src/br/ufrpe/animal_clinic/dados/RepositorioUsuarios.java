@@ -1,9 +1,16 @@
 package br.ufrpe.animal_clinic.dados;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
-
 import br.ufrpe.animal_clinic.exception.ExisteException;
+import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
@@ -80,4 +87,29 @@ public class RepositorioUsuarios {
 	      }
 	      return listaUsuarios;
 	  }
+	
+	public void salvarDados(String file) throws IOException {
+	    File arquivo = new File(file);
+	    FileOutputStream fos = new FileOutputStream(arquivo);
+	    ObjectOutputStream ous = new ObjectOutputStream(fos);
+	    ous.writeObject(this.getDados());
+	    ous.close();
+	}
+	
+	public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException {
+	    
+	    File arquivo = new File(file);
+	    FileInputStream fis;
+	    ObjectInputStream ois;
+	    fis = new FileInputStream(arquivo);
+
+		try {
+		    ois = new ObjectInputStream(fis);
+		    RepositorioUsuarios a = new RepositorioUsuarios((ArrayList<Usuario>) ois.readObject());
+		    ois.close();
+   
+		}	catch (IOException ex) {
+			RepositorioUsuarios a = new RepositorioUsuarios(20);
+		}
+	}
 }

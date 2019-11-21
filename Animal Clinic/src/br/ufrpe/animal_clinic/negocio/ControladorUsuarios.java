@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import br.ufrpe.animal_clinic.dados.RepositorioCirurgia;
+import br.ufrpe.animal_clinic.dados.RepositorioCirurgias;
 import br.ufrpe.animal_clinic.dados.RepositorioUsuarios;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
@@ -62,36 +62,6 @@ public class ControladorUsuarios {
 	public Usuario procurar(String id) throws NullException {
         return this.repositorio.procurar(id);
     }
-	
-	/*public void salvarDados(String file) throws IOException {
-        File arquivo = new File(file);
-        FileOutputStream fos = new FileOutputStream(arquivo);
-        ObjectOutputStream ous = new ObjectOutputStream(fos);
-        ous.writeObject(this.repositorio.getDados());
-        ous.close();
-    }*/
-	
-	/*public void carregarDados(String file) {
-        
-        File arquivo = new File(file);
-        FileInputStream fis;
-        ObjectInputStream ois;
-        try {
-            fis = new FileInputStream(arquivo);
-
-            try {
-                ois = new ObjectInputStream(fis);
-                this.repositorio = new RepositorioUsuarios((ArrayList<Usuario>) ois.readObject());
-                ois.close();
-            } catch (IOException ex) {
-                this.repositorio = new RepositorioUsuarios(15);
-            } catch (ClassNotFoundException ex) {
-                this.repositorio = new RepositorioUsuarios(15);
-            }
-        } catch (FileNotFoundException ex) {
-            this.repositorio = new RepositorioUsuarios(15);
-        }
-    }*/
 	
 	public ArrayList<Usuario> getDados() {
         return this.repositorio.getDados();

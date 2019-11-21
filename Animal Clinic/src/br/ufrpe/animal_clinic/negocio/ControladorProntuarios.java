@@ -1,6 +1,6 @@
 package br.ufrpe.animal_clinic.negocio;
 
-import br.ufrpe.animal_clinic.dados.RepositorioCirurgia;
+import br.ufrpe.animal_clinic.dados.RepositorioCirurgias;
 import br.ufrpe.animal_clinic.dados.RepositorioProntuarios;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.exception.ExisteException;

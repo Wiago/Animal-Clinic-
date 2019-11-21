@@ -1,5 +1,12 @@
 package br.ufrpe.animal_clinic.dados;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,13 +15,18 @@ import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
+import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 
 public class RepositorioProntuarios {
 	ArrayList<Prontuario> prontuarios = new ArrayList<Prontuario>(10);
 	
-	public RepositorioProntuarios(int tamanho) {
-        this.prontuarios = new ArrayList<Prontuario>(tamanho);
+	public RepositorioProntuarios(ArrayList<Prontuario> arrayList) {
+        this.prontuarios = new ArrayList<Prontuario>(arrayList);
+    }
+	
+	public RepositorioProntuarios(int a) {
+        this.prontuarios = new ArrayList<Prontuario>(a);
     }
 
     public void RepositorioUsuarios(ArrayList<Prontuario> prontuario) {
@@ -33,6 +45,10 @@ public class RepositorioProntuarios {
 	}
 
 	
+	public ArrayList<Prontuario> getProntuarios() {
+		return prontuarios;
+	}
+
 	public Prontuario procurar(String id) throws NullException{
 		Prontuario u = null;
 		boolean continuar = true;
@@ -91,4 +107,29 @@ public class RepositorioProntuarios {
 	      }
 	      return listaProntuarios;
 	  }
+	
+	public void salvarDados(String file) throws IOException {
+	    File arquivo = new File(file);
+	    FileOutputStream fos = new FileOutputStream(arquivo);
+	    ObjectOutputStream ous = new ObjectOutputStream(fos);
+	    ous.writeObject(this.getProntuarios());
+	    ous.close();
+	}
+	
+	public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException {
+	    
+	    File arquivo = new File(file);
+	    FileInputStream fis;
+	    ObjectInputStream ois;
+	    fis = new FileInputStream(arquivo);
+
+		try {
+		    ois = new ObjectInputStream(fis);
+		    RepositorioProntuarios a = new RepositorioProntuarios((ArrayList<Prontuario>) ois.readObject());
+		    ois.close();
+   
+		}	catch (IOException ex) {
+			RepositorioProntuarios a = new RepositorioProntuarios(20);
+		}
+	}
 }

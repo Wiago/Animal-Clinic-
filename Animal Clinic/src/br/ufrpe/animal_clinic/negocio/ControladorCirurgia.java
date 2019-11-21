@@ -2,18 +2,18 @@ package br.ufrpe.animal_clinic.negocio;
 
 import java.util.Date;
 
-import br.ufrpe.animal_clinic.dados.RepositorioCirurgia;
+import br.ufrpe.animal_clinic.dados.RepositorioCirurgias;
 import br.ufrpe.animal_clinic.dados.RepositorioExames;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 public class ControladorCirurgia {
-	private RepositorioCirurgia repositorio;
+	private RepositorioCirurgias repositorio;
 	private static ControladorCirurgia instancia;
 	
 	private ControladorCirurgia() {
-		repositorio = new RepositorioCirurgia(10);
+		repositorio = new RepositorioCirurgias(10);
 	}
 	
 	public static ControladorCirurgia getInstancia() {
@@ -23,7 +23,7 @@ public class ControladorCirurgia {
 		return instancia;
 	}
 	
-	public RepositorioCirurgia getRepositorio() {
+	public RepositorioCirurgias getRepositorio() {
 		return repositorio;
 	}
 	

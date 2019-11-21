@@ -1,21 +1,28 @@
 package br.ufrpe.animal_clinic.dados;
 
 import java.util.Date;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 import br.ufrpe.animal_clinic.exception.*;
 
-public class RepositorioCirurgia {
+public class RepositorioCirurgias {
 
 	 ArrayList<Cirurgia> cirurgias;
 
-	 public RepositorioCirurgia(int tamanho) {
+	 public RepositorioCirurgias(int tamanho) {
 		 this.cirurgias = new ArrayList<Cirurgia>(tamanho);
 	 }
 
-	 public RepositorioCirurgia(ArrayList<Cirurgia> cirurgias) {
+	 public RepositorioCirurgias(ArrayList<Cirurgia> cirurgias) {
 		 this.cirurgias = cirurgias;
 	 }
 	    
@@ -90,5 +97,30 @@ public class RepositorioCirurgia {
 	    	  throw new NullException();
 	      }
 	      return listaCirurgias;
-	  }  
+	  }
+	  
+	  public void salvarDados(String file) throws IOException {
+		    File arquivo = new File(file);
+		    FileOutputStream fos = new FileOutputStream(arquivo);
+		    ObjectOutputStream ous = new ObjectOutputStream(fos);
+		    ous.writeObject(this.getDados());
+		    ous.close();
+		}
+		
+	  public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException {
+		    
+		    File arquivo = new File(file);
+		    FileInputStream fis;
+		    ObjectInputStream ois;
+		    fis = new FileInputStream(arquivo);
+
+			try {
+			    ois = new ObjectInputStream(fis);
+			    RepositorioCirurgias a = new RepositorioCirurgias((ArrayList<Cirurgia>) ois.readObject());
+			    ois.close();
+	   
+			}	catch (IOException ex) {
+				RepositorioCirurgias a = new RepositorioCirurgias(20);
+			}
+	  }
 }
