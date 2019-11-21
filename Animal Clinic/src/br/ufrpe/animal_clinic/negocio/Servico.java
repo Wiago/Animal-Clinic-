@@ -80,8 +80,8 @@ public class Servico implements IServico{
 
 	@Override
 	public Usuario efetuarLoginUsuario(Login l) throws NullException {
-		Usuario u = usuarios.procurarUsuario(l.getId());
-		return u;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
