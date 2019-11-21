@@ -3,13 +3,13 @@ import java.util.Date;
 import br.ufrpe.animal_clinic.negocio.ControladorExames;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
-import br.ufrpe.animal_clinic.negocio.ControladorCirurgia;
+import br.ufrpe.animal_clinic.negocio.ControladorCirurgias;
 import br.ufrpe.animal_clinic.negocio.ControladorConsultas;
 import br.ufrpe.animal_clinic.negocio.ControladorProntuarios;
 
 public class Atendente extends Usuario {
 	private ControladorExames conExame;
-	private ControladorCirurgia conCirurg;
+	private ControladorCirurgias conCirurg;
 	private ControladorProntuarios conPront;
 	private ControladorConsultas conCons;
 	
@@ -17,7 +17,7 @@ public class Atendente extends Usuario {
 		super(nome, cpf, senha, login, dataNas);
 		this.setId(1);
 		conExame = ControladorExames.getInstancia();
-		conCirurg = ControladorCirurgia.getInstancia();
+		conCirurg = ControladorCirurgias.getInstancia();
 		conPront = ControladorProntuarios.getInstancia();
 		conCons = ControladorConsultas.getInstancia();
 	}
@@ -30,7 +30,7 @@ public class Atendente extends Usuario {
 		return conExame;
 	}
 
-	public ControladorCirurgia getControladorCirurgias() {
+	public ControladorCirurgias getControladorCirurgias() {
 		return conCirurg;
 	}
 

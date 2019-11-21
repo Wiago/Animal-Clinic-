@@ -1,16 +1,35 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
 public class Login {
+	private String senha;
+	private String login;
 	private String id;
-	private int senhaHash;
 	
 	public Login() {
 		
 	}
 	
-	public Login(String id, int senhaHash) {
+	public Login(String login, String senha, String id) {
+		this.login = login;
+		this.senha = senha;
 		this.id = id;
-		this.senhaHash = senhaHash;
+	}
+
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getId() {
@@ -21,11 +40,11 @@ public class Login {
 		this.id = id;
 	}
 
-	public int getSenhaHash() {
-		return senhaHash;
+	public String getSenhaHash() {
+		return senha;
 	}
 
-	public void setSenhaHash(int senhaHash) {
-		this.senhaHash = senhaHash;
+	public void setSenhaHash(String senha) {
+		this.senha = senha;
 	}	
 }

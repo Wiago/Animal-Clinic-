@@ -65,4 +65,8 @@ public class ControladorConsultas {
 	public Consulta procurar(Consulta c) throws NullException {
         return this.repositorio.procurar(c);
     }
+
+	public Consulta procurar(String id) throws NullException {
+		return this.repositorio.procurar(id);
+	}
 }

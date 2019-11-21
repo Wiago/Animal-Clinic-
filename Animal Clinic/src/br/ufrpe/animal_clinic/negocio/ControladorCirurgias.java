@@ -8,17 +8,17 @@ import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
-public class ControladorCirurgia {
+public class ControladorCirurgias {
 	private RepositorioCirurgias repositorio;
-	private static ControladorCirurgia instancia;
+	private static ControladorCirurgias instancia;
 	
-	private ControladorCirurgia() {
+	private ControladorCirurgias() {
 		repositorio = new RepositorioCirurgias(10);
 	}
 	
-	public static ControladorCirurgia getInstancia() {
+	public static ControladorCirurgias getInstancia() {
 		if(instancia == null) {
-			instancia = new ControladorCirurgia();
+			instancia = new ControladorCirurgias();
 		}
 		return instancia;
 	}
@@ -65,4 +65,8 @@ public class ControladorCirurgia {
 	public Cirurgia procurar(Cirurgia c) throws NullException {
         return this.repositorio.procurar(c);
     }
+	
+	public Cirurgia procurar(String id) throws NullException {
+		return this.repositorio.procurar(id);
+	}
 }
