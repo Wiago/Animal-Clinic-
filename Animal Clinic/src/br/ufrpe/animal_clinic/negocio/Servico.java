@@ -14,7 +14,8 @@ import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class Servico implements IServico{
-
+	
+	
 	@Override
 	public void cadastrarUsuario(Usuario u) throws ExisteException, NullException {
 		// TODO Auto-generated method stub
@@ -70,9 +71,9 @@ public class Servico implements IServico{
 	}
 
 	@Override
-	public Usuario efetuarLoginPaciente(Login l) throws NullException {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario efetuarLoginUsuario(Login l) throws NullException {
+		Usuario u = usuarios.procurarUsuario(l.getId());
+		return u;
 	}
 
 	@Override
