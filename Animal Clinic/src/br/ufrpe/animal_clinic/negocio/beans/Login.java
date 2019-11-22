@@ -15,8 +15,8 @@ public class Login {
 		this.id = id;
 	}
 	
-	public Login(String login, String senha) {
-		this.login = login;
+	public Login(String id, String senha) {
+		this.id = id;
 		this.senha = senha;
 	}
 

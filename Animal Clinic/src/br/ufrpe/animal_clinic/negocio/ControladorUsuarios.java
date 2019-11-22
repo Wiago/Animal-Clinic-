@@ -1,15 +1,7 @@
 package br.ufrpe.animal_clinic.negocio;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import br.ufrpe.animal_clinic.dados.RepositorioCirurgias;
 import br.ufrpe.animal_clinic.dados.RepositorioUsuarios;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;

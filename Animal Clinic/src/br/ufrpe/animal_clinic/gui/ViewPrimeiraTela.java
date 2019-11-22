@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -79,7 +80,9 @@ public class ViewPrimeiraTela {
 		JButton btnCadastrar = new JButton("CADASTRAR");
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnCadastrar.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent arg0) {
+				
 			}
 		});
 		btnCadastrar.setBackground(new Color(255, 204, 255));
@@ -131,5 +134,5 @@ public class ViewPrimeiraTela {
 		panel.setBounds(0, 0, 434, 261);
 		frame.getContentPane().add(panel);
 	
-}	
+	}	
 }

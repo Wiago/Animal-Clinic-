@@ -29,11 +29,13 @@ public class RepositorioUsuarios {
 
 
 	public void cadastrar(Usuario u) throws ExisteException{
+		usuarios.add(u);
 		
 		try {
             procurar(u.getId());
         } catch (NullException ex) {
             usuarios.add(u);
+            System.out.println(usuarios);
         }
 
 	}
