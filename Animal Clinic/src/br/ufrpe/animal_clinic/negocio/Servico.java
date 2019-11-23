@@ -17,11 +17,11 @@ import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class Servico implements IServico{
 	
-	private ControladorUsuarios usuarios;
-	private ControladorConsultas consultas;
-	private ControladorExames exames;
-	private ControladorCirurgias cirurgias;
-	private ControladorProntuarios prontuarios;
+	private ControladorUsuarios usuarios = ControladorUsuarios.getInstancia();
+	private ControladorConsultas consultas = ControladorConsultas.getInstancia();
+	private ControladorExames exames = ControladorExames.getInstancia();
+	private ControladorCirurgias cirurgias = ControladorCirurgias.getInstancia();
+	private ControladorProntuarios prontuarios = ControladorProntuarios.getInstancia();
 
 	@Override
 	public void cadastrarUsuario(Usuario u) throws ExisteException, NullException {

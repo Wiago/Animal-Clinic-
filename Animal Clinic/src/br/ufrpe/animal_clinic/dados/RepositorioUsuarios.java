@@ -29,7 +29,6 @@ public class RepositorioUsuarios {
 
 
 	public void cadastrar(Usuario u) throws ExisteException{
-		usuarios.add(u);
 		
 		try {
             procurar(u.getId());
@@ -91,6 +90,7 @@ public class RepositorioUsuarios {
 	  }
 	
 	public void salvarDados(String file) throws IOException {
+		System.out.println("oi");
 	    File arquivo = new File(file);
 	    FileOutputStream fos = new FileOutputStream(arquivo);
 	    ObjectOutputStream ous = new ObjectOutputStream(fos);

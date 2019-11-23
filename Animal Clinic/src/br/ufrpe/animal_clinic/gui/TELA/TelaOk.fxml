@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.animal_clinic.gui.TELA.ControladorOk">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="label" layoutX="261.0" layoutY="32.0" text="Cadastro">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <TextField fx:id="login" layoutX="357.0" layoutY="108.0" promptText="Login" />
+            <TextField fx:id="nome" layoutX="59.0" layoutY="108.0" promptText="Nome" />
+            <TextField fx:id="cpf" layoutX="59.0" layoutY="169.0" promptText="CPF" />
+            <TextField fx:id="data" layoutX="59.0" layoutY="229.0" promptText="Data de Nascimento" />
+            <PasswordField fx:id="senha" layoutX="357.0" layoutY="166.0" promptText="Senha" />
+            <ComboBox fx:id="usuarios" layoutX="357.0" layoutY="229.0" prefHeight="31.0" prefWidth="187.0" promptText="Tipo de Usuário" />
+            <Button fx:id="voltarID" layoutX="120.0" layoutY="307.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+            <Button fx:id="cadastrarID" layoutX="387.0" layoutY="307.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
