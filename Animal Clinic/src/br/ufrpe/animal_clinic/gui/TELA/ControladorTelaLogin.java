@@ -15,7 +15,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 
-public class Controlador implements Initializable{
+public class ControladorTelaLogin implements Initializable{
 	
 	private static GetInformacao i = new GetInformacao();
 	
@@ -36,15 +36,14 @@ public class Controlador implements Initializable{
 
     @FXML
     void login(ActionEvent event) throws NullException {
-    	String idS = id.getText();
+    	String loginS = id.getText();
     	String senhaS = senha.getText();
-    	
-    	i.loginU(idS, senhaS);
+    	i.loginUser(loginS, senhaS);
     }
 
     @FXML
     void sair(ActionEvent event) {
-
+    	Main.getStage().close();
     }
 
     @FXML

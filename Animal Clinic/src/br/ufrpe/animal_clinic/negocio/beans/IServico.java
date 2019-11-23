@@ -16,13 +16,16 @@ public interface IServico {
 	void desmarcarCirurgia(String id) throws NullException;
     void carregarDados()throws IOException, NotFoundException, ClassNotFoundException;
     
-    Atendente efetuarLoginRecepcionista(Login l) throws NullException ;
-	Medico efetuarLoginMedico(Login l) throws NullException ;
-	Usuario efetuarLoginUsuario(Login l) throws NullException ;
+    Atendente efetuarLoginAtendente(String login) throws NullException ;
+	Medico efetuarLoginMedico(String login) throws NullException ;
+	Usuario efetuarLoginUsuario(String login) throws NullException ;
 	
 	Medico procurarMedico(String id) throws NullException ;
+	Medico procurarMedicoPorLogin(String login) throws NullException;
 	Usuario procurarUsuario(String id) throws NullException ;
+	Usuario procurarUsuarioPorLogin(String login) throws NullException;
 	Atendente procurarAtendente(String id) throws NullException ;
+	Atendente procurarAtendentePorLogin(String login) throws NullException;
     
 	
 	void salvarDados() throws IOException;

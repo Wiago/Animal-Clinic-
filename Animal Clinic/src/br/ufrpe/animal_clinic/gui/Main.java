@@ -36,7 +36,7 @@ public class Main {
 		Date data4 = f.parse("01/12/2019");
 		Date data5 = f.parse("02/12/2019");
 		
-		Servico s = new Servico();
+		Servico s = Servico.getInstancia();
 		Medico a = new Medico("Pedro","111.111.111-11","pedrinho123","1111",data1);
 		Usuario dono = new Usuario("Claudio","222.222.222-22","clau895","2222",data3);
 		Atendente b = new Atendente("Fernanda","333.333.333-33","fer555","5555",data2);

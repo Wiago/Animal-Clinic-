@@ -12,19 +12,31 @@ import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class GetInformacao {
-	private Servico s = new Servico();
+	private Servico s = Servico.getInstancia();
 	private Login l;
 	
 	public void cadastrarU(String nome, String cpf, String senha, String login, Date data) throws ExisteException, NullException {
 		Usuario u = new Usuario(nome, cpf, senha, login, data);
-		u.setId(3);
+		//u.setId(3);
 		System.out.println(u.getId());
 		s.cadastrarUsuario(u);
 	}
 	
-	public void loginU(String id, String senha) throws NullException {
-		l = new Login(id, senha);
-		s.efetuarLoginUsuario(l);
+	public void loginUser(String login, String senha) throws NullException {
+		String id = s.procurarIdPorLogin(login);
+		if(id != null) {
+			switch(id.charAt(0)) {
+				case '1':
+					s.efetuarLoginAtendente(login);
+					break;
+				case '2':
+					s.efetuarLoginMedico(login);
+					break;
+				case '3':
+					s.efetuarLoginUsuario(login);
+					break;
+			}
+		}
 	}
 	
 	public void salvar() throws IOException {

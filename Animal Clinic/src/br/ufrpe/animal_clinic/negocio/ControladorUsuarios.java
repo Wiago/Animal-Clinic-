@@ -27,7 +27,6 @@ public class ControladorUsuarios {
 	}
 	
 	public void cadastrar(Usuario u) throws ExisteException, NullException {
-		
 		if(u != null) {
 			repositorio.cadastrar(u);
 		}else {
@@ -55,6 +54,13 @@ public class ControladorUsuarios {
         return this.repositorio.procurar(id);
     }
 	
+	public Usuario procurarPorLogin(String login) throws NullException {
+        return this.repositorio.procurarPorLogin(login);
+    }
+	
+	public String procurarIdPorLogin(String login) throws NullException{
+		return this.repositorio.procurarIdPorLogin(login);
+	}
 	public ArrayList<Usuario> getDados() {
         return this.repositorio.getDados();
     }

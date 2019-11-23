@@ -22,7 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class ControladorOk implements Initializable{
+public class ControladorTelaCadastro implements Initializable{
 	private static GetInformacao i = new GetInformacao();
 	DateFormat f = DateFormat.getDateInstance();
 	
@@ -57,6 +57,17 @@ public class ControladorOk implements Initializable{
     
     @FXML
     void voltar(ActionEvent event) {
+    	Main.trocaCena(0);
+    	login.clear();
+    	senha.clear();
+    	nome.clear();
+    	cpf.clear();
+    	data.clear();
+    	usuarios.setValue(null);
+    }
+    
+    @FXML
+    void login(ActionEvent event) {
     	Main.trocaCena(0);
     }
 

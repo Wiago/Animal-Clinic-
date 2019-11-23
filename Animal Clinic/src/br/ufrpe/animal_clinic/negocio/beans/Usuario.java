@@ -19,6 +19,7 @@ public class Usuario {
 		this.cpf = cpf;
 		this.senha = senha;
 		this.dataNas = dataNas;
+		this.login = login;
 		this.setId(3);
 	}
 
@@ -70,7 +71,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuário [Nome = " + getNome() + ", CPF = " + getCpf() + ", Senha = " + getSenha()
+		return "Usuário [Nome = " + getNome() + ","+"Login = " + getLogin() + " CPF = " + getCpf() + ", Senha = " + getSenha()
 				+ ", Data de Nascimento = " + getData() + "]";
 	}
 	

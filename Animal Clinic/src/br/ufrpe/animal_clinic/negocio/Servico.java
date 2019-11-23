@@ -17,11 +17,27 @@ import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class Servico implements IServico{
 	
-	private ControladorUsuarios usuarios = ControladorUsuarios.getInstancia();
-	private ControladorConsultas consultas = ControladorConsultas.getInstancia();
-	private ControladorExames exames = ControladorExames.getInstancia();
-	private ControladorCirurgias cirurgias = ControladorCirurgias.getInstancia();
-	private ControladorProntuarios prontuarios = ControladorProntuarios.getInstancia();
+	private static Servico instancia;
+	
+	private ControladorUsuarios usuarios;
+	private ControladorConsultas consultas;
+	private ControladorExames exames;
+	private ControladorCirurgias cirurgias;
+	private ControladorProntuarios prontuarios;
+	
+	private Servico() {
+		usuarios = ControladorUsuarios.getInstancia();
+		consultas = ControladorConsultas.getInstancia();
+		exames = ControladorExames.getInstancia();
+		cirurgias = ControladorCirurgias.getInstancia();
+		prontuarios = ControladorProntuarios.getInstancia();
+	}
+	public static Servico getInstancia() {
+		if(instancia == null) {
+			instancia = new Servico();
+		}
+		return instancia;
+	}
 
 	@Override
 	public void cadastrarUsuario(Usuario u) throws ExisteException, NullException {
@@ -67,37 +83,56 @@ public class Servico implements IServico{
 	}
 
 	@Override
-	public Atendente efetuarLoginRecepcionista(Login l) throws NullException {
-		Atendente a = (Atendente) usuarios.procurar(l.getId());
+	public Atendente efetuarLoginAtendente(String login) throws NullException {
+		Atendente a = (Atendente) usuarios.procurarPorLogin(login);
 		return (Atendente) a;
 	}
 
 	@Override
-	public Medico efetuarLoginMedico(Login l) throws NullException {
-		Medico m = (Medico) usuarios.procurar(l.getId());
+	public Medico efetuarLoginMedico(String login) throws NullException {
+		Medico m = (Medico) usuarios.procurarPorLogin(login);
 		return m;
 	}
 
 	@Override
-	public Usuario efetuarLoginUsuario(Login l) throws NullException {
+	public Usuario efetuarLoginUsuario(String login) throws NullException {
 		System.out.println("ok");
-		Usuario u = usuarios.getRepositorio().procurar(l.getId());
+		Usuario u = usuarios.procurarPorLogin(login);
+		if(u != null) {
+			System.out.println("Ok - achou o usuário por login!");
+		}
 		return u;
+	}
+	
+	public String procurarIdPorLogin(String login) throws NullException {
+		return usuarios.procurarIdPorLogin(login);
 	}
 
 	@Override
 	public Medico procurarMedico(String id) throws NullException {
-		return (Medico) usuarios.getRepositorio().procurar(id);
+		return (Medico) usuarios.procurar(id);
+	}
+	
+	public Medico procurarMedicoPorLogin(String login) throws NullException {
+		return (Medico) usuarios.procurarPorLogin(login);
 	}
 
 	@Override
 	public Usuario procurarUsuario(String id) throws NullException {
-		return usuarios.getRepositorio().procurar(id);
+		return usuarios.procurar(id);
+	}
+	
+	public Usuario procurarUsuarioPorLogin(String login) throws NullException {
+		return usuarios.procurarPorLogin(login);
 	}
 
 	@Override
 	public Atendente procurarAtendente(String id) throws NullException {
-		return (Atendente) usuarios.getRepositorio().procurar(id);
+		return (Atendente) usuarios.procurar(id);
+	}
+	
+	public Atendente procurarAtendentePorLogin(String login) throws NullException {
+		return (Atendente) usuarios.procurarPorLogin(login);
 	}
 
 	@Override

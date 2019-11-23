@@ -27,7 +27,7 @@ import java.awt.SystemColor;
 
 public class ViewPrimeiraTela {
 
-	private Servico s = new Servico();
+	private Servico s = Servico.getInstancia();
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -88,6 +88,7 @@ public class ViewPrimeiraTela {
 		btnCadastrar.setBackground(new Color(255, 204, 255));
 		btnCadastrar.setForeground(new Color(255, 105, 180));
 		btnCadastrar.setBounds(162, 227, 104, 23);
+		
 		frame.getContentPane().add(btnCadastrar);
 		
 		JButton btnLogar = new JButton("LOGAR");
