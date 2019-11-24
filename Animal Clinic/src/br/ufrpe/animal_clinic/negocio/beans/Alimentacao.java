@@ -1,20 +1,19 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
 public enum Alimentacao {
-	CARNIVORO(1), HERBIVORO(2), ONIVORO(3); 
+	CARNIVORO("Carnivoro"), HERBIVORO("Herbivoro"), ONIVORO("Onivoro"); 
 	
-	public int idAlimentacao;
+	private String categoria;
 	
-	Alimentacao(int idAlimentacao){
-		this.idAlimentacao = idAlimentacao;
+	Alimentacao (String categoria) {
+        this.setCategoria(categoria);
+    }
+
+	public String getCategoria() {
+		return categoria;
 	}
-	/*public String nome; 
-	Alimentacao(String nome){ 
-		this.nome = nome; 
-	} 
-	 
-	public static void main(String[] args) { 
-		System.out.println(Alimentacao.CARNIVORO.name()); 
-		System.out.println(CARNIVORO.name().equals("CARNIVORO")); 
-	}*/ 
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
 }

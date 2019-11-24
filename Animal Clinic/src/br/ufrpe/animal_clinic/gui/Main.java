@@ -38,8 +38,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		stage = primaryStage;
-		criaCena("TelaLogin.fxml"); //0
+		criaCena("TelaLogin.fxml");       //0
 		criaCena("TelaCadastro.fxml");    //1
+		criaCena("TelaUsuario.fxml");     //2
 		
 		stage.setScene(cenas.get(0));
         stage.setTitle("ANIMAL CLINIC");

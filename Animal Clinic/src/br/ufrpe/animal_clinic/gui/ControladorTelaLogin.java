@@ -38,6 +38,7 @@ public class ControladorTelaLogin implements Initializable{
     	String loginS = id.getText();
     	String senhaS = senha.getText();
     	i.loginUser(loginS, senhaS);
+    	Main.trocaCena(2);
     }
 
     @FXML
