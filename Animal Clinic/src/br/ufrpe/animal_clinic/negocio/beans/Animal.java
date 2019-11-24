@@ -1,9 +1,14 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Animal { 
+public class Animal implements Serializable{ 
 	 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4247798444000409255L;
 	private String nome; 
 	private Usuario dono; 
 	private boolean oAnimalEMae; 

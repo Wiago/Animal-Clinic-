@@ -13,9 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.ufrpe.animal_clinic.exception.ExisteException;
-import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
-import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class RepositorioUsuarios {
@@ -113,7 +111,7 @@ public class RepositorioUsuarios {
 	
 	public Map<String,String> getDadosLoginId() {
         return loginId;
-}
+	}
 	
 	public ArrayList<Usuario> listarPorData(Date d) throws NullException{
 		  ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
@@ -126,14 +124,22 @@ public class RepositorioUsuarios {
 	    	  throw new NullException();
 	      }
 	      return listaUsuarios;
-	  }
+	}
+	
+	public Usuario getUsuario() {
+		Usuario b = null;
+		for (int a = 0; a<this.usuarios.size();a++) {
+			b = this.usuarios.get(a);
+		}
+		return b;
+	}
 	
 	public void salvarDados(String file) throws IOException {
 		System.out.println("oi");
 	    File arquivo = new File(file);
 	    FileOutputStream fos = new FileOutputStream(arquivo);
 	    ObjectOutputStream ous = new ObjectOutputStream(fos);
-	    ous.writeObject(this.getDados());
+	    ous.writeObject(getUsuario());
 	    ous.close();
 	}
 	
@@ -146,11 +152,9 @@ public class RepositorioUsuarios {
 
 		try {
 		    ois = new ObjectInputStream(fis);
-		    RepositorioUsuarios a = new RepositorioUsuarios((ArrayList<Usuario>) ois.readObject());
 		    ois.close();
    
 		}	catch (IOException ex) {
-			RepositorioUsuarios a = new RepositorioUsuarios(20);
 		}
 	}
 }

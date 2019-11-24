@@ -1,4 +1,4 @@
-package br.ufrpe.animal_clinic.gui.TELA;
+package br.ufrpe.animal_clinic.gui;
 
 import java.io.IOException;
 import java.net.URL;
@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
-import br.ufrpe.animal_clinic.gui.GetInformacao;
 import br.ufrpe.animal_clinic.negocio.beans.TipoUsuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

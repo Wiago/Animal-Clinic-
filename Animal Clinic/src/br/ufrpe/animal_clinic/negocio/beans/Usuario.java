@@ -1,11 +1,13 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import br.ufrpe.animal_clinic.exception.ExisteException;
-import br.ufrpe.animal_clinic.exception.NullException;
-
-public class Usuario {
+public class Usuario implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2775735858339834846L;
 	private String nome;
 	private String cpf;
 	private String login;

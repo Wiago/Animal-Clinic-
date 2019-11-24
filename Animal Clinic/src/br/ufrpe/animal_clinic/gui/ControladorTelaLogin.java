@@ -1,10 +1,9 @@
-package br.ufrpe.animal_clinic.gui.TELA;
+package br.ufrpe.animal_clinic.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.ufrpe.animal_clinic.exception.NullException;
-import br.ufrpe.animal_clinic.gui.GetInformacao;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
