@@ -126,6 +126,10 @@ public class RepositorioUsuarios {
 	      return listaUsuarios;
 	}
 	
+	public ArrayList<Usuario> getUsuarios(){
+		return usuarios;
+	}
+	
 	public Usuario getUsuario() {
 		Usuario b = null;
 		for (int a = 0; a<this.usuarios.size();a++) {
@@ -136,21 +140,20 @@ public class RepositorioUsuarios {
 	
 	public void salvarDados(String file) throws IOException {
 		System.out.println("oi");
-	    File arquivo = new File(file);
+	    File arquivo = new File("HistoricoDeUsuarios.txt");
 	    FileOutputStream fos = new FileOutputStream(arquivo);
 	    ObjectOutputStream ous = new ObjectOutputStream(fos);
-	    ous.writeObject(getUsuario());
+	    ous.writeObject(this.getUsuarios());
 	    ous.close();
 	}
 	
 	public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException {
 	    
-	    File arquivo = new File(file);
+	    File arquivo = new File("HistoricoDeUsuarios.txt");
 	    FileInputStream fis;
 	    ObjectInputStream ois;
-	    fis = new FileInputStream(arquivo);
-
 		try {
+			fis = new FileInputStream(arquivo);
 		    ois = new ObjectInputStream(fis);
 		    ois.close();
    

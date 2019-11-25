@@ -13,6 +13,7 @@ import br.ufrpe.animal_clinic.negocio.beans.IServico;
 import br.ufrpe.animal_clinic.negocio.beans.Login;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
+import java.util.ArrayList;
 
 
 public class Servico implements IServico{
@@ -148,6 +149,10 @@ public class Servico implements IServico{
 	public void marcarExame(Exame e) throws NullException, ExisteException {
 		this.exames.criarExame(e);
 		
+	}
+	
+	public ArrayList<Usuario> getDadosUsuarios(){
+		return usuarios.getDados();
 	}
 
 }

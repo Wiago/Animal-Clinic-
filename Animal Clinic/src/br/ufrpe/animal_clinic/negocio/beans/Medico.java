@@ -13,9 +13,9 @@ public class Medico extends Usuario {
 		this.setId(2);
 	}
 
-	public String getId() {
+	/*public String getId() {
 		return getId();
-	}
+	}*/
 	
 	public String getEspecialidade() {
 		return especialidade;
@@ -51,7 +51,7 @@ public class Medico extends Usuario {
 
 	@Override
 	public String toString() {
-		return "["+this.getNome()+" , "+especialidade+ "]";
+		return "["+this.getNome()+" , "+especialidade+" , "+this.getData()+ " , "+this.getLogin()+"]";
 	}
 	
 }

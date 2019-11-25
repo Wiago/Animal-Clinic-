@@ -16,8 +16,7 @@ import javafx.scene.control.TextField;
 
 public class ControladorTelaLogin implements Initializable{
 	
-	private static GetInformacao i = new GetInformacao();
-	
+	private static GetInformacao i = GetInformacao.getInstancia();
 	@FXML
     private PasswordField senha;
 
@@ -32,13 +31,26 @@ public class ControladorTelaLogin implements Initializable{
 
     @FXML
     private Button cadastrar;
-
+    
+    
     @FXML
     void login(ActionEvent event) throws NullException {
     	String loginS = id.getText();
     	String senhaS = senha.getText();
-    	i.loginUser(loginS, senhaS);
-    	Main.trocaCena(2);
+    	String idLogin = i.loginUser(loginS, senhaS);
+    	System.out.println(idLogin);
+    	if(idLogin != null) {
+    		switch(idLogin.charAt(0)) {
+    			case '1':
+    				Main.trocaCena(2);
+    				break;
+    			case '2':
+    				Main.trocaCena(3);
+    				break;
+    			case '3':
+    				Main.trocaCena(4);
+    		}
+    	}
     }
 
     @FXML
@@ -51,6 +63,8 @@ public class ControladorTelaLogin implements Initializable{
     	Main.trocaCena(1);
 
     }
+    
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

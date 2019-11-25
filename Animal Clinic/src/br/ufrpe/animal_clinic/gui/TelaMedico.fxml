@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller= "br.ufrpe.animal_clinic.gui.ControladorTelaMedico">
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Medico">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="27.0" layoutY="26.0" text="Médico">
+                           <font>
+                              <Font name="System Italic" size="25.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="voltar" layoutX="40.0" layoutY="311.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Pacientes">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tabela" layoutX="6.0" layoutY="14.0" prefHeight="305.0" prefWidth="587.0">
+                          <columns>
+                            <TableColumn fx:id="colunaNome" prefWidth="129.0" text="Nome" />
+                            <TableColumn fx:id="colunaEspecie" prefWidth="169.0" text="Especie" />
+                              <TableColumn fx:id="colunaAlimentacao" prefWidth="143.0" text="Alimentacao" />
+                              <TableColumn fx:id="colunaDono" prefWidth="145.0" text="Dono" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Mensagens">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
