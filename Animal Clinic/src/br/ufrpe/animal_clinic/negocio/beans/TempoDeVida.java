@@ -1,6 +1,8 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
-public enum TempoDeVida {
+import java.io.Serializable;
+
+public enum TempoDeVida implements Serializable{
 	FILHOTE("Filhote"), ADULTO("Adulto"), IDOSO("Idoso");
 	
 	private String categoria;

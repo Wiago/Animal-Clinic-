@@ -80,6 +80,7 @@ public class Servico implements IServico{
 		this.exames.getRepositorio().carregarDados("HistoricoDeExames.txt");
 		this.prontuarios.getRepositorio().carregarDados("HistoricoDeProntuarios.txt");
 		this.usuarios.getRepositorio().carregarDados("HistoricoDeUsuarios.txt");
+		System.out.println("ok");
 	}
 
 	@Override

@@ -8,15 +8,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 import br.ufrpe.animal_clinic.exception.*;
 
-public class RepositorioCirurgias {
+public class RepositorioCirurgias implements Serializable{
 
-	 ArrayList<Cirurgia> cirurgias;
+	 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	ArrayList<Cirurgia> cirurgias;
 
 	 public RepositorioCirurgias(int tamanho) {
 		 this.cirurgias = new ArrayList<Cirurgia>(tamanho);

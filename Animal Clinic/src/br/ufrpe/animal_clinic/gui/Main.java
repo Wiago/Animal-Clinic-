@@ -1,5 +1,6 @@
 package br.ufrpe.animal_clinic.gui;
 	
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javafx.application.Application;
@@ -10,8 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
 
-public class Main extends Application {
+public class Main extends Application implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static ArrayList<Scene> cenas = new ArrayList<Scene>();
     private static Stage stage;
 	

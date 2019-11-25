@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,8 +19,12 @@ import br.ufrpe.animal_clinic.negocio.beans.Exame;
 import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
 
 
-public class RepositorioExames {
+public class RepositorioExames implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	ArrayList<Exame> exames = new ArrayList<Exame>(10);
 
 	public RepositorioExames(int tamanho) {

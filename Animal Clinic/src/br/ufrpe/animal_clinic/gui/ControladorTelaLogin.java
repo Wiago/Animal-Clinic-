@@ -1,8 +1,10 @@
 package br.ufrpe.animal_clinic.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -34,7 +36,7 @@ public class ControladorTelaLogin implements Initializable{
     private Button cadastrar;
 
     @FXML
-    void login(ActionEvent event) throws NullException {
+    void login(ActionEvent event) throws NullException, ClassNotFoundException, IOException, NotFoundException {
     	String loginS = id.getText();
     	String senhaS = senha.getText();
     	i.loginUser(loginS, senhaS);
@@ -54,7 +56,12 @@ public class ControladorTelaLogin implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		try {
+			i.carregar();
+		} catch (ClassNotFoundException | IOException | NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

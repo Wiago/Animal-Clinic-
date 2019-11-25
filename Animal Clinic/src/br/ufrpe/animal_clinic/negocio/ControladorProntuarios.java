@@ -1,12 +1,18 @@
 package br.ufrpe.animal_clinic.negocio;
 
+import java.io.Serializable;
+
 import br.ufrpe.animal_clinic.dados.RepositorioCirurgias;
 import br.ufrpe.animal_clinic.dados.RepositorioProntuarios;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
 
-public class ControladorProntuarios {
+public class ControladorProntuarios implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private RepositorioProntuarios repositorio;
 	private static ControladorProntuarios instancia;
 	

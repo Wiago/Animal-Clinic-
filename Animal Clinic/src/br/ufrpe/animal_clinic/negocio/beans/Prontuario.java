@@ -1,8 +1,13 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Prontuario {
+public class Prontuario implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Animal animal;
 	private Medico medico;
 	private Date data;

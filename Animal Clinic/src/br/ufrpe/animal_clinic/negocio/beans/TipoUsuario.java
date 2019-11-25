@@ -1,6 +1,8 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
-public enum TipoUsuario {
+import java.io.Serializable;
+
+public enum TipoUsuario implements Serializable{
 	USUARIO(3), MEDICO(2), ATENDENTE(1);
 	
 	private int categoria;

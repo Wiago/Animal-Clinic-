@@ -1,9 +1,11 @@
 package br.ufrpe.animal_clinic.gui;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 
 import br.ufrpe.animal_clinic.exception.ExisteException;
+import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.Servico;
 import br.ufrpe.animal_clinic.negocio.beans.Atendente;
@@ -11,7 +13,11 @@ import br.ufrpe.animal_clinic.negocio.beans.Login;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
-public class GetInformacao {
+public class GetInformacao implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Servico s = Servico.getInstancia();
 	private Login l;
 	
@@ -41,6 +47,10 @@ public class GetInformacao {
 	
 	public void salvar() throws IOException {
 		s.salvarDados();
+	}
+	
+	public void carregar() throws ClassNotFoundException, IOException, NotFoundException {
+		s.carregarDados();
 	}
 
 	public void cadastrarA(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException {

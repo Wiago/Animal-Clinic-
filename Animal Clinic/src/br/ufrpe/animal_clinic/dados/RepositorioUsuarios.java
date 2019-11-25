@@ -7,18 +7,26 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import br.ufrpe.animal_clinic.exception.ExisteException;
+import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
-public class RepositorioUsuarios {
+public class RepositorioUsuarios implements Serializable{
 	
-	ArrayList<Usuario> usuarios = new ArrayList<Usuario>(10);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+	
 	
 	Map<String,String> loginId = new HashMap<String,String>();
 	
@@ -36,8 +44,6 @@ public class RepositorioUsuarios {
             procurar(u.getId());
         } catch (NullException ex) {
             usuarios.add(u);
-            loginId.put(u.getLogin(), u.getId()); //Key = login; Content = id
-            System.out.println(usuarios);
         }
 
 	}
@@ -139,22 +145,29 @@ public class RepositorioUsuarios {
 	    File arquivo = new File(file);
 	    FileOutputStream fos = new FileOutputStream(arquivo);
 	    ObjectOutputStream ous = new ObjectOutputStream(fos);
-	    ous.writeObject(getUsuario());
+	    ous.writeObject(this.usuarios);
 	    ous.close();
 	}
 	
-	public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException {
-	    
-	    File arquivo = new File(file);
-	    FileInputStream fis;
-	    ObjectInputStream ois;
-	    fis = new FileInputStream(arquivo);
-
-		try {
-		    ois = new ObjectInputStream(fis);
-		    ois.close();
-   
-		}	catch (IOException ex) {
-		}
-	}
+	  public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException, NotFoundException {
+	        System.out.println("carregou o Arquivo");
+	        File arquivo = new File(file);
+	        FileInputStream fis = null;
+	        ObjectInputStream ois = null;
+	        fis = new FileInputStream(arquivo);
+	        
+			try {
+			    ois = new ObjectInputStream(fis);
+			    
+			    this.usuarios.add((Usuario) ois.readObject());
+			    for(int a = 0; a<usuarios.size();a++) {
+			    	 loginId.put(usuarios.get(a).getLogin(), usuarios.get(a).getId()); //Key = login; Content = id
+			    }
+			    
+			    ois.close();
+			} catch (IOException ex) {
+			
+ 
+			}
+	  }
 }
