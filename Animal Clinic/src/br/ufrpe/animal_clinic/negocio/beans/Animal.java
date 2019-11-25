@@ -11,6 +11,7 @@ public class Animal implements Serializable{
 	private static final long serialVersionUID = -4247798444000409255L;
 	private String nome; 
 	private Usuario dono; 
+	private String nomeDono;
 	private boolean oAnimalEMae; 
 	private boolean estaVivo; 
 	private Alimentacao alimentacao; 
@@ -21,6 +22,7 @@ public class Animal implements Serializable{
 	public Animal(String nome, Usuario dono, Alimentacao alimentacao, Especie especie, Genero genero, TempoDeVida tempoDeVida) { 
 		this.nome = nome; 
 		this.dono = dono; 
+		this.nomeDono = dono.getNome();
 		this.oAnimalEMae = false; 
 		this.estaVivo = true; 
 		this.alimentacao = alimentacao; 
@@ -45,6 +47,16 @@ public class Animal implements Serializable{
  
 	public void setDono(Usuario dono) { 
 		this.dono = dono; 
+	} 
+	
+	public String getNomeDono() { 
+		return nomeDono; 
+	} 
+ 
+ 
+	public void setNomeDono(String nomeDono) { 
+		this.dono.setNome(nomeDono);
+		this.nomeDono = nomeDono; 
 	} 
  
  

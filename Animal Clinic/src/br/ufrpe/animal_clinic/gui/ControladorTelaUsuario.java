@@ -2,7 +2,9 @@ package br.ufrpe.animal_clinic.gui;
 
 import java.io.Serializable;
 import java.net.URL;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -11,6 +13,7 @@ import br.ufrpe.animal_clinic.negocio.beans.Animal;
 import br.ufrpe.animal_clinic.negocio.beans.Especie;
 import br.ufrpe.animal_clinic.negocio.beans.Genero;
 import br.ufrpe.animal_clinic.negocio.beans.TempoDeVida;
+import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
@@ -60,8 +63,8 @@ public class ControladorTelaUsuario implements Initializable {
     	colunaGenero.setCellValueFactory(new PropertyValueFactory<>("Genero"));
     	colunaAlimento.setCellValueFactory(new PropertyValueFactory<>("Alimentacao"));
     	
-    	Animal a = new Animal("Ze", null, Alimentacao.CARNIVORO, Especie.CANINO, Genero.MACHO, TempoDeVida.ADULTO);
-    	Animal b = new Animal("Zezinho", null, Alimentacao.HERBIVORO, Especie.ROEDOR, Genero.MACHO, TempoDeVida.ADULTO);
+    	Animal a = new Animal("Ze", new Usuario("Fulano", "111", "123", "fulo123", new Date().from(Instant.now())), Alimentacao.CARNIVORO, Especie.CANINO, Genero.MACHO, TempoDeVida.ADULTO);
+    	Animal b = new Animal("Zezinho", new Usuario("Beltrano", "222", "123", "belo123", new Date().from(Instant.now())), Alimentacao.HERBIVORO, Especie.ROEDOR, Genero.MACHO, TempoDeVida.ADULTO);
     	
     	listaDeAnimais.add(a);
     	listaDeAnimais.add(b);

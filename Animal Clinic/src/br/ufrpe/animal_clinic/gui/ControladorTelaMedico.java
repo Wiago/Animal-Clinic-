@@ -57,7 +57,7 @@ public class ControladorTelaMedico implements Initializable{
     	colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
     	colunaEspecie.setCellValueFactory(new PropertyValueFactory<>("especie"));
     	colunaAlimentacao.setCellValueFactory(new PropertyValueFactory<>("alimentacao"));
-    	colunaDono.setCellValueFactory(new PropertyValueFactory<>("dono"));
+    	colunaDono.setCellValueFactory(new PropertyValueFactory<>("nomeDono"));
     	
     	Animal a = new Animal("Ze",new Usuario("Fulano", "111", "123", "fulo123", new Date().from(Instant.now())), Alimentacao.CARNIVORO, Especie.CANINO, Genero.MACHO, TempoDeVida.ADULTO);
     	Animal b = new Animal("Zezinho", new Usuario("Beltrano", "222", "123", "belt123", new Date().from(Instant.now())), Alimentacao.HERBIVORO, Especie.ROEDOR, Genero.MACHO, TempoDeVida.ADULTO);
