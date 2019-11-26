@@ -155,6 +155,9 @@ public class Servico implements IServico{
 	public ArrayList<Usuario> getDadosUsuarios(){
 		return usuarios.getDados();
 	}
+	public ArrayList<Animal> getDadosAnimais(){
+		return usuarios.getDadosAnimais();
+	}
 	@Override
 	public void cadastrarAnimal(Animal a) throws ExisteException {
 		usuarios.getRepositorioAnimais().cadastrar(a);

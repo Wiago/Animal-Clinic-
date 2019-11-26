@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.animal_clinic.gui.ControladorTelaUsuario">
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Usuario">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="25.0" layoutY="23.0" text="Usuário">
+                           <font>
+                              <Font name="System Italic" size="25.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="voltar" layoutX="41.0" layoutY="307.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+                        <TableView fx:id="tabelaUsuario" layoutX="25.0" layoutY="74.0" prefHeight="200.0" prefWidth="318.0">
+                          <columns>
+                            <TableColumn fx:id="colunaNomeUsuario" prefWidth="92.0" text="Nome" />
+                            <TableColumn fx:id="colunaLogin" prefWidth="105.0" text="Login" />
+                              <TableColumn fx:id="colunaData" prefWidth="120.0" text="Nascimento" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="btAtualizaU" layoutX="438.0" layoutY="307.0" mnemonicParsing="false" onAction="#atualizar" text="Atualizar" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Animais">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tabela" editable="true" layoutX="4.0" layoutY="27.0" prefHeight="234.0" prefWidth="588.0">
+                          <columns>
+                            <TableColumn fx:id="colunaNome" prefWidth="118.0" text="Nome" />
+                            <TableColumn fx:id="colunaTempo" prefWidth="135.0" text="Tempo De Vida" />
+                              <TableColumn fx:id="colunaEspecie" minWidth="0.0" prefWidth="111.0" text="Especie" />
+                              <TableColumn fx:id="colunaGenero" prefWidth="105.0" text="Genero" />
+                              <TableColumn fx:id="colunaAlimento" prefWidth="118.0" text="Alimentação" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="btAddPets" layoutX="29.0" layoutY="288.0" mnemonicParsing="false" onAction="#adicionar" text="Adicionar" />
+                        <Button fx:id="btRemovePets" layoutX="472.0" layoutY="288.0" mnemonicParsing="false" onAction="#remove" text="Remover" />
+                        <Button fx:id="btMarcar" layoutX="236.0" layoutY="288.0" mnemonicParsing="false" onAction="#solicitarMarcar" text="Marcar Consulta" />
+                        <Button fx:id="btAtulaizar" layoutX="131.0" layoutY="288.0" mnemonicParsing="false" onAction="#atualizar" text="Atualizar" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Mensagens">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

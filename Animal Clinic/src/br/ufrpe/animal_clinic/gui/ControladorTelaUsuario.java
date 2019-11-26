@@ -107,13 +107,17 @@ public class ControladorTelaUsuario implements Initializable {
     	colunaLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
     	colunaData.setCellValueFactory(new PropertyValueFactory<>("data"));
     	
-    	if (i.getA() != null){
-    		if (listaDeAnimais.contains(i.getA()) == false) {
-        		listaDeAnimais.add(i.getA());
-    		}
-    	}
     	String login = i.getLogin();
 		Usuario dono = s.procurarUsuarioPorLogin(login);
+    	
+		for(Animal a: i.getDadosAnimais()) {
+			if(a.getIdDono().equals(dono.getId())) {
+				if (listaDeAnimais.contains(a) == false) {
+	        		listaDeAnimais.add(a);
+	    		}
+			}
+		}
+		
     	
 		if(listaDeUsuario.contains(dono) == false) {
 	    	listaDeUsuario.add(dono);
@@ -136,10 +140,12 @@ public class ControladorTelaUsuario implements Initializable {
     }
 
     @FXML
-    void remove(ActionEvent event) {
+    void remove(ActionEvent event) throws NullException {
     	Animal animal = tabela.getSelectionModel().getSelectedItem();
     	listaDeAnimais.remove(animal);
     	listaOb.remove(animal);
+    	
+    	i.removerAn(animal);
     }
 
     @FXML

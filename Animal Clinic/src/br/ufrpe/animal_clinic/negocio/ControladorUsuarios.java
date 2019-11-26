@@ -7,6 +7,7 @@ import br.ufrpe.animal_clinic.dados.RepositorioAnimais;
 import br.ufrpe.animal_clinic.dados.RepositorioUsuarios;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
+import br.ufrpe.animal_clinic.negocio.beans.Animal;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class ControladorUsuarios implements Serializable{
@@ -75,5 +76,8 @@ public class ControladorUsuarios implements Serializable{
 	}
 	public ArrayList<Usuario> getDados() {
         return this.repositorio.getDados();
+    }
+	public ArrayList<Animal> getDadosAnimais() {
+        return this.repositorioAnimais.getAnimais();
     }
 }

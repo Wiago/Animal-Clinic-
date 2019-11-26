@@ -101,11 +101,18 @@ public class GetInformacao {
 		s.cadastrarAnimal(a);
 	}
 	
+	public void removerAn(Animal a) throws NullException {
+		s.removerAnimal(a.getNome(), a.getDono().getLogin());
+	}
+	
 	public void carregarDados() throws ClassNotFoundException, IOException, NotFoundException {
 		s.carregarDados();
 	}
 	public ArrayList<Usuario> getDadosUsuarios(){
 		return s.getDadosUsuarios();
+	}
+	public ArrayList<Animal> getDadosAnimais(){
+		return s.getDadosAnimais();
 	}
 	public String getLogin() {
 		return login;
