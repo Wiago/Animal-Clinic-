@@ -67,6 +67,7 @@ public class ControladorTelaCadastroAnimal implements Initializable{
 		System.out.println(b);
 		
 		i.setA(b);
+		i.setU(dono);
 		
 		Main.trocaCena(4);
     }

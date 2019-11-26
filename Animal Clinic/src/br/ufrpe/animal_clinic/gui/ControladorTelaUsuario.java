@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.net.URL;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -30,7 +31,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ControladorTelaUsuario implements Initializable {
-	static GetInformacao i;
+	static GetInformacao i = GetInformacao.getInstancia();
 	private Servico s = Servico.getInstancia();
 	
 	private GetInformacao gI = GetInformacao.getInstancia();
@@ -77,6 +78,12 @@ public class ControladorTelaUsuario implements Initializable {
     @FXML
     private Button voltar;
     
+    @FXML
+    private Button btAtulaizar;
+    
+    @FXML
+    private Button btAtualizaU;
+    
     
     public void voltar() {
     	Main.trocaCena(0);
@@ -96,28 +103,27 @@ public class ControladorTelaUsuario implements Initializable {
     	colunaGenero.setCellValueFactory(new PropertyValueFactory<>("Genero"));
     	colunaAlimento.setCellValueFactory(new PropertyValueFactory<>("Alimentacao"));
     	
-    	Animal a = new Animal("Ze", new Usuario("Fulano", "111", "123", "fulo123", new Date().from(Instant.now())), Alimentacao.CARNIVORO, Especie.CANINO, Genero.MACHO, TempoDeVida.ADULTO);
-    	Animal b = new Animal("Zezinho", new Usuario("Beltrano", "222", "123", "belo123", new Date().from(Instant.now())), Alimentacao.HERBIVORO, Especie.ROEDOR, Genero.MACHO, TempoDeVida.ADULTO);
+    	colunaNomeUsuario.setCellValueFactory(new PropertyValueFactory<>("nome"));
+    	colunaLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
+    	colunaData.setCellValueFactory(new PropertyValueFactory<>("data"));
     	
-    	Date d = new Date(); 
-    	Usuario c = new Usuario("Henrique", "123.123.123-33", "123", "henr123",d);
+    	if (i.getA() != null){
+    		if (listaDeAnimais.contains(i.getA()) == false) {
+        		listaDeAnimais.add(i.getA());
+    		}
+    	}
+    	String login = i.getLogin();
+		Usuario dono = s.procurarUsuarioPorLogin(login);
     	
-    	Animal g = new Animal("Ze", c, Alimentacao.CARNIVORO, Especie.CANINO, Genero.MACHO, TempoDeVida.ADULTO);
-    	Animal h = new Animal("Zezinho", c, Alimentacao.HERBIVORO, Especie.ROEDOR, Genero.MACHO, TempoDeVida.ADULTO);
-    	
-    	listaDeAnimais.add(a);
-    	listaDeAnimais.add(b);
-    	listaDeAnimais.add(g);
-    	listaDeAnimais.add(h);
-    	
-    	
-    	listaDeUsuario.add(c);
+		if(listaDeUsuario.contains(dono) == false) {
+	    	listaDeUsuario.add(dono);
+		}
     	
     	listaOb = (ObservableListBase<Animal>) FXCollections.observableArrayList(listaDeAnimais);
     	tabela.setItems(listaOb);
     	
     	listaObs = (ObservableListBase<Usuario>) FXCollections.observableArrayList(listaDeUsuario);
-    	//tabelaUsuario.setItems(listaObs);
+    	tabelaUsuario.setItems(listaObs);
     }
     
     public void animalSelecionado(Animal animal) {
@@ -141,16 +147,14 @@ public class ControladorTelaUsuario implements Initializable {
     	Animal animal = tabela.getSelectionModel().getSelectedItem();
     	
     }
+    
+    @FXML
+    void atualizar(ActionEvent event) throws NullException {
+    	preencherTabela();
+    }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		try {
-			preencherTabela();
-		} catch (NullException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		//tabela.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> animalSelecionado(newValue));
 	}
 }
