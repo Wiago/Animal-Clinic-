@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 import br.ufrpe.animal_clinic.exception.ExisteException;
+import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.Servico;
 import br.ufrpe.animal_clinic.negocio.beans.Atendente;
@@ -39,19 +43,19 @@ public class GetInformacao {
 		if(id != null) {
 			switch(id.charAt(0)) {
 				case '1':
-					Atendente a = s.efetuarLoginAtendente(login);
+					Usuario a = s.efetuarLogin(login);
 					if(a != null && a.getSenha().equals(senha)) {
 						return a.getId();
 					}
 					break;
 				case '2':
-					Medico m = s.efetuarLoginMedico(login);
+					Usuario m = s.efetuarLogin(login);
 					if(m != null && m.getSenha().equals(senha)) {
 						return m.getId();
 					}
 					break;
 				case '3':
-					Usuario u = s.efetuarLoginUsuario(login);
+					Usuario u = s.efetuarLogin(login);
 					if(u != null && u.getSenha().equals(senha)) {
 						return u.getId();
 					}
@@ -62,7 +66,7 @@ public class GetInformacao {
 		
 	}
 	
-	public void salvar() throws IOException {
+	public void salvar() throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
 		s.salvarDados();
 	}
 
@@ -80,6 +84,9 @@ public class GetInformacao {
 		s.cadastrarUsuario(m);
 	}
 	
+	public void carregarDados() throws ClassNotFoundException, IOException, NotFoundException {
+		s.carregarDados();
+	}
 	public ArrayList<Usuario> getDadosUsuarios(){
 		return s.getDadosUsuarios();
 	}

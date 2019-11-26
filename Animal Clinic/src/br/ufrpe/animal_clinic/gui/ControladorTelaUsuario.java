@@ -19,13 +19,19 @@ import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ControladorTelaUsuario implements Initializable {
 	
 	private GetInformacao gI = GetInformacao.getInstancia();
+	
+	@FXML
+    private ChoiceBox<?> boxSolicitacao;
+
 	
 	@FXML
     private TableView<Animal> tabela;
@@ -47,6 +53,7 @@ public class ControladorTelaUsuario implements Initializable {
     
     @FXML
     private Button voltar;
+    
     
     public void voltar() {
     	Main.trocaCena(0);

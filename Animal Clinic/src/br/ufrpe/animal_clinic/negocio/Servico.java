@@ -15,6 +15,9 @@ import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 import java.util.ArrayList;
 
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 
 public class Servico implements IServico{
 	
@@ -76,27 +79,16 @@ public class Servico implements IServico{
 
 	@Override
 	public void carregarDados() throws IOException, NotFoundException, ClassNotFoundException {
-		this.cirurgias.getRepositorio().carregarDados("HistoricoDeCirurgia.txt");
-		this.consultas.getRepositorio().carregarDados("HistoricoDeConsultas.txt");
-		this.exames.getRepositorio().carregarDados("HistoricoDeExames.txt");
-		this.prontuarios.getRepositorio().carregarDados("HistoricoDeProntuarios.txt");
-		this.usuarios.getRepositorio().carregarDados("HistoricoDeUsuarios.txt");
+		//this.cirurgias.getRepositorio().carregarDados("HistoricoDeCirurgia.txt");
+		//this.consultas.getRepositorio().carregarDados("HistoricoDeConsultas.txt");
+		//this.exames.getRepositorio().carregarDados("HistoricoDeExames.txt");
+		//this.prontuarios.getRepositorio().carregarDados("HistoricoDeProntuarios.txt");
+		this.usuarios.getRepositorio().carregarDados("HistoricoDeUsuarios.csv");
 	}
 
-	@Override
-	public Atendente efetuarLoginAtendente(String login) throws NullException {
-		Atendente a = (Atendente) usuarios.procurarPorLogin(login);
-		return (Atendente) a;
-	}
 
 	@Override
-	public Medico efetuarLoginMedico(String login) throws NullException {
-		Medico m = (Medico) usuarios.procurarPorLogin(login);
-		return m;
-	}
-
-	@Override
-	public Usuario efetuarLoginUsuario(String login) throws NullException {
+	public Usuario efetuarLogin(String login) throws NullException {
 		System.out.println("ok");
 		Usuario u = usuarios.procurarPorLogin(login);
 		if(u != null) {
@@ -137,12 +129,18 @@ public class Servico implements IServico{
 	}
 
 	@Override
-	public void salvarDados() throws IOException {
-		this.cirurgias.getRepositorio().salvarDados("HistoricoDeCirurgia.txt");
+	public void salvarDados() throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+		try {	
+		/*this.cirurgias.getRepositorio().salvarDados("HistoricoDeCirurgia.txt");
 		this.consultas.getRepositorio().salvarDados("HistoricoDeConsultas.txt");
 		this.exames.getRepositorio().salvarDados("HistoricoDeExames.txt");
-		this.prontuarios.getRepositorio().salvarDados("HistoricoDeProntuarios.txt");
-		this.usuarios.getRepositorio().salvarDados("HistoricoDeUsuarios.txt");
+		this.prontuarios.getRepositorio().salvarDados("HistoricoDeProntuarios.txt");*/
+		this.usuarios.getRepositorio().salvarDados("HistoricoDeUsuarios.csv");
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

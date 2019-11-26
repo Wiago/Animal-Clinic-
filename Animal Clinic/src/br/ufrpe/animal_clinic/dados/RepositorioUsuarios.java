@@ -1,16 +1,27 @@
 package br.ufrpe.animal_clinic.dados;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
@@ -138,26 +149,58 @@ public class RepositorioUsuarios {
 		return b;
 	}
 	
-	public void salvarDados(String file) throws IOException {
-		System.out.println("oi");
-	    File arquivo = new File("HistoricoDeUsuarios.txt");
-	    FileOutputStream fos = new FileOutputStream(arquivo);
-	    ObjectOutputStream ous = new ObjectOutputStream(fos);
-	    ous.writeObject(this.getUsuarios());
-	    ous.close();
+	public void salvarDados(String file) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+		System.out.println(usuarios);
+
+        Writer writer = Files.newBufferedWriter(Paths.get(file));
+        StatefulBeanToCsv<Usuario> beanToCsv = new StatefulBeanToCsvBuilder<Usuario>(writer).build();
+        
+        
+        beanToCsv.write(usuarios);
+        System.out.println(usuarios);
+        writer.flush();
+        writer.close();
 	}
 	
 	public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException {
 	    
-	    File arquivo = new File("HistoricoDeUsuarios.txt");
-	    FileInputStream fis;
-	    ObjectInputStream ois;
+		ArrayList<Usuario> users = new ArrayList<Usuario>();
+		BufferedReader csvReader = null;
+		String csvLine = null;
+		System.out.println("ok");
 		try {
-			fis = new FileInputStream(arquivo);
-		    ois = new ObjectInputStream(fis);
-		    ois.close();
-   
-		}	catch (IOException ex) {
+			csvReader = new BufferedReader(new FileReader(file));
+			csvReader.readLine(); // ignore header!
+
+			while ((csvLine = csvReader.readLine()) != null) {
+				System.out.println(csvLine);
+				users.add(Usuario.of(csvLine)); // create usuario object and add to repository
+			}
+
+		} catch (Exception e) {
+			System.out.println("Erro ao ler arquivo!! | Linha lida: " + csvLine);
+			e.printStackTrace();
+
+		} finally {
+			closeFile(csvReader);
+		}
+		
+		usuarios.addAll(users);
+		System.out.println(usuarios);
+		for(Usuario us: usuarios) {
+			loginId.put(us.getLogin(), us.getId());
+			System.out.println("Key:"+us.getLogin()+","+loginId.get(us.getLogin()));
+		}
+		System.out.println(loginId.get("ccc123"));
+		
+	}
+	
+	private static void closeFile(BufferedReader csvReader) {
+		try {
+			csvReader.close();
+		} catch (IOException e) {
+			System.out.println("Erro ao fechar arquivo!!");
+			e.printStackTrace();
 		}
 	}
 }

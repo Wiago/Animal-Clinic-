@@ -1,6 +1,10 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
 import java.io.IOException;
+
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
@@ -16,9 +20,7 @@ public interface IServico {
 	void desmarcarCirurgia(String id) throws NullException;
     void carregarDados()throws IOException, NotFoundException, ClassNotFoundException;
     
-    Atendente efetuarLoginAtendente(String login) throws NullException ;
-	Medico efetuarLoginMedico(String login) throws NullException ;
-	Usuario efetuarLoginUsuario(String login) throws NullException ;
+    Usuario efetuarLogin(String login) throws NullException ;
 	
 	Medico procurarMedico(String id) throws NullException ;
 	Medico procurarMedicoPorLogin(String login) throws NullException;
@@ -28,7 +30,7 @@ public interface IServico {
 	Atendente procurarAtendentePorLogin(String login) throws NullException;
     
 	
-	void salvarDados() throws IOException;
+	void salvarDados() throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException;
 	void marcarExame(Exame e) throws NullException, ExisteException;
 
 }

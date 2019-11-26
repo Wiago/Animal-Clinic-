@@ -7,6 +7,9 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.TipoUsuario;
@@ -71,7 +74,7 @@ public class ControladorTelaCadastro implements Initializable{
     }
 
     @FXML
-    void cadastrar(ActionEvent event) throws ParseException, ExisteException, NullException, IOException {
+    void cadastrar(ActionEvent event) throws ParseException, ExisteException, NullException, IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
     	
     	String loginS = login.getText();
     	String senhaS = senha.getText();
