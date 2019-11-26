@@ -48,9 +48,9 @@ public class Consulta implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Consulta [Médico =" + getMedico().getNome()+ "," + getMedico().getEspecialidade() 
-				+ "; Data=" + getData() + "; "
-				+ "Animal=" + getAnimal().getNome() + "," + getAnimal().getTempoDeVida() + "," +getAnimal().getEspecie() + "," +getAnimal().getGenero() + "," +getAnimal().getAlimentacao() + "; Dono = " +getAnimal().getDono().getNome() + "," +getAnimal().getDono().getCpf() + "." + "]\n\n";
+		return "Consulta [Médico =(" + getMedico().getNome()+ ";" + getMedico().getEspecialidade() 
+				+ ") Data=(" + getData() + ")/"
+				+ "Animal=" + getAnimal().getNome() + "/" + getAnimal().getTempoDeVida() + "/" +getAnimal().getEspecie() + "/" +getAnimal().getGenero() + "/" +getAnimal().getAlimentacao() + "/ Dono =(" +getAnimal().getDono().getNome() + ";" +getAnimal().getDono().getCpf() + ")" + "]\n\n";
 	}
 	
 	

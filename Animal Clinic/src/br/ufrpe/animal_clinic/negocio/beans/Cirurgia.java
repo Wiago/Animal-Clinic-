@@ -61,9 +61,9 @@ public class Cirurgia implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Cirurgia [Médico =" + getMedico().getNome()+ "," + getMedico().getEspecialidade() 
-				+ "; Data=" + getData() + "; "
-				+ "Animal=" + getAnimal().getNome() + "," + getAnimal().getTempoDeVida() + "," +getAnimal().getEspecie() + "," +getAnimal().getGenero() + "," +getAnimal().getAlimentacao() + "; Dono = " +getAnimal().getDono().getNome() + "," +getAnimal().getDono().getCpf() + "." + "]\n\n";
+		return "Cirurgia [Médico =(" + getMedico().getNome()+ ";" + getMedico().getEspecialidade() 
+				+ ")/ Data=(" + getData() + ")/"
+				+ "Animal=" + getAnimal().getNome() + "/" + getAnimal().getTempoDeVida() + "/" +getAnimal().getEspecie() + "/" +getAnimal().getGenero() + "/" +getAnimal().getAlimentacao() + "/ Dono =(" +getAnimal().getDono().getNome() + ";" +getAnimal().getDono().getCpf() + ") ]\n\n";
 	}
 	
 	public static Cirurgia of(String csvLine) throws ParseException {

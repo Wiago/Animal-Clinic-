@@ -144,8 +144,8 @@ public class Animal implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Animal [Nome = " + nome + ", Dono = " + dono + "; " + alimentacao + "; " + especie
-				+ "; " + genero + "; " + tempoDeVida + "]";
+		return "Animal [Nome = " + nome + "/Dono =(" + dono + ")/" + alimentacao + "/" + especie
+				+ "/" + genero + "/" + tempoDeVida + "]";
 	}
 
 	@Override 

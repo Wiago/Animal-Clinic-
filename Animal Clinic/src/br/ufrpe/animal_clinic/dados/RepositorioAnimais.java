@@ -180,11 +180,10 @@ public class RepositorioAnimais implements Serializable{
 		ArrayList<Animal> animals = new ArrayList<Animal>();
 		BufferedReader csvReader = null;
 		String csvLine = null;
-		System.out.println("ok");
 		try {
 			csvReader = new BufferedReader(new FileReader(file));
 			csvReader.readLine(); // ignore header!
-
+			System.out.println("Linhas no arquivo(Animais):");
 			while ((csvLine = csvReader.readLine()) != null) {
 				System.out.println(csvLine);
 				animals.add(RepositorioAnimais.of(csvLine)); // create animal object and add to repository
@@ -197,8 +196,8 @@ public class RepositorioAnimais implements Serializable{
 		} finally {
 			closeFile(csvReader);
 		}
-		
 		animais.addAll(animals);
+		System.out.println("Animais no arquivo (toString):");
 		System.out.println(animais);
 	}
 	

@@ -194,11 +194,11 @@ public class RepositorioUsuarios implements Serializable{
 		ArrayList<Usuario> users = new ArrayList<Usuario>();
 		BufferedReader csvReader = null;
 		String csvLine = null;
-		System.out.println("ok");
+		
 		try {
 			csvReader = new BufferedReader(new FileReader(file));
 			csvReader.readLine(); // ignore header!
-
+			System.out.println("Linhas no arquivo (Usuários):");
 			while ((csvLine = csvReader.readLine()) != null) {
 				System.out.println(csvLine);
 				users.add(Usuario.of(csvLine)); // create usuario object and add to repository
@@ -213,13 +213,13 @@ public class RepositorioUsuarios implements Serializable{
 		}
 		
 		usuarios.addAll(users);
+		System.out.println("Usuários no Arquivo (toString):");
 		System.out.println(usuarios);
+		System.out.println("Usuários no Arquivo (Key,Login):");
 		for(Usuario us: usuarios) {
 			loginId.put(us.getLogin(), us.getId());
-			System.out.println("Key:"+us.getLogin()+","+loginId.get(us.getLogin()));
-		}
-		System.out.println(loginId.get("ccc123"));
-		
+			System.out.println(us.getLogin()+","+loginId.get(us.getLogin()));
+		}		
 	}
 	
 	private static void closeFile(BufferedReader csvReader) {

@@ -114,7 +114,6 @@ public class Usuario implements Serializable{
 		Date data1 = formatter.parse(dados[2].replaceAll(oldString,""));
 		Usuario u = new Usuario(null,null,null,null,data1);
 		try {
-			System.out.println("Chegou");
 			u.setCpf(dados[0].replaceAll(oldString,""));
 			u.setIdCSV(dados[3].replaceAll(oldString,""));
 			u.setLogin(dados[4].replaceAll(oldString,""));

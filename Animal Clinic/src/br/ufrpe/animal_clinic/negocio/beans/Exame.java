@@ -73,9 +73,9 @@ public class Exame implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Exame [Médico =" + getMedico().getNome()+ "," + getMedico().getEspecialidade() 
-				+ "; Data=" + getData() + "; "
-				+ "Animal=" + getAnimal().getNome() + "," + getAnimal().getTempoDeVida() + "," +getAnimal().getEspecie() + "," +getAnimal().getGenero() + "," +getAnimal().getAlimentacao() + "; Dono = " +getAnimal().getDono().getNome() + "," +getAnimal().getDono().getCpf() + "." + "]\n\n";
+		return "Exame [Médico = (" + getMedico().getNome()+ ";" + getMedico().getEspecialidade() 
+				+ ") Data=(" + getData() + ")/ "
+				+ "Animal=" + getAnimal().getNome() + "/" + getAnimal().getTempoDeVida() + "/" +getAnimal().getEspecie() + "/" +getAnimal().getGenero() + "/" +getAnimal().getAlimentacao() + "/ Dono = (" +getAnimal().getDono().getNome() + ";" +getAnimal().getDono().getCpf() + ")" + "]\n\n";
 	}
 	
 	

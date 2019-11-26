@@ -47,9 +47,9 @@ public class Prontuario implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Prontuário [Médico =" + getMedico().getNome()+ "," + getMedico().getEspecialidade() 
-				+ "; Data=" + getData() + "; "
-				+ "Animal=" + getAnimal().getNome() + "," + getAnimal().getTempoDeVida() + "," +getAnimal().getEspecie() + "," +getAnimal().getGenero() + "," +getAnimal().getAlimentacao() + "; Dono = " +getAnimal().getDono().getNome() + "," +getAnimal().getDono().getCpf() + "." + "]\n\n";
+		return "Prontuário [Médico =(" + getMedico().getNome()+ ";" + getMedico().getEspecialidade() 
+				+ ")/ Data=(" + getData() + ")/ "
+				+ "Animal=" + getAnimal().getNome() + "/" + getAnimal().getTempoDeVida() + "/" +getAnimal().getEspecie() + "/" +getAnimal().getGenero() + "/" +getAnimal().getAlimentacao() + "/ Dono =(" +getAnimal().getDono().getNome() + ";" +getAnimal().getDono().getCpf() + ")" + "]\n\n";
 	}
 
 	
