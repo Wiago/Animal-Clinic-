@@ -85,6 +85,7 @@ public class Servico implements IServico{
 		//this.exames.getRepositorio().carregarDados("HistoricoDeExames.txt");
 		//this.prontuarios.getRepositorio().carregarDados("HistoricoDeProntuarios.txt");
 		this.usuarios.getRepositorio().carregarDados("HistoricoDeUsuarios.csv");
+		this.usuarios.getRepositorioAnimais().carregarDados("HistoricoDeAnimais.csv");
 	}
 
 
@@ -137,6 +138,7 @@ public class Servico implements IServico{
 		this.exames.getRepositorio().salvarDados("HistoricoDeExames.txt");
 		this.prontuarios.getRepositorio().salvarDados("HistoricoDeProntuarios.txt");*/
 		this.usuarios.getRepositorio().salvarDados("HistoricoDeUsuarios.csv");
+		this.usuarios.getRepositorioAnimais().salvarDados("HistoricoDeAnimais.csv");
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -154,14 +156,12 @@ public class Servico implements IServico{
 		return usuarios.getDados();
 	}
 	@Override
-	public void cadastrarAnimal(Animal a) {
-		
-		
+	public void cadastrarAnimal(Animal a) throws ExisteException {
+		usuarios.getRepositorioAnimais().cadastrar(a);
 	}
 	@Override
-	public void removerAnimal(String nome) {
-		// TODO Auto-generated method stub
-		
+	public void removerAnimal(String nomeAnimal, String loginDono) throws NullException {
+		usuarios.getRepositorioAnimais().removerPorLoginDoDono(nomeAnimal, loginDono);
 	}
 
 }

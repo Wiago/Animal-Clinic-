@@ -35,26 +35,50 @@ public class RepositorioUsuarios implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static RepositorioUsuarios instancia;
 
-	ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+	private ArrayList<Usuario> usuarios;
 	
+	private Map<String,String> loginId;
 	
-	Map<String,String> loginId = new HashMap<String,String>();
-	
-	public RepositorioUsuarios(int tamanho) {
-        this.usuarios = new ArrayList<Usuario>(tamanho);
+	private RepositorioUsuarios() {
+        this.usuarios = new ArrayList<Usuario>();
+        this.loginId = new HashMap<String,String>();
     }
 
-    public RepositorioUsuarios(ArrayList<Usuario> usuarios) {
+    /*public RepositorioUsuarios(ArrayList<Usuario> usuarios) {
         this.usuarios = usuarios;
-    }
+    }*/
+	
+	public static RepositorioUsuarios getInstancia() {
+		if(instancia == null) {
+			instancia = new RepositorioUsuarios();
+		}
+		return instancia;
+	}
 
+	public Map<String, String> getLoginId() {
+		return loginId;
+	}
+
+	public void setLoginId(Map<String, String> loginId) {
+		this.loginId = loginId;
+	}
+
+	public ArrayList<Usuario> getUsuarios(){
+		return usuarios;
+	}
+	
+	public void setUsuarios(ArrayList<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
 
 	public void cadastrar(Usuario u) throws ExisteException{
 		try {
             procurar(u.getId());
         } catch (NullException ex) {
             usuarios.add(u);
+            loginId.put(u.getLogin(), u.getId());
         }
 
 	}
@@ -143,9 +167,6 @@ public class RepositorioUsuarios implements Serializable{
 	      return listaUsuarios;
 	}
 	
-	public ArrayList<Usuario> getUsuarios(){
-		return usuarios;
-	}
 	
 	public Usuario getUsuario() {
 		Usuario b = null;

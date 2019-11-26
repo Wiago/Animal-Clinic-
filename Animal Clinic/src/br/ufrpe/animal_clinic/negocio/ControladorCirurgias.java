@@ -18,7 +18,7 @@ public class ControladorCirurgias implements Serializable{
 	private static ControladorCirurgias instancia;
 	
 	private ControladorCirurgias() {
-		repositorio = new RepositorioCirurgias(10);
+		repositorio = RepositorioCirurgias.getInstancia();
 	}
 	
 	public static ControladorCirurgias getInstancia() {

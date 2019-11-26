@@ -95,10 +95,9 @@ public class GetInformacao {
 		s.cadastrarUsuario(m);
 	}
 	
-	public Animal cadastrarA(String nome, Usuario dono, Alimentacao alimentacao, Especie especie, Genero genero, TempoDeVida tempoDeVida) {
+	public void cadastrarAn(String nome, Usuario dono, Alimentacao alimentacao, Especie especie, Genero genero, TempoDeVida tempoDeVida) throws ExisteException {
 		Animal a = new Animal(nome, dono, alimentacao, especie, genero, tempoDeVida);
 		s.cadastrarAnimal(a);
-		return a;
 	}
 	
 	public void carregarDados() throws ClassNotFoundException, IOException, NotFoundException {

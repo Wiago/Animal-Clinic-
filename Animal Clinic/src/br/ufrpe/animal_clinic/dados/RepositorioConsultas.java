@@ -22,15 +22,23 @@ public class RepositorioConsultas implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static RepositorioConsultas instancia;
 	private ArrayList<Consulta> consultas;
 	
-	public RepositorioConsultas(int tam) {
+	/*public RepositorioConsultas(int tam) {
 		consultas = new ArrayList(tam);
-	}
+	}*/
 	
-	public RepositorioConsultas(ArrayList<Consulta> consultas) {
-		this.consultas = consultas;
-	}
+	private RepositorioConsultas() {
+		 this.consultas = new ArrayList<Consulta>();
+	 }
+	 
+	 public static RepositorioConsultas getInstancia() {
+		 if(instancia == null) {
+			 instancia = new RepositorioConsultas();
+		 }
+		 return instancia;
+	 }
 
 	public void cadastrarConsulta(Consulta c) {
 		 try {
@@ -115,18 +123,6 @@ public class RepositorioConsultas implements Serializable{
 		
 	  public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException {
 		    
-		    File arquivo = new File(file);
-		    FileInputStream fis;
-		    ObjectInputStream ois;
-		    fis = new FileInputStream(arquivo);
-
-			try {
-			    ois = new ObjectInputStream(fis);
-			    RepositorioConsultas a = new RepositorioConsultas((ArrayList<Consulta>) ois.readObject());
-			    ois.close();
-	   
-			}	catch (IOException ex) {
-				RepositorioConsultas a = new RepositorioConsultas(20);
-			}
+		    
 	  }
 }

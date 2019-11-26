@@ -1,8 +1,13 @@
 package br.ufrpe.animal_clinic.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
+import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.Servico;
 import br.ufrpe.animal_clinic.negocio.beans.Alimentacao;
@@ -53,7 +58,7 @@ public class ControladorTelaCadastroAnimal implements Initializable{
     ObservableList<Alimentacao> alimentos = FXCollections.observableArrayList(Alimentacao.values());
     
     @FXML
-    void cadastrar(ActionEvent event) throws NullException {
+    void cadastrar(ActionEvent event) throws NullException, ExisteException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {
     	Especie e = especie.getValue();
 		Genero g = genero.getValue();
 		TempoDeVida t = tempoDeVida.getValue();
@@ -62,11 +67,11 @@ public class ControladorTelaCadastroAnimal implements Initializable{
 		String login = i.getLogin();
 		Usuario dono = s.procurarUsuarioPorLogin(login);
 		
-		Animal b = i.cadastrarA(nomePet.getText(), dono, a, e, g, t);
+		i.cadastrarAn(nomePet.getText(), dono, a, e, g, t);
 		
-		System.out.println(b);
+		i.salvar();
 		
-		i.setA(b);
+		//i.setA(b);
 		
 		Main.trocaCena(4);
     }

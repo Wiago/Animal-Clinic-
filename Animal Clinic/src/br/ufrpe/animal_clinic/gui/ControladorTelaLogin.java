@@ -43,13 +43,20 @@ public class ControladorTelaLogin implements Initializable{
     		switch(idLogin.charAt(0)) {
     			case '1':
     				Main.trocaCena(2);
+    				id.clear();
+    				senha.clear();
     				break;
     			case '2':
     				Main.trocaCena(3);
+    				id.clear();
+    				senha.clear();
     				break;
     			case '3':
     				i.setLogin(loginS);
     				Main.trocaCena(4);
+    				id.clear();
+    				senha.clear();
+    				break;
     		}
     	}
     }

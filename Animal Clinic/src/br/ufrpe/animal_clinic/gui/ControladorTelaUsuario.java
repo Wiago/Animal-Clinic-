@@ -132,7 +132,7 @@ public class ControladorTelaUsuario implements Initializable {
     @FXML
     void remove(ActionEvent event) {
     	Animal animal = tabela.getSelectionModel().getSelectedItem();
-    	listaDeUsuario.remove(animal);
+    	listaDeAnimais.remove(animal);
     	listaOb.remove(animal);
     }
 

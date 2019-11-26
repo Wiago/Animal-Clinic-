@@ -15,10 +15,9 @@ public interface IServico {
 	void cadastrarUsuario(Usuario u) throws ExisteException, NullException;
 	void cadastrarConsulta(Consulta c) throws NullException, ExisteException;
 	void cadastrarCirurgia(Cirurgia c) throws NullException, ExisteException;
-	void cadastrarAnimal(Animal a);
+	void cadastrarAnimal(Animal a) throws ExisteException;
 	
 	void removerUsuario(String id) throws NullException;
-	void removerAnimal(String nome);
 	
 	void desmarcarConsulta(String id) throws NullException;
 	void desmarcarCirurgia(String id) throws NullException;
@@ -37,5 +36,6 @@ public interface IServico {
 	
 	void salvarDados() throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException;
 	void marcarExame(Exame e) throws NullException, ExisteException;
+	void removerAnimal(String nomeAnimal, String loginDono) throws NullException;
 	
 }

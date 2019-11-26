@@ -3,6 +3,7 @@ package br.ufrpe.animal_clinic.negocio;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import br.ufrpe.animal_clinic.dados.RepositorioAnimais;
 import br.ufrpe.animal_clinic.dados.RepositorioUsuarios;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
@@ -14,10 +15,12 @@ public class ControladorUsuarios implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private RepositorioUsuarios repositorio;
+	private RepositorioAnimais repositorioAnimais;
 	private static ControladorUsuarios instancia;
 	
 	private ControladorUsuarios() {
-		repositorio = new RepositorioUsuarios(10);
+		repositorio = RepositorioUsuarios.getInstancia();
+		repositorioAnimais = RepositorioAnimais.getInstancia();
 	}
 	
 	public static ControladorUsuarios getInstancia() {
@@ -29,6 +32,10 @@ public class ControladorUsuarios implements Serializable{
 	
 	public RepositorioUsuarios getRepositorio() {
 		return repositorio;
+	}
+	
+	public RepositorioAnimais getRepositorioAnimais() {
+		return repositorioAnimais;
 	}
 	
 	public void cadastrar(Usuario u) throws ExisteException, NullException {

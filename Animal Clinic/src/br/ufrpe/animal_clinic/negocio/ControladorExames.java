@@ -18,7 +18,7 @@ public class ControladorExames implements Serializable{
 	private RepositorioExames repositorio;
 		
 	private ControladorExames() {
-		repositorio = new RepositorioExames(10);
+		repositorio = RepositorioExames.getInstancia();
 	}
 	
 	public static ControladorExames getInstancia() {

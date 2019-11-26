@@ -19,7 +19,7 @@ public class ControladorConsultas implements Serializable{
 	private RepositorioConsultas repositorio;
 	
 	private ControladorConsultas() {
-		repositorio = new RepositorioConsultas(10);
+		repositorio = RepositorioConsultas.getInstancia();
 	}
 	
 	public static ControladorConsultas getInstancia() {

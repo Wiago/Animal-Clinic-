@@ -25,15 +25,23 @@ public class RepositorioExames implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	ArrayList<Exame> exames = new ArrayList<Exame>(10);
+	private static RepositorioExames instancia;
+	ArrayList<Exame> exames = new ArrayList<Exame>();
 
-	public RepositorioExames(int tamanho) {
-	    this.exames = new ArrayList<Exame>(tamanho);
+	private RepositorioExames() {
+	    this.exames = new ArrayList<Exame>();
 	}
 	
-	public RepositorioExames(ArrayList<Exame> usuarios) {
+	/*public RepositorioExames(ArrayList<Exame> usuarios) {
 	    this.exames = usuarios;
-	}
+	}*/
+	 
+	 public static RepositorioExames getInstancia() {
+		 if(instancia == null) {
+			 instancia = new RepositorioExames();
+		 }
+		 return instancia;
+	 }
 	
 	
 	public ArrayList<Exame> getExames() {
@@ -135,18 +143,6 @@ public class RepositorioExames implements Serializable{
 	
 	public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException {
 	    
-	    File arquivo = new File(file);
-	    FileInputStream fis;
-	    ObjectInputStream ois;
-	    fis = new FileInputStream(arquivo);
-
-		try {
-		    ois = new ObjectInputStream(fis);
-		    RepositorioExames a = new RepositorioExames((ArrayList<Exame>) ois.readObject());
-		    ois.close();
-   
-		}	catch (IOException ex) {
-			RepositorioExames a = new RepositorioExames(20);
-		}
+	    
 	}
 }

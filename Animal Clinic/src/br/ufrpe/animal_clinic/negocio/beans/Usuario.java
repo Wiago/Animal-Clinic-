@@ -100,8 +100,8 @@ public class Usuario implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Usuário [Nome = " + getNome() + ","+"Login = " + getLogin() + " CPF = " + getCpf() + ", Senha = " + getSenha()
-				+ ", Data de Nascimento = " + getDataNasS() + "]";
+		return "Usuário [Nome = " + getNome() + "/"+"Login = " + getLogin() + "/CPF = " + getCpf() + "/Senha = " + getSenha()
+				+ "/ Data de Nascimento = " + getDataNasS() + "]";
 	}
 	
 	public static Usuario of(String csvLine) throws ParseException {
@@ -110,7 +110,6 @@ public class Usuario implements Serializable{
 		// "cpf","dataNas","dataNasS","id","login","nome","senha","serialVersionUID"
 		String[] dados = csvLine.split(",");
 		String oldString = String.valueOf('"');
-		ArrayList<String> arrayDados = new ArrayList<String>();
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/M/yyyy"); 
 		Date data1 = formatter.parse(dados[2].replaceAll(oldString,""));
 		Usuario u = new Usuario(null,null,null,null,data1);

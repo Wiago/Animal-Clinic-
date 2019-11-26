@@ -1,0 +1,3 @@
+"alimentacao","dono","especie","estaVivo","genero","idDono","nome","nomeDono","oAnimalEMae","serialVersionUID","tempoDeVida"
+"ONIVORO","Usuário [Nome = aaa/Login = aaa123/CPF = 888/Senha = 123/ Data de Nascimento = 02/11/2000]","FELINO","true","MACHO","3754","Filhote","aaa","false","","FILHOTE"
+"CARNIVORO","Usuário [Nome = aaa/Login = aaa123/CPF = 888/Senha = 123/ Data de Nascimento = 02/11/2000]","ROEDOR","true","FEMEA","3754","Filhota","aaa","false","","ADULTO"

@@ -1,36 +1,54 @@
 package br.ufrpe.animal_clinic.dados;
 
 import java.util.Date;
+
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
+import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 import br.ufrpe.animal_clinic.exception.*;
 
 public class RepositorioCirurgias implements Serializable{
-
-	 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static RepositorioCirurgias instancia; 
 	
 	ArrayList<Cirurgia> cirurgias;
 
-	 public RepositorioCirurgias(int tamanho) {
+	 /*public RepositorioCirurgias(int tamanho) {
 		 this.cirurgias = new ArrayList<Cirurgia>(tamanho);
-	 }
+	 }*/
 
-	 public RepositorioCirurgias(ArrayList<Cirurgia> cirurgias) {
-		 this.cirurgias = cirurgias;
+	 private RepositorioCirurgias() {
+		 this.cirurgias = new ArrayList<Cirurgia>();
+	 }
+	 
+	 public static RepositorioCirurgias getInstancia() {
+		 if(instancia == null) {
+			 instancia = new RepositorioCirurgias();
+		 }
+		 return instancia;
 	 }
 	    
 	 public void cadastrar(Cirurgia c) throws ExisteException, NullException{
@@ -106,28 +124,51 @@ public class RepositorioCirurgias implements Serializable{
 	      return listaCirurgias;
 	  }
 	  
-	  public void salvarDados(String file) throws IOException {
-		    File arquivo = new File(file);
-		    FileOutputStream fos = new FileOutputStream(arquivo);
-		    ObjectOutputStream ous = new ObjectOutputStream(fos);
-		    ous.writeObject(this.getDados());
-		    ous.close();
+	  public void salvarDados(String file) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+		  	System.out.println(cirurgias);
+
+	        Writer writer = Files.newBufferedWriter(Paths.get(file));
+	        StatefulBeanToCsv<Cirurgia> beanToCsv = new StatefulBeanToCsvBuilder<Cirurgia>(writer).build();
+	        
+	        
+	        beanToCsv.write(cirurgias);
+	        System.out.println(cirurgias);
+	        writer.flush();
+	        writer.close();
 		}
 		
 	  public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException {
-		    
-		    File arquivo = new File(file);
-		    FileInputStream fis;
-		    ObjectInputStream ois;
-		    fis = new FileInputStream(arquivo);
-
+		  	ArrayList<Cirurgia> cirur = new ArrayList<Cirurgia>();
+			BufferedReader csvReader = null;
+			String csvLine = null;
+			System.out.println("ok");
 			try {
-			    ois = new ObjectInputStream(fis);
-			    RepositorioCirurgias a = new RepositorioCirurgias((ArrayList<Cirurgia>) ois.readObject());
-			    ois.close();
-	   
-			}	catch (IOException ex) {
-				RepositorioCirurgias a = new RepositorioCirurgias(20);
+				csvReader = new BufferedReader(new FileReader(file));
+				csvReader.readLine(); // ignore header!
+
+				while ((csvLine = csvReader.readLine()) != null) {
+					System.out.println(csvLine);
+					cirur.add(Cirurgia.of(csvLine)); // create usuario object and add to repository
+				}
+
+			} catch (Exception e) {
+				System.out.println("Erro ao ler arquivo!! | Linha lida: " + csvLine);
+				e.printStackTrace();
+
+			} finally {
+				closeFile(csvReader);
 			}
+			
+			cirurgias.addAll(cirur);
+			System.out.println(cirurgias);
 	  }
+	  
+	  private static void closeFile(BufferedReader csvReader) {
+			try {
+				csvReader.close();
+			} catch (IOException e) {
+				System.out.println("Erro ao fechar arquivo!!");
+				e.printStackTrace();
+			}
+		}
 }

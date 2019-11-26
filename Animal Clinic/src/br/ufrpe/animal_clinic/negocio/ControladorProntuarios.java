@@ -17,7 +17,7 @@ public class ControladorProntuarios implements Serializable{
 	private static ControladorProntuarios instancia;
 	
 	private ControladorProntuarios() {
-		repositorio = new RepositorioProntuarios(10);
+		repositorio = RepositorioProntuarios.getInstancia();
 	}
 	
 	public static ControladorProntuarios getInstancia() {

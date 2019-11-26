@@ -24,19 +24,24 @@ public class RepositorioProntuarios implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	ArrayList<Prontuario> prontuarios = new ArrayList<Prontuario>(10);
+	private static RepositorioProntuarios instancia;
+	ArrayList<Prontuario> prontuarios;
 	
-	public RepositorioProntuarios(ArrayList<Prontuario> arrayList) {
-        this.prontuarios = new ArrayList<Prontuario>(arrayList);
+	private RepositorioProntuarios() {
+        this.prontuarios = new ArrayList<Prontuario>();
     }
 	
-	public RepositorioProntuarios(int a) {
+	/*public RepositorioProntuarios(int a) {
         this.prontuarios = new ArrayList<Prontuario>(a);
-    }
+    }*/
 
-    public void RepositorioUsuarios(ArrayList<Prontuario> prontuario) {
-        this.prontuarios = prontuario;
-    }
+	 
+	 public static RepositorioProntuarios getInstancia() {
+		 if(instancia == null) {
+			 instancia = new RepositorioProntuarios();
+		 }
+		 return instancia;
+	 }
 
 
 	public void cadastrar(Prontuario p) throws ExisteException{
@@ -123,18 +128,6 @@ public class RepositorioProntuarios implements Serializable{
 	
 	public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException {
 	    
-	    File arquivo = new File(file);
-	    FileInputStream fis;
-	    ObjectInputStream ois;
-	    fis = new FileInputStream(arquivo);
-
-		try {
-		    ois = new ObjectInputStream(fis);
-		    RepositorioProntuarios a = new RepositorioProntuarios((ArrayList<Prontuario>) ois.readObject());
-		    ois.close();
-   
-		}	catch (IOException ex) {
-			RepositorioProntuarios a = new RepositorioProntuarios(20);
-		}
+	    
 	}
 }

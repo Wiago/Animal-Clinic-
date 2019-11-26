@@ -1,6 +1,8 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Animal implements Serializable{ 
@@ -11,6 +13,7 @@ public class Animal implements Serializable{
 	private static final long serialVersionUID = -4247798444000409255L;
 	private String nome; 
 	private Usuario dono; 
+	private String idDono;
 	private String nomeDono;
 	private boolean oAnimalEMae; 
 	private boolean estaVivo; 
@@ -22,6 +25,7 @@ public class Animal implements Serializable{
 	public Animal(String nome, Usuario dono, Alimentacao alimentacao, Especie especie, Genero genero, TempoDeVida tempoDeVida) { 
 		this.nome = nome; 
 		this.dono = dono; 
+		this.idDono = dono.getId();
 		this.nomeDono = dono.getNome();
 		this.oAnimalEMae = false; 
 		this.estaVivo = true; 
@@ -49,6 +53,14 @@ public class Animal implements Serializable{
 		this.dono = dono; 
 	} 
 	
+	public String getIdDono() {
+		return idDono;
+	}
+
+	public void setIdDono(String idDono) {
+		this.idDono = idDono;
+	}
+
 	public String getNomeDono() { 
 		return nomeDono; 
 	} 
