@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.animal_clinic.gui.ControladorTelaCadastroAnimal">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="nomePet" layoutX="207.0" layoutY="83.0" promptText="Nome" />
+            <Button fx:id="btCadastro" layoutX="418.0" layoutY="340.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+            <Button fx:id="btSair" layoutX="113.0" layoutY="340.0" mnemonicParsing="false" onAction="#sair" text="Sair" />
+            <ComboBox fx:id="alimentação" layoutX="60.0" layoutY="152.0" prefWidth="150.0" promptText="Alimentação" />
+            <ComboBox fx:id="genero" layoutX="60.0" layoutY="248.0" prefWidth="150.0" promptText="Genero" />
+            <ComboBox fx:id="especie" layoutX="375.0" layoutY="152.0" prefWidth="150.0" promptText="Especie" />
+            <ComboBox fx:id="tempoDeVida" layoutX="364.0" layoutY="248.0" prefHeight="31.0" prefWidth="161.0" promptText="Tempo De Vida" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

@@ -31,13 +31,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ControladorTelaUsuario implements Initializable {
 	static GetInformacao i;
-	private Servico s;
+	private Servico s = Servico.getInstancia();
 	
 	private GetInformacao gI = GetInformacao.getInstancia();
-	
-	@FXML
-    private ChoiceBox<?> boxSolicitacao;
 
+	@FXML
+	private Button btRemovePets;
+
+    @FXML
+    private Button btAddPets;
+
+    @FXML
+    private TableView<Usuario> tabelaUsuario;
+
+    @FXML
+    private Button btMarcar;
 	
 	@FXML
     private TableView<Animal> tabela;
@@ -75,6 +83,8 @@ public class ControladorTelaUsuario implements Initializable {
     }
     
     private List<Animal> listaDeAnimais = new ArrayList();
+
+    private List<Usuario> listaDeUsuario = new ArrayList();
     
     private ObservableListBase<Animal> listaOb;
     private ObservableListBase<Usuario> listaObs;
@@ -99,17 +109,37 @@ public class ControladorTelaUsuario implements Initializable {
     	listaDeAnimais.add(b);
     	listaDeAnimais.add(g);
     	listaDeAnimais.add(h);
- 
+    	
+    	
+    	listaDeUsuario.add(c);
     	
     	listaOb = (ObservableListBase<Animal>) FXCollections.observableArrayList(listaDeAnimais);
     	tabela.setItems(listaOb);
     	
-    	//listaObs = (ObservableListBase<Usuario>) FXCollections.observableArrayList(listaDoUsuario);
+    	listaObs = (ObservableListBase<Usuario>) FXCollections.observableArrayList(listaDeUsuario);
     	//tabelaUsuario.setItems(listaObs);
     }
     
     public void animalSelecionado(Animal animal) {
     	System.out.println(animal.getNome());
+    }
+    
+    @FXML
+    void adicionar(ActionEvent event) {
+    	Main.trocaCena(5);
+    }
+
+    @FXML
+    void remove(ActionEvent event) {
+    	Animal animal = tabela.getSelectionModel().getSelectedItem();
+    	listaDeUsuario.remove(animal);
+    	listaOb.remove(animal);
+    }
+
+    @FXML
+    void solicitarMarcar(ActionEvent event) {
+    	Animal animal = tabela.getSelectionModel().getSelectedItem();
+    	
     }
 
 	@Override

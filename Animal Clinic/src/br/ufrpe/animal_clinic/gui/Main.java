@@ -43,11 +43,12 @@ public class Main extends Application implements Serializable{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		stage = primaryStage;
-		criaCena("TelaLogin.fxml");       //0
-		criaCena("TelaCadastro.fxml");    //1     
-		criaCena("TelaAtendente.fxml"); //2
-		criaCena("TelaMedico.fxml"); //3
-		criaCena("TelaUsuario1.fxml"); //4
+		criaCena("TelaLogin.fxml");            //0
+		criaCena("TelaCadastro.fxml");         //1     
+		criaCena("TelaAtendente.fxml");        //2
+		criaCena("TelaMedico.fxml");           //3
+		criaCena("TelaUsuario1.fxml");         //4
+		criaCena("TelaCadastroAnimal.fxml");   //5
 		
 		stage.setScene(cenas.get(0));
         stage.setTitle("ANIMAL CLINIC");

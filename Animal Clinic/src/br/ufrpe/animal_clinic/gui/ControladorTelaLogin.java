@@ -6,9 +6,7 @@ import java.util.ResourceBundle;
 
 import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -50,6 +48,7 @@ public class ControladorTelaLogin implements Initializable{
     				Main.trocaCena(3);
     				break;
     			case '3':
+    				i.setLogin(loginS);
     				Main.trocaCena(4);
     		}
     	}

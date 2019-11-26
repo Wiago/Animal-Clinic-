@@ -11,9 +11,14 @@ import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.Servico;
+import br.ufrpe.animal_clinic.negocio.beans.Alimentacao;
+import br.ufrpe.animal_clinic.negocio.beans.Animal;
 import br.ufrpe.animal_clinic.negocio.beans.Atendente;
+import br.ufrpe.animal_clinic.negocio.beans.Especie;
+import br.ufrpe.animal_clinic.negocio.beans.Genero;
 import br.ufrpe.animal_clinic.negocio.beans.Login;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
+import br.ufrpe.animal_clinic.negocio.beans.TempoDeVida;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class GetInformacao {
@@ -21,6 +26,8 @@ public class GetInformacao {
 	private static GetInformacao instancia;
 	private Servico s;
 	private Login l;
+	private String login;
+	private Animal a;
 
 	private GetInformacao() {
 		s = Servico.getInstancia();
@@ -88,10 +95,28 @@ public class GetInformacao {
 		s.cadastrarUsuario(m);
 	}
 	
+	public Animal cadastrarA(String nome, Usuario dono, Alimentacao alimentacao, Especie especie, Genero genero, TempoDeVida tempoDeVida) {
+		Animal a = new Animal(nome, dono, alimentacao, especie, genero, tempoDeVida);
+		s.cadastrarAnimal(a);
+		return a;
+	}
+	
 	public void carregarDados() throws ClassNotFoundException, IOException, NotFoundException {
 		s.carregarDados();
 	}
 	public ArrayList<Usuario> getDadosUsuarios(){
 		return s.getDadosUsuarios();
+	}
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	public Animal getA() {
+		return a;
+	}
+	public void setA(Animal a) {
+		this.a = a;
 	}
 }

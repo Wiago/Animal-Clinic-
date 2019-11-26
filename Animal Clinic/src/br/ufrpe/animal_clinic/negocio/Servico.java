@@ -5,6 +5,7 @@ import java.io.IOException;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
+import br.ufrpe.animal_clinic.negocio.beans.Animal;
 import br.ufrpe.animal_clinic.negocio.beans.Atendente;
 import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
@@ -151,6 +152,16 @@ public class Servico implements IServico{
 	
 	public ArrayList<Usuario> getDadosUsuarios(){
 		return usuarios.getDados();
+	}
+	@Override
+	public void cadastrarAnimal(Animal a) {
+		
+		
+	}
+	@Override
+	public void removerAnimal(String nome) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
