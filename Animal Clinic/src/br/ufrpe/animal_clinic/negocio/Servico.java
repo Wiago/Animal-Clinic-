@@ -92,7 +92,7 @@ public class Servico implements IServico{
 		System.out.println("ok");
 		Usuario u = usuarios.procurarPorLogin(login);
 		if(u != null) {
-			System.out.println("Ok - achou o usuário por login!");
+			System.out.println("Ok - achou o usuï¿½rio por login!");
 		}
 		return u;
 	}

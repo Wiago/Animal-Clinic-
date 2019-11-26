@@ -69,6 +69,10 @@ public class GetInformacao {
 	public void salvar() throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
 		s.salvarDados();
 	}
+	
+	public void carregar() throws ClassNotFoundException, IOException, NotFoundException {
+		s.carregarDados();
+	}
 
 	public void cadastrarA(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException {
 		Usuario a = new Atendente(nomeS, cpfS, senhaS, loginS, dataD);

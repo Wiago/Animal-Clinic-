@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,7 +19,11 @@ import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 
-public class RepositorioProntuarios {
+public class RepositorioProntuarios implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	ArrayList<Prontuario> prontuarios = new ArrayList<Prontuario>(10);
 	
 	public RepositorioProntuarios(ArrayList<Prontuario> arrayList) {

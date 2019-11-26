@@ -1,6 +1,8 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
-public enum Alimentacao {
+import java.io.Serializable;
+
+public enum Alimentacao implements Serializable{
 	CARNIVORO("Carnivoro"), HERBIVORO("Herbivoro"), ONIVORO("Onivoro"); 
 	
 	private String categoria;

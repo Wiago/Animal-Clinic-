@@ -1,6 +1,8 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
-public enum Especie {
+import java.io.Serializable;
+
+public enum Especie implements Serializable{
 	CANINO("Canino"), FELINO("Felino"), ROEDOR("Roedor"), REPTIL("Reptil"), AVE("Ave");
 	
 	private String categoria;

@@ -24,12 +24,19 @@ import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import br.ufrpe.animal_clinic.exception.ExisteException;
+import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
-public class RepositorioUsuarios {
+public class RepositorioUsuarios implements Serializable{
 	
-	ArrayList<Usuario> usuarios = new ArrayList<Usuario>(10);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+	
 	
 	Map<String,String> loginId = new HashMap<String,String>();
 	
@@ -47,8 +54,6 @@ public class RepositorioUsuarios {
             procurar(u.getId());
         } catch (NullException ex) {
             usuarios.add(u);
-            loginId.put(u.getLogin(), u.getId()); //Key = login; Content = id
-            System.out.println(usuarios);
         }
 
 	}

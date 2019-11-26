@@ -1,6 +1,8 @@
 package br.ufrpe.animal_clinic.exception;
 
-public class ExisteException  extends Exception{
+import java.io.Serializable;
+
+public class ExisteException  extends Exception implements Serializable{
 	
 /**
 	 * 

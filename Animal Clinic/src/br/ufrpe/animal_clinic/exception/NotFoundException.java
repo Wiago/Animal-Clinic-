@@ -1,6 +1,8 @@
 package br.ufrpe.animal_clinic.exception;
 
-public class NotFoundException extends Exception{
+import java.io.Serializable;
+
+public class NotFoundException extends Exception implements Serializable{
 
 	/**
 	 * 

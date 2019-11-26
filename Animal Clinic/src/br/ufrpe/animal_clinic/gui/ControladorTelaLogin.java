@@ -36,7 +36,7 @@ public class ControladorTelaLogin implements Initializable{
     
     
     @FXML
-    void login(ActionEvent event) throws NullException {
+    void login(ActionEvent event) throws NullException, ClassNotFoundException, IOException, NotFoundException {
     	String loginS = id.getText();
     	String senhaS = senha.getText();
     	String idLogin = i.loginUser(loginS, senhaS);

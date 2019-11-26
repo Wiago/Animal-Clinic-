@@ -1,6 +1,8 @@
 package br.ufrpe.animal_clinic.exception;
 
-public class NullException extends Exception{
+import java.io.Serializable;
+
+public class NullException extends Exception implements Serializable{
 
     /**
 	 * 

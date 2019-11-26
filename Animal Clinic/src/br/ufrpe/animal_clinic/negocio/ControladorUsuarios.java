@@ -1,5 +1,6 @@
 package br.ufrpe.animal_clinic.negocio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import br.ufrpe.animal_clinic.dados.RepositorioUsuarios;
@@ -7,7 +8,11 @@ import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
-public class ControladorUsuarios {
+public class ControladorUsuarios implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private RepositorioUsuarios repositorio;
 	private static ControladorUsuarios instancia;
 	
