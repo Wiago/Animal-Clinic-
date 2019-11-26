@@ -35,6 +35,7 @@
                               <TableColumn fx:id="colunaData" prefWidth="120.0" text="Nascimento" />
                           </columns>
                         </TableView>
+                        <Button fx:id="btAtualizaU" layoutX="438.0" layoutY="307.0" mnemonicParsing="false" onAction="#atualizar" text="Atualizar" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -51,9 +52,10 @@
                               <TableColumn fx:id="colunaAlimento" prefWidth="118.0" text="Alimentação" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btAddPets" layoutX="48.0" layoutY="288.0" mnemonicParsing="false" onAction="#adicionar" text="Adicionar" />
+                        <Button fx:id="btAddPets" layoutX="29.0" layoutY="288.0" mnemonicParsing="false" onAction="#adicionar" text="Adicionar" />
                         <Button fx:id="btRemovePets" layoutX="472.0" layoutY="288.0" mnemonicParsing="false" onAction="#remove" text="Remover" />
                         <Button fx:id="btMarcar" layoutX="236.0" layoutY="288.0" mnemonicParsing="false" onAction="#solicitarMarcar" text="Marcar Consulta" />
+                        <Button fx:id="btAtulaizar" layoutX="131.0" layoutY="288.0" mnemonicParsing="false" onAction="#atualizar" text="Atualizar" />
                      </children>
                   </AnchorPane>
             </content>

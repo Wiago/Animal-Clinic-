@@ -26,6 +26,7 @@ public class GetInformacao {
 	private static GetInformacao instancia;
 	private Servico s;
 	private Login l;
+	private Usuario u;
 	private String login;
 	private Animal a;
 
@@ -117,5 +118,11 @@ public class GetInformacao {
 	}
 	public void setA(Animal a) {
 		this.a = a;
+	}
+	public Usuario getU() {
+		return u;
+	}
+	public void setU(Usuario u) {
+		this.u = u;
 	}
 }

@@ -54,7 +54,7 @@ public class ControladorTelaCadastroAnimal implements Initializable{
     private Button btSair;
 
     @FXML
-    private ComboBox<Alimentacao> alimentação;
+    private ComboBox<Alimentacao> alimentaï¿½ï¿½o;
     ObservableList<Alimentacao> alimentos = FXCollections.observableArrayList(Alimentacao.values());
     
     @FXML
@@ -62,7 +62,7 @@ public class ControladorTelaCadastroAnimal implements Initializable{
     	Especie e = especie.getValue();
 		Genero g = genero.getValue();
 		TempoDeVida t = tempoDeVida.getValue();
-		Alimentacao a = alimentação.getValue();
+		Alimentacao a = alimentaï¿½ï¿½o.getValue();
 		
 		String login = i.getLogin();
 		Usuario dono = s.procurarUsuarioPorLogin(login);
@@ -71,7 +71,7 @@ public class ControladorTelaCadastroAnimal implements Initializable{
 		
 		i.salvar();
 		
-		//i.setA(b);
+		i.setU(dono);
 		
 		Main.trocaCena(4);
     }
@@ -86,7 +86,7 @@ public class ControladorTelaCadastroAnimal implements Initializable{
 		especie.setItems(especies);
 		genero.setItems(generos);
 		tempoDeVida.setItems(idade);
-		alimentação.setItems(alimentos);
+		alimentaï¿½ï¿½o.setItems(alimentos);
 
 	}
 }
