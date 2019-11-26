@@ -92,18 +92,20 @@ public class ControladorTelaUsuario implements Initializable {
     	Date d = new Date(); 
     	Usuario c = new Usuario("Henrique", "123.123.123-33", "123", "henr123",d);
     	
-    	Animal a = new Animal("Ze", c, Alimentacao.CARNIVORO, Especie.CANINO, Genero.MACHO, TempoDeVida.ADULTO);
-    	Animal b = new Animal("Zezinho", c, Alimentacao.HERBIVORO, Especie.ROEDOR, Genero.MACHO, TempoDeVida.ADULTO);
+    	Animal g = new Animal("Ze", c, Alimentacao.CARNIVORO, Especie.CANINO, Genero.MACHO, TempoDeVida.ADULTO);
+    	Animal h = new Animal("Zezinho", c, Alimentacao.HERBIVORO, Especie.ROEDOR, Genero.MACHO, TempoDeVida.ADULTO);
     	
     	listaDeAnimais.add(a);
     	listaDeAnimais.add(b);
+    	listaDeAnimais.add(g);
+    	listaDeAnimais.add(h);
  
     	
     	listaOb = (ObservableListBase<Animal>) FXCollections.observableArrayList(listaDeAnimais);
     	tabela.setItems(listaOb);
     	
-    	listaObs = (ObservableListBase<Usuario>) FXCollections.observableArrayList(listaDoUsuario);
-    	tabelaUsuario.setItems(listaObs);
+    	//listaObs = (ObservableListBase<Usuario>) FXCollections.observableArrayList(listaDoUsuario);
+    	//tabelaUsuario.setItems(listaObs);
     }
     
     public void animalSelecionado(Animal animal) {
