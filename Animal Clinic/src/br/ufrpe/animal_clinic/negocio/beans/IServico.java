@@ -21,7 +21,7 @@ public interface IServico {
 	
 	void desmarcarConsulta(String id) throws NullException;
 	void desmarcarCirurgia(String id) throws NullException;
-    void carregarDados()throws IOException, NotFoundException, ClassNotFoundException;
+    void carregarDados()throws IOException, NotFoundException, ClassNotFoundException, ExisteException;
     
     
     Usuario efetuarLogin(String login) throws NullException ;

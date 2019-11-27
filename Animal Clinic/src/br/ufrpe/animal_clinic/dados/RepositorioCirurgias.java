@@ -20,10 +20,14 @@ import java.io.Serializable;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import br.ufrpe.animal_clinic.negocio.beans.Animal;
 import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
+import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 import br.ufrpe.animal_clinic.exception.*;
 
@@ -33,8 +37,10 @@ public class RepositorioCirurgias implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private static RepositorioCirurgias instancia; 
+	private static RepositorioUsuarios repoUsuarios;
+	private static RepositorioAnimais repoAnimais;
 	
-	ArrayList<Cirurgia> cirurgias;
+	private ArrayList<Cirurgia> cirurgias;
 
 	 /*public RepositorioCirurgias(int tamanho) {
 		 this.cirurgias = new ArrayList<Cirurgia>(tamanho);
@@ -42,6 +48,8 @@ public class RepositorioCirurgias implements Serializable{
 
 	 private RepositorioCirurgias() {
 		 this.cirurgias = new ArrayList<Cirurgia>();
+		 repoUsuarios = RepositorioUsuarios.getInstancia();
+		 repoAnimais = RepositorioAnimais.getInstancia();
 	 }
 	 
 	 public static RepositorioCirurgias getInstancia() {
@@ -50,8 +58,19 @@ public class RepositorioCirurgias implements Serializable{
 		 }
 		 return instancia;
 	 }
-	    
-	 public void cadastrar(Cirurgia c) throws ExisteException, NullException{
+
+	 public static RepositorioUsuarios getRepoUsuarios() {
+		return repoUsuarios;
+	}
+
+	public static RepositorioAnimais getRepoAnimais() {
+		return repoAnimais;
+	}
+	
+	public ArrayList<Cirurgia> getCirurgias(){
+		return cirurgias;
+	}
+	public void cadastrar(Cirurgia c) throws ExisteException, NullException{
 			 if(cirurgias.size() == 0) {
 				 cirurgias.add(c);
 			 }
@@ -76,7 +95,7 @@ public class RepositorioCirurgias implements Serializable{
 	    	 }
 	     }
 	     if (get == null) {
-            throw new NullException();
+            return null;
 	     }
 	     return get;
 	  }
@@ -125,12 +144,8 @@ public class RepositorioCirurgias implements Serializable{
 	  }
 	  
 	  public void salvarDados(String file) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
-		  	System.out.println(cirurgias);
-
 	        Writer writer = Files.newBufferedWriter(Paths.get(file));
 	        StatefulBeanToCsv<Cirurgia> beanToCsv = new StatefulBeanToCsvBuilder<Cirurgia>(writer).build();
-	        
-	        
 	        beanToCsv.write(cirurgias);
 	        System.out.println(cirurgias);
 	        writer.flush();
@@ -148,7 +163,7 @@ public class RepositorioCirurgias implements Serializable{
 
 				while ((csvLine = csvReader.readLine()) != null) {
 					System.out.println(csvLine);
-					cirur.add(Cirurgia.of(csvLine)); // create usuario object and add to repository
+					cirur.add(RepositorioCirurgias.of(csvLine)); // create cirurgia object and add to repository
 				}
 
 			} catch (Exception e) {
@@ -170,5 +185,30 @@ public class RepositorioCirurgias implements Serializable{
 				System.out.println("Erro ao fechar arquivo!!");
 				e.printStackTrace();
 			}
+	  }
+	  
+	  public static Cirurgia of(String csvLine) throws ParseException, NullException {
+
+			// 0 1 2 3 4 5 6 7 8
+			// "animal","data","dataS","id","idDonoAnimal","idMedico","medico","nomeAnimal","serialVersionUID"
+			//Animal animal, Medico medico, Date data
+			String[] dados = csvLine.split(",");
+			String oldString = String.valueOf('"');
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
+			Cirurgia c = new Cirurgia(null, null, null);
+			Animal a;
+			Medico m;
+			Date data1 = formatter.parse(dados[2].replaceAll(oldString,""));
+			a = repoAnimais.procurarPorIdDoDono(dados[7].replaceAll(oldString,""), dados[4].replaceAll(oldString,""));
+			m = repoUsuarios.procurarMedico(dados[5].replaceAll(oldString,""));
+			c.setAnimal(a);
+			c.setMedico(m);
+			c.setData(data1);
+			c.setNomeAnimal(dados[7].replaceAll(oldString,""));
+			c.setIdDonoAnimal(dados[4].replaceAll(oldString,""));
+			c.setIdMedico(dados[5].replaceAll(oldString,""));
+			c.setDataS(dados[2].replaceAll(oldString,""));
+			c.setIdCSV(dados[3].replaceAll(oldString,""));
+			return c;
 		}
 }

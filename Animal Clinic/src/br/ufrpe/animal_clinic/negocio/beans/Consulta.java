@@ -9,10 +9,14 @@ public class Consulta implements Serializable{
 	 */
 	private static final long serialVersionUID = 2237191239913280526L;
 	private Animal animal;
+	private String nomeAnimal;
+	private String idDonoAnimal;
 	private Medico medico;
+	private String idMedico;
 	private Date data;
+	private String dataS;
 	private String id;
-	static Id a = new Id();
+	//static Id a = new Id();
 	
 	public Consulta(Animal animal, Medico medico, Date data) {
 		this.animal = animal;
@@ -24,7 +28,41 @@ public class Consulta implements Serializable{
 	public Animal getAnimal() {
 		return animal;
 	}
-	
+	public void setAnimal(Animal animal) {
+		this.animal = animal;
+	}
+	public String getNomeAnimal() {
+		return nomeAnimal;
+	}
+
+	public void setNomeAnimal(String nomeAnimal) {
+		this.nomeAnimal = nomeAnimal;
+	}
+
+	public String getIdDonoAnimal() {
+		return idDonoAnimal;
+	}
+
+	public void setIdDonoAnimal(String idDonoAnimal) {
+		this.idDonoAnimal = idDonoAnimal;
+	}
+
+	public String getIdMedico() {
+		return idMedico;
+	}
+
+	public void setIdMedico(String idMedico) {
+		this.idMedico = idMedico;
+	}
+
+	public String getDataS() {
+		return dataS;
+	}
+
+	public void setDataS(String dataS) {
+		this.dataS = dataS;
+	}
+
 	public void setMedico(Medico medico){
 		this.medico = medico;
 	}
@@ -45,7 +83,10 @@ public class Consulta implements Serializable{
 	public void setId() {
 		this.id = Id.gerarId(4);
 	}
-
+	
+	public void setIdCSV(String id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
 		return "Consulta [Médico =(" + getMedico().getNome()+ ";" + getMedico().getEspecialidade() 

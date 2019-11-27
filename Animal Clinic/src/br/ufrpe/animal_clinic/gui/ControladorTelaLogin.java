@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import javafx.event.ActionEvent;
@@ -86,6 +87,9 @@ public class ControladorTelaLogin implements Initializable{
 			e.printStackTrace();
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExisteException e){
+			
 			e.printStackTrace();
 		}
 		

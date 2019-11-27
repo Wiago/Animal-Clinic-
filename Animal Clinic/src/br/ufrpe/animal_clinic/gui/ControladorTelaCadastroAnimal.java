@@ -2,6 +2,8 @@ package br.ufrpe.animal_clinic.gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
@@ -12,9 +14,11 @@ import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.Servico;
 import br.ufrpe.animal_clinic.negocio.beans.Alimentacao;
 import br.ufrpe.animal_clinic.negocio.beans.Animal;
+import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Especie;
 import br.ufrpe.animal_clinic.negocio.beans.Genero;
 import br.ufrpe.animal_clinic.negocio.beans.Login;
+import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.TempoDeVida;
 import br.ufrpe.animal_clinic.negocio.beans.TipoUsuario;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
@@ -66,9 +70,14 @@ public class ControladorTelaCadastroAnimal implements Initializable{
 		
 		String login = i.getLogin();
 		Usuario dono = s.procurarUsuarioPorLogin(login);
+		Animal ani = new Animal(nomePet.getText(), dono, a, e, g, t);
 		
 		i.cadastrarAn(nomePet.getText(), dono, a, e, g, t);
 		
+		Cirurgia c = new Cirurgia(ani, s.procurarMedicoPorLogin("bbb123"), Date.from(Instant.now()));
+
+		i.cadastrarCir(ani, s.procurarMedicoPorLogin("bbb123"), Date.from(Instant.now()));
+		i.cadastrarCon(ani, s.procurarMedicoPorLogin("eee123"), Date.from(Instant.now()));
 		i.salvar();
 		
 		i.setU(dono);

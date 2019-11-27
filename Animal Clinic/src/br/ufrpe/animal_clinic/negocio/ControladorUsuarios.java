@@ -8,6 +8,8 @@ import br.ufrpe.animal_clinic.dados.RepositorioUsuarios;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Animal;
+import br.ufrpe.animal_clinic.negocio.beans.Atendente;
+import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class ControladorUsuarios implements Serializable{
@@ -74,6 +76,21 @@ public class ControladorUsuarios implements Serializable{
 	public String procurarIdPorLogin(String login) throws NullException{
 		return this.repositorio.procurarIdPorLogin(login);
 	}
+	public Medico procurarMedico(String id) throws NullException{
+		return repositorio.procurarMedico(id);
+	}
+	
+	public Medico procurarMedicoPorLogin(String login) throws NullException{
+		return repositorio.procurarMedicoPorLogin(login);
+	}
+	public Atendente procurarAtendente(String id) throws NullException{
+		return repositorio.procurarAtendente(id);
+	}
+	
+	public Atendente procurarAtendentePorLogin(String login) throws NullException{
+		return repositorio.procurarAtendentePorLogin(login);
+	}
+	
 	public ArrayList<Usuario> getDados() {
         return this.repositorio.getDados();
     }

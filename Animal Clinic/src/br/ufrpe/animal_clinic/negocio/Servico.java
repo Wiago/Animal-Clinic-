@@ -59,6 +59,10 @@ public class Servico implements IServico{
 		this.cirurgias.criarCirurgia(c);
 		
 	}
+	
+	public ArrayList<Cirurgia> getCirurgias(){
+		return cirurgias.getRepositorio().getCirurgias();
+	}
 
 	@Override
 	public void removerUsuario(String id) throws NullException {
@@ -79,13 +83,14 @@ public class Servico implements IServico{
 	}
 
 	@Override
-	public void carregarDados() throws IOException, NotFoundException, ClassNotFoundException {
-		//this.cirurgias.getRepositorio().carregarDados("HistoricoDeCirurgia.txt");
-		//this.consultas.getRepositorio().carregarDados("HistoricoDeConsultas.txt");
+	public void carregarDados() throws IOException, NotFoundException, ClassNotFoundException, ExisteException {
+		
 		//this.exames.getRepositorio().carregarDados("HistoricoDeExames.txt");
 		//this.prontuarios.getRepositorio().carregarDados("HistoricoDeProntuarios.txt");
 		this.usuarios.getRepositorio().carregarDados("HistoricoDeUsuarios.csv");
 		this.usuarios.getRepositorioAnimais().carregarDados("HistoricoDeAnimais.csv");
+		this.cirurgias.getRepositorio().carregarDados("HistoricoDeCirurgias.csv");
+		this.consultas.getRepositorio().carregarDados("HistoricoDeConsultas.csv");
 	}
 
 
@@ -105,11 +110,11 @@ public class Servico implements IServico{
 
 	@Override
 	public Medico procurarMedico(String id) throws NullException {
-		return (Medico) usuarios.procurar(id);
+		return usuarios.procurarMedico(id);
 	}
 	
 	public Medico procurarMedicoPorLogin(String login) throws NullException {
-		return (Medico) usuarios.procurarPorLogin(login);
+		return usuarios.procurarMedicoPorLogin(login);
 	}
 
 	@Override
@@ -123,22 +128,22 @@ public class Servico implements IServico{
 
 	@Override
 	public Atendente procurarAtendente(String id) throws NullException {
-		return (Atendente) usuarios.procurar(id);
+		return usuarios.procurarAtendente(id);
 	}
 	
 	public Atendente procurarAtendentePorLogin(String login) throws NullException {
-		return (Atendente) usuarios.procurarPorLogin(login);
+		return usuarios.procurarAtendentePorLogin(login);
 	}
 
 	@Override
 	public void salvarDados() throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
 		try {	
-		/*this.cirurgias.getRepositorio().salvarDados("HistoricoDeCirurgia.txt");
-		this.consultas.getRepositorio().salvarDados("HistoricoDeConsultas.txt");
-		this.exames.getRepositorio().salvarDados("HistoricoDeExames.txt");
-		this.prontuarios.getRepositorio().salvarDados("HistoricoDeProntuarios.txt");*/
+		//this.exames.getRepositorio().salvarDados("HistoricoDeExames.txt");
+		//this.prontuarios.getRepositorio().salvarDados("HistoricoDeProntuarios.txt");*/
 		this.usuarios.getRepositorio().salvarDados("HistoricoDeUsuarios.csv");
 		this.usuarios.getRepositorioAnimais().salvarDados("HistoricoDeAnimais.csv");
+		this.cirurgias.getRepositorio().salvarDados("HistoricoDeCirurgias.csv");
+		this.consultas.getRepositorio().salvarDados("HistoricoDeConsultas.csv");
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block

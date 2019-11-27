@@ -1,6 +1,7 @@
 package br.ufrpe.animal_clinic.gui;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,6 +15,8 @@ import br.ufrpe.animal_clinic.negocio.Servico;
 import br.ufrpe.animal_clinic.negocio.beans.Alimentacao;
 import br.ufrpe.animal_clinic.negocio.beans.Animal;
 import br.ufrpe.animal_clinic.negocio.beans.Atendente;
+import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
+import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 import br.ufrpe.animal_clinic.negocio.beans.Especie;
 import br.ufrpe.animal_clinic.negocio.beans.Genero;
 import br.ufrpe.animal_clinic.negocio.beans.Login;
@@ -78,7 +81,7 @@ public class GetInformacao {
 		s.salvarDados();
 	}
 	
-	public void carregar() throws ClassNotFoundException, IOException, NotFoundException {
+	public void carregar() throws ClassNotFoundException, IOException, NotFoundException, ExisteException {
 		s.carregarDados();
 	}
 
@@ -101,11 +104,39 @@ public class GetInformacao {
 		s.cadastrarAnimal(a);
 	}
 	
+	public void cadastrarCir(Animal animal, Medico medico, Date data) throws NullException, ExisteException {
+		Cirurgia c = new Cirurgia(animal,medico,data);
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+	    String strDate = formatter.format(data); 
+	    c.setDataS(strDate);
+	    c.setIdDonoAnimal(animal.getIdDono());
+	    c.setIdMedico(medico.getId());
+	    c.setNomeAnimal(animal.getNome());
+		System.out.println(c);
+		s.cadastrarCirurgia(c);
+	}
+	public void cadastrarCon(Animal animal, Medico medico, Date data) throws NullException, ExisteException {
+		Consulta c = new Consulta(animal,medico,data);
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+	    String strDate = formatter.format(data); 
+	    c.setDataS(strDate);
+	    c.setIdDonoAnimal(animal.getIdDono());
+	    c.setIdMedico(medico.getId());
+	    c.setNomeAnimal(animal.getNome());
+		System.out.println(c);
+		s.cadastrarConsulta(c);
+		
+	}
+	
+	public ArrayList<Cirurgia> getCirurgias(){
+		return s.getCirurgias();
+	}
+	
 	public void removerAn(Animal a) throws NullException {
 		s.removerAnimal(a.getNome(), a.getDono().getLogin());
 	}
 	
-	public void carregarDados() throws ClassNotFoundException, IOException, NotFoundException {
+	public void carregarDados() throws ClassNotFoundException, IOException, NotFoundException, ExisteException {
 		s.carregarDados();
 	}
 	public ArrayList<Usuario> getDadosUsuarios(){

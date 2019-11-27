@@ -27,6 +27,8 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
+import br.ufrpe.animal_clinic.negocio.beans.Atendente;
+import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class RepositorioUsuarios implements Serializable{
@@ -37,12 +39,16 @@ public class RepositorioUsuarios implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private static RepositorioUsuarios instancia;
 
-	private ArrayList<Usuario> usuarios;
+	private ArrayList<Usuario> usuarios; //todos os usuários, incluindo médicos e atendentes
+	private ArrayList<Medico> medicos; //apenas os médicos
+	private ArrayList<Atendente> atendentes; //apenas os atendentes
 	
 	private Map<String,String> loginId;
 	
 	private RepositorioUsuarios() {
-        this.usuarios = new ArrayList<Usuario>();
+		this.usuarios = new ArrayList<Usuario>();
+		this.medicos = new ArrayList<Medico>();
+		this.atendentes = new ArrayList<Atendente>();
         this.loginId = new HashMap<String,String>();
     }
 
@@ -68,6 +74,12 @@ public class RepositorioUsuarios implements Serializable{
 	public ArrayList<Usuario> getUsuarios(){
 		return usuarios;
 	}
+	public ArrayList<Medico> getMedicos(){
+		return medicos;
+	}
+	public ArrayList<Atendente> getAtendentes(){
+		return atendentes;
+	}
 	
 	public void setUsuarios(ArrayList<Usuario> usuarios) {
 		this.usuarios = usuarios;
@@ -79,10 +91,44 @@ public class RepositorioUsuarios implements Serializable{
         } catch (NullException ex) {
             usuarios.add(u);
             loginId.put(u.getLogin(), u.getId());
+            cadastrarMedicoOuAtendente(u);
         }
 
 	}
-
+	public void cadastrarMedicoOuAtendente(Usuario u) throws ExisteException {
+		if(u.getId().startsWith("1")) {
+			Atendente a = new Atendente(u.getNome(),u.getCpf(),u.getSenha(),u.getLogin(),u.getData());
+			a.setIdCSV(u.getId());
+			if(!atendentes.contains(a)) {
+				atendentes.add(a);
+			}
+		}
+		else if(u.getId().startsWith("2")) {
+			Medico m = new Medico(u.getNome(),u.getCpf(),u.getSenha(),u.getLogin(),u.getData());
+			m.setIdCSV(u.getId());
+			if(!medicos.contains(m)) {
+				medicos.add(m);
+			}
+		}
+	}
+	public void cadastrarMedicoOuAtendente(ArrayList<Usuario> us) throws ExisteException {
+		for(Usuario u : us) {
+			if(u.getId().startsWith("1")) {
+				Atendente a = new Atendente(u.getNome(),u.getCpf(),u.getSenha(),u.getLogin(),u.getData());
+				a.setIdCSV(u.getId());
+				if(!atendentes.contains(a)) {
+					atendentes.add(a);
+				}
+			}
+			else if(u.getId().startsWith("2")) {
+				Medico m = new Medico(u.getNome(),u.getCpf(),u.getSenha(),u.getLogin(),u.getData());
+				m.setIdCSV(u.getId());
+				if(!medicos.contains(m)) {
+					medicos.add(m);
+				}
+			}
+		}
+	}
 	
 	public Usuario procurar(String id) throws NullException{
 		Usuario u = null;
@@ -110,6 +156,81 @@ public class RepositorioUsuarios implements Serializable{
 		for (int j = 0; j < usuarios.size() && continuar; j++) {
 			if (usuarios.get(j).getLogin().equals(login)) {
 				u = usuarios.get(j);
+	            continuar = false;
+			}
+	    }
+
+		if (u == null) {
+            NullException e = new NullException();
+            throw e;
+        }
+	    
+	    return u;
+	}
+	public Medico procurarMedico(String id) throws NullException{
+		Medico u = null;
+		boolean continuar = true;
+		for (int j = 0; j < medicos.size() && continuar; j++) {
+			System.out.println(medicos.get(j).getId());
+			if (medicos.get(j).getId().equals(id)) {
+				u = medicos.get(j);
+	            continuar = false;
+			}
+	    }
+
+		if (u == null) {
+            NullException e = new NullException();
+            throw e;
+        }
+	    
+	    return u;
+	}
+	
+	public Medico procurarMedicoPorLogin(String login) throws NullException{
+		Medico u = null;
+		boolean continuar = true;
+		for (int j = 0; j < medicos.size() && continuar; j++) {
+			if (medicos.get(j).getLogin().equals(login)) {
+				if(medicos.get(j) == null) {
+				}
+				u = medicos.get(j);
+	            continuar = false;
+			}
+	    }
+
+		if (u == null) {
+            NullException e = new NullException();
+            throw e;
+        }
+	    
+	    return u;
+	}
+	public Atendente procurarAtendente(String id) throws NullException{
+		Atendente u = null;
+		boolean continuar = true;
+
+		for (int j = 0; j < atendentes.size() && continuar; j++) {
+			if (atendentes.get(j).getId().equals(id)) {
+				u = atendentes.get(j);
+	            continuar = false;
+			}
+	    }
+
+		if (u == null) {
+            NullException e = new NullException();
+            throw e;
+        }
+	    
+	    return u;
+	}
+	
+	public Atendente procurarAtendentePorLogin(String login) throws NullException{
+		Atendente u = null;
+		boolean continuar = true;
+
+		for (int j = 0; j < atendentes.size() && continuar; j++) {
+			if (atendentes.get(j).getLogin().equals(login)) {
+				u = atendentes.get(j);
 	            continuar = false;
 			}
 	    }
@@ -177,19 +298,16 @@ public class RepositorioUsuarios implements Serializable{
 	}
 	
 	public void salvarDados(String file) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
-		System.out.println(usuarios);
-
         Writer writer = Files.newBufferedWriter(Paths.get(file));
         StatefulBeanToCsv<Usuario> beanToCsv = new StatefulBeanToCsvBuilder<Usuario>(writer).build();
-        
-        
+       
         beanToCsv.write(usuarios);
         System.out.println(usuarios);
         writer.flush();
         writer.close();
 	}
 	
-	public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException {
+	public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException, ExisteException {
 	    
 		ArrayList<Usuario> users = new ArrayList<Usuario>();
 		BufferedReader csvReader = null;
@@ -213,6 +331,7 @@ public class RepositorioUsuarios implements Serializable{
 		}
 		
 		usuarios.addAll(users);
+		cadastrarMedicoOuAtendente(usuarios);
 		System.out.println("Usuários no Arquivo (toString):");
 		System.out.println(usuarios);
 		System.out.println("Usuários no Arquivo (Key,Login):");

@@ -56,7 +56,7 @@ public class Medico extends Usuario implements Serializable{
 
 	@Override
 	public String toString() {
-		return "["+this.getNome()+" , "+especialidade+" , "+this.getData()+ " , "+this.getLogin()+"]";
+		return "Médico["+this.getNome()+";"+especialidade+";"+this.getData()+ ";"+this.getLogin()+"]";
 	}
 	
 }
