@@ -39,4 +39,14 @@ public class ControladorUsuario {
         repositorioUsuarios.atualizar(newObj);
     }
     
+    public Usuario procurarPorLogin(String login) throws ElementoNaoExisteException {
+    	List<Usuario> usuarios = repositorioUsuarios.listar();
+    	for(Usuario u : usuarios) {
+    		if(u.getLogin().equals(login)) {
+    			return u;
+    		}
+    	}
+		return null;
+    }
+    
 }

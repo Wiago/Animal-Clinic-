@@ -10,6 +10,8 @@ public interface IRepositorioGenerico<T> {
     
     List<T> listar();
     
+    T procurar(T objeto);
+    
     void remover(T obj) throws ElementoNaoExisteException;
 
     void atualizar(T newObj) throws ElementoNaoExisteException;

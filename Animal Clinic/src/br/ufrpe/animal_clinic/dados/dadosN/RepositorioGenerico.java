@@ -2,6 +2,7 @@ package br.ufrpe.animal_clinic.dados.dadosN;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import br.ufrpe.animal_clinic.exception.*;
@@ -83,5 +84,15 @@ public class RepositorioGenerico<T> implements IRepositorioGenerico<T> {
         
         RepositorioFileUtil.salvarArquivo(elementos, this.filename);
     }
+
+	@Override
+	public T procurar(T objeto) {
+		for(T obj:elementos) {
+			if(obj.equals(objeto)) {
+				return obj;
+			}
+		}
+		return null;
+	}
     
 }

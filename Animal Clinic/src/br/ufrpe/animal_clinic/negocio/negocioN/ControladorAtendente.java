@@ -7,13 +7,14 @@ import br.ufrpe.animal_clinic.dados.dadosN.RepositorioGenerico;
 import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
 import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
 import br.ufrpe.animal_clinic.negocio.beans.Atendente;
+import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 public class ControladorAtendente {
 	private IRepositorioGenerico<Atendente> repositorioAtendentes;
     private static ControladorAtendente instance;
     
     private ControladorAtendente() {
-        this.repositorioAtendentes = new RepositorioGenerico<>("usuarios.dat");
+        this.repositorioAtendentes = new RepositorioGenerico<>("atendentes.txt");
     }
 
     public static ControladorAtendente getInstance() {
@@ -37,5 +38,15 @@ public class ControladorAtendente {
 
     public void atualizar(Atendente newObj) throws ElementoNaoExisteException {
     	repositorioAtendentes.atualizar(newObj);
+    }
+    
+    public Atendente procurarPorLogin(String login) throws ElementoNaoExisteException {
+		List<Atendente> atendentes = repositorioAtendentes.listar();
+    	for(Atendente u : atendentes) {
+    		if(u.getLogin().equals(login)) {
+    			return u;
+    		}
+    	}
+		return null;
     }
 }

@@ -29,10 +29,6 @@ public class GetInformacao {
 	
 	private static GetInformacao instancia;
 	private Servico s;
-	private Login l;
-	private Usuario u;
-	private String login;
-	private Animal a;
 
 	private GetInformacao() {
 		s = Servico.getInstancia();
@@ -84,10 +80,7 @@ public class GetInformacao {
 		s.salvarDados();
 	}
 	
-	public void carregar() throws ClassNotFoundException, IOException, NotFoundException, ExisteException {
-		s.carregarDados();
-	}
-
+	
 	public void cadastrarA(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException, ElementoJaExisteException {
 		Usuario a = new Atendente(nomeS, cpfS, senhaS, loginS, dataD);
 		//a.setId(1);
