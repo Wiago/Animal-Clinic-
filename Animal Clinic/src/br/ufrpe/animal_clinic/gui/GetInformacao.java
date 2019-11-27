@@ -111,6 +111,7 @@ public class GetInformacao {
 	public ArrayList<Usuario> getDadosUsuarios(){
 		return s.getDadosUsuarios();
 	}
+	
 	public ArrayList<Animal> getDadosAnimais(){
 		return s.getDadosAnimais();
 	}

@@ -151,6 +151,7 @@ public class ControladorTelaUsuario implements Initializable {
     @FXML
     void solicitarMarcar(ActionEvent event) {
     	Animal animal = tabela.getSelectionModel().getSelectedItem();
+    	Main.trocaCena(6);
     	
     }
     

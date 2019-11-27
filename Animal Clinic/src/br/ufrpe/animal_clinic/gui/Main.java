@@ -49,6 +49,7 @@ public class Main extends Application implements Serializable{
 		criaCena("TelaMedico.fxml");           //3
 		criaCena("TelaUsuario1.fxml");         //4
 		criaCena("TelaCadastroAnimal.fxml");   //5
+		criaCena("TelaMarcarConsulta.fxml");   //6
 		
 		stage.setScene(cenas.get(0));
         stage.setTitle("ANIMAL CLINIC");
