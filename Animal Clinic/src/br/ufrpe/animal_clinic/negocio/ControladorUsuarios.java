@@ -42,8 +42,23 @@ public class ControladorUsuarios implements Serializable{
 	}
 	
 	public void cadastrar(Usuario u) throws ExisteException, NullException {
-		if(u != null) {
-			repositorio.cadastrar(u);
+		int d = 0;
+		if(u != null || u.getNome() != null || u.getSenha() != null || u.getCpf() != null || u.getLogin() != null) {
+			for(int a = 0; a<repositorio.getDados().size(); a++) {
+				Usuario f = repositorio.getDados().get(a);
+				if(f.getLogin() != u.getLogin() && f.getCpf() != u.getCpf()) {
+					d++;
+					System.out.println(d);
+				}
+			}
+			if(d == repositorio.getDados().size()) {
+				repositorio.cadastrar(u);
+			}
+			else {
+				ExisteException e = new ExisteException();
+				throw e;
+			}
+			
 		}else {
 			NullException e = new NullException();
             throw e;
@@ -97,4 +112,7 @@ public class ControladorUsuarios implements Serializable{
 	public ArrayList<Animal> getDadosAnimais() {
         return this.repositorioAnimais.getAnimais();
     }
+	public ArrayList<Medico> getDadosMedico(){
+		return this.repositorio.getMedicos();
+	}
 }

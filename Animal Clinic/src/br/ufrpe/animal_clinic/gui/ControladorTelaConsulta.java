@@ -72,15 +72,12 @@ public class ControladorTelaConsulta implements Initializable {
     
     public void preencherTabela(){
     	colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-    	colunaEspecialidade.setCellValueFactory(new PropertyValueFactory<>("especialidade"));
+    	colunaEspecialidade.setCellValueFactory(new PropertyValueFactory<>("xmedicoEspecialidade"));
     	
-    	for(Usuario a: i.getDadosUsuarios()) {
-    		String b = a.getId();
-			if(b.charAt(0) == '2') {
-				if (listaMedicos.contains(a) == false) {
-	        		listaMedicos.add((Medico) a);
-	    		}
-			}
+    	for(Medico m: s.getArrayMedico()) {
+			if (listaMedicos.contains(m) == false) {
+	        	listaMedicos.add(m);
+	    	}
 		}
     	
     	listaOb = (ObservableListBase<Medico>) FXCollections.observableArrayList(listaMedicos);

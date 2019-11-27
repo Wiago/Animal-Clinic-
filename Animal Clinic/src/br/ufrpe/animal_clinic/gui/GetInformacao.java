@@ -8,6 +8,7 @@ import java.util.Date;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
+import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
@@ -42,7 +43,7 @@ public class GetInformacao {
 		}
 		return instancia;
 	}
-	public void cadastrarU(String nome, String cpf, String senha, String login, Date data) throws ExisteException, NullException {
+	public void cadastrarU(String nome, String cpf, String senha, String login, Date data) throws ExisteException, NullException, ElementoJaExisteException {
 		Usuario u = new Usuario(nome, cpf, senha, login, data);
 		//u.setId(3); 
 		System.out.println(u.getId());
@@ -72,7 +73,9 @@ public class GetInformacao {
 					}
 					break;
 			}
+			
 		}
+		
 		return null;
 		
 	}
@@ -85,15 +88,17 @@ public class GetInformacao {
 		s.carregarDados();
 	}
 
-	public void cadastrarA(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException {
+	public void cadastrarA(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException, ElementoJaExisteException {
 		Usuario a = new Atendente(nomeS, cpfS, senhaS, loginS, dataD);
 		//a.setId(1);
 		System.out.println(a.getId());
 		s.cadastrarUsuario(a);
 	}
 
-	public void cadastrarM(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException {
+	public void cadastrarM(String nomeS, String cpfS, String senhaS, String loginS, Date dataD, String especialidade) throws ExisteException, NullException, ElementoJaExisteException {
 		Usuario m = new Medico(nomeS, cpfS, senhaS, loginS, dataD);
+		m.setXmedicoEspecialidade(especialidade);
+		System.out.println(m);
 		//m.setId(2);
 		System.out.println(m.getId());
 		s.cadastrarUsuario(m);

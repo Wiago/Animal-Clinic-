@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
+import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.TipoUsuario;
@@ -30,6 +31,9 @@ public class ControladorTelaCadastro implements Initializable{
 	
 	@FXML
     private PasswordField senha;
+	
+	@FXML
+    private TextField especialidade;
 
     @FXML
     private TextField data;
@@ -74,33 +78,60 @@ public class ControladorTelaCadastro implements Initializable{
     }
 
     @FXML
-    void cadastrar(ActionEvent event) throws ParseException, ExisteException, NullException, IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
-    	
-    	String loginS = login.getText();
-    	String senhaS = senha.getText();
-    	String nomeS = nome.getText();
-    	String cpfS = cpf.getText();
+    void cadastrar(ActionEvent event) throws ParseException, ExisteException, NullException, IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, ElementoJaExisteException {
+    	String loginS = null;
+    	String senhaS = null;
+    	String nomeS = null;
+    	String cpfS = null;
     	String dataS = data.getText();
     	Date dataD = f.parse(dataS);
-    	TipoUsuario usuario = usuarios.getValue();
     	
-    	switch (usuario.getCategoria()) {
-		case 1:
-			i.cadastrarA(nomeS, cpfS, senhaS, loginS, dataD);
-			i.salvar();
-			break;
-		case 2:
-			i.cadastrarM(nomeS, cpfS, senhaS, loginS, dataD);
-			i.salvar();
-			break;
-		case 3:
-			i.cadastrarU(nomeS, cpfS, senhaS, loginS, dataD);
-			i.salvar();
-			break;
+    	if(!"".equals(login.getText()) || !"".equals(senha.getText()) 
+    								   || !"".equals(nome.getText()) 
+    								   || !"".equals(cpf.getText())) {
+    		loginS = login.getText();
+    		senhaS = senha.getText();
+    		nomeS = nome.getText();
+    		cpfS = cpf.getText();
+    		
+    		TipoUsuario usuario = usuarios.getValue();
+        	
+        	String esp = null;
+        	if(usuarios.getValue() == TipoUsuario.MEDICO) {
+        		esp = especialidade.getText();
+        		System.out.println(esp);
+        	}
+        	
+        	switch (usuario.getCategoria()) {
+    		case 1:
+    			i.cadastrarA(nomeS, cpfS, senhaS, loginS, dataD);
+    			i.salvar();
+    			break;
+    		case 2:
+    			i.cadastrarM(nomeS, cpfS, senhaS, loginS, dataD, esp);
+    			i.salvar();
+    			break;
+    		case 3:
+    			i.cadastrarU(nomeS, cpfS, senhaS, loginS, dataD);
+    			i.salvar();
+    			break;
 
-		default:
-			break;
-		}
+    		default:
+    			break;
+    		}
+    		
+    	}
+    	
+    	if(!login.getText().trim().isEmpty() || !senha.getText().trim().isEmpty()) {
+    		if(!nome.getText().trim().isEmpty() || !cpf.getText().trim().isEmpty())
+    			loginS = login.getText();
+    			senhaS = senha.getText();
+    			nomeS = nome.getText();
+    			cpfS = cpf.getText();
+    	}
+    	
+    	
+    	
     	
     }
 

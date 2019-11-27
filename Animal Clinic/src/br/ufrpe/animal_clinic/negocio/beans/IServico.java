@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
+import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
@@ -12,7 +13,7 @@ import br.ufrpe.animal_clinic.exception.NullException;
 
 public interface IServico {
 	
-	void cadastrarUsuario(Usuario u) throws ExisteException, NullException;
+	void cadastrarUsuario(Usuario u) throws ExisteException, NullException, ElementoJaExisteException;
 	void cadastrarConsulta(Consulta c) throws NullException, ExisteException;
 	void cadastrarCirurgia(Cirurgia c) throws NullException, ExisteException;
 	void cadastrarAnimal(Animal a) throws ExisteException;

@@ -41,25 +41,26 @@ public class ControladorTelaLogin implements Initializable{
     	String idLogin = i.loginUser(loginS, senhaS);
     	System.out.println(idLogin);
     	if(idLogin != null) {
-    		switch(idLogin.charAt(0)) {
-    			case '1':
-    				Main.trocaCena(2);
-    				id.clear();
-    				senha.clear();
-    				break;
-    			case '2':
-    				Main.trocaCena(3);
-    				id.clear();
-    				senha.clear();
-    				break;
-    			case '3':
-    				i.setLogin(loginS);
-    				Main.trocaCena(4);
-    				id.clear();
-    				senha.clear();
-    				break;
-    		}
-    	}
+			switch(idLogin.charAt(0)) {
+				case '1':
+					Main.trocaCena(2);
+					id.clear();
+					senha.clear();
+					break;
+				case '2':
+					Main.trocaCena(3);
+					id.clear();
+					senha.clear();
+					break;
+				case '3':
+					i.setLogin(loginS);
+					Main.trocaCena(4);
+					id.clear();
+					senha.clear();
+					break;
+			}
+		}
+    	
     }
 
     @FXML

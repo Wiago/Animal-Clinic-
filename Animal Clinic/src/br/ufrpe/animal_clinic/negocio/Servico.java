@@ -2,6 +2,7 @@ package br.ufrpe.animal_clinic.negocio;
 
 import java.io.IOException;
 
+import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
@@ -14,6 +15,9 @@ import br.ufrpe.animal_clinic.negocio.beans.IServico;
 import br.ufrpe.animal_clinic.negocio.beans.Login;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
+import br.ufrpe.animal_clinic.negocio.negocioN.ControladorMedico;
+import br.ufrpe.animal_clinic.negocio.negocioN.ControladorUsuario;
+
 import java.util.ArrayList;
 
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
@@ -25,12 +29,16 @@ public class Servico implements IServico{
 	private static Servico instancia;
 	
 	private ControladorUsuarios usuarios;
+	private ControladorUsuario usuario;
+	private ControladorMedico medico;
 	private ControladorConsultas consultas;
 	private ControladorExames exames;
 	private ControladorCirurgias cirurgias;
 	private ControladorProntuarios prontuarios;
 	
 	private Servico() {
+		usuario = ControladorUsuario.getInstance();
+		medico = ControladorMedico.getInstance();
 		usuarios = ControladorUsuarios.getInstancia();
 		consultas = ControladorConsultas.getInstancia();
 		exames = ControladorExames.getInstancia();
@@ -45,8 +53,9 @@ public class Servico implements IServico{
 	}
 
 	@Override
-	public void cadastrarUsuario(Usuario u) throws ExisteException, NullException {
-		this.usuarios.cadastrar(u);	
+	public void cadastrarUsuario(Usuario u) throws ElementoJaExisteException {
+		this.usuario.inserir(u);
+		//this.usuarios.cadastrar(u);	
 	}
 
 	@Override
@@ -133,6 +142,10 @@ public class Servico implements IServico{
 	
 	public Atendente procurarAtendentePorLogin(String login) throws NullException {
 		return usuarios.procurarAtendentePorLogin(login);
+	}
+	
+	public ArrayList<Medico> getArrayMedico(){
+		return usuarios.getDadosMedico();
 	}
 
 	@Override
