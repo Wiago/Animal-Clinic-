@@ -163,6 +163,7 @@ public class Servico implements IServico{
 	public ArrayList<Animal> getDadosAnimais(){
 		return usuarios.getDadosAnimais();
 	}
+	
 	@Override
 	public void cadastrarAnimal(Animal a) throws ExisteException {
 		usuarios.getRepositorioAnimais().cadastrar(a);

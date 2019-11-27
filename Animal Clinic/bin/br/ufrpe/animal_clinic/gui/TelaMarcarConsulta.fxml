@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.animal_clinic.gui.ControladorTelaConsulta">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btConsulta" layoutX="452.0" layoutY="346.0" mnemonicParsing="false" onAction="#marcarConsulta" text="Consulta" />
+            <DatePicker fx:id="dataConsulta" layoutX="359.0" layoutY="296.0" promptText="Data da Consulta" />
+            <TextField fx:id="horaConsulta" layoutX="359.0" layoutY="253.0" promptText="Hora" />
+            <Button fx:id="btVoltar" layoutX="72.0" layoutY="346.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
+            <TextArea fx:id="relatoSintomas" layoutX="358.0" layoutY="53.0" prefHeight="188.0" prefWidth="220.0" promptText="Diga os Sintomas Apresentados Pelo Animal" />
+            <TableView fx:id="tabelaMedico" layoutX="25.0" layoutY="53.0" prefHeight="279.0" prefWidth="281.0">
+              <columns>
+                <TableColumn fx:id="colunaNome" prefWidth="131.0" text="Nome" />
+                <TableColumn fx:id="colunaEspecialidade" prefWidth="149.0" text="Especialidade" />
+              </columns>
+            </TableView>
+            <Button fx:id="btAtualizar" layoutX="166.0" layoutY="346.0" mnemonicParsing="false" onAction="#atualizar" text="Atualizar" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
