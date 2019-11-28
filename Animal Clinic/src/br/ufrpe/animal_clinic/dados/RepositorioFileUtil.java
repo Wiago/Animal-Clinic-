@@ -1,4 +1,4 @@
-package br.ufrpe.animal_clinic.dados.dadosN;
+package br.ufrpe.animal_clinic.dados;
 
 import java.io.File;
 import java.io.FileInputStream;

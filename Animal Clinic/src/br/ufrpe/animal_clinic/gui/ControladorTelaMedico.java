@@ -46,6 +46,21 @@ public class ControladorTelaMedico implements Initializable{
 
     @FXML
     private TableColumn<Usuario, String> colunaDono;
+    
+    @FXML
+    private TableColumn<?, ?> colinaHorario;
+
+    @FXML
+    private TableView<?> tabelaConsultas;
+
+    @FXML
+    private TableColumn<?, ?> colunaNomeAnimal;
+
+    @FXML
+    private Button btConsultar;
+
+    @FXML
+    private Button btAtualizar;
 
     @FXML
     void voltar(ActionEvent event) {
