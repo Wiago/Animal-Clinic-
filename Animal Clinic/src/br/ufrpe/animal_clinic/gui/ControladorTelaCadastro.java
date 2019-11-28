@@ -98,6 +98,7 @@ public class ControladorTelaCadastro implements Initializable{
     		cpfS = cpf.getText();
     		
     		TipoUsuario usuario = usuarios.getValue();
+    		System.out.println(usuario.getCategoria());
         	
         	String esp = null;
         	if(usuarios.getValue() == TipoUsuario.MEDICO) {
@@ -107,6 +108,7 @@ public class ControladorTelaCadastro implements Initializable{
         	
         	switch (usuario.getCategoria()) {
     		case 1:
+    			System.out.println();
     			try {
     				i.cadastrarAtendente(nomeS, cpfS, senhaS, loginS, dataD);
     			}catch (ElementoJaExisteException e) {

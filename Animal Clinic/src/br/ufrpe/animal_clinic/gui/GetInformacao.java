@@ -63,8 +63,8 @@ public class GetInformacao {
 			}
 			if(s.procurarMedicoPorLogin(login) != null) {
 				m = s.procurarMedicoPorLogin(login);
-				if(u.getId().charAt(0) == '2') {
-					return u.getId();
+				if(m.getId().charAt(0) == '2') {
+					return m.getId();
 				}
 			}
 			if(s.procurarAtendentePorLogin(login) != null) {

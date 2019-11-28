@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.ufrpe.animal_clinic.negocio.Servico;
 import br.ufrpe.animal_clinic.negocio.beans.Alimentacao;
 import br.ufrpe.animal_clinic.negocio.beans.Animal;
 import br.ufrpe.animal_clinic.negocio.beans.Especie;
@@ -25,7 +26,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ControladorTelaMedico implements Initializable{
 	
-	private GetInformacao gI = GetInformacao.getInstancia();
+	private static GetInformacao gI = GetInformacao.getInstancia();
+	private Servico s = Servico.getInstancia();
 	
 	@FXML
     private Button voltar;
@@ -55,15 +57,12 @@ public class ControladorTelaMedico implements Initializable{
     
     public void preencherTabela() {
     	colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-    	colunaEspecie.setCellValueFactory(new PropertyValueFactory<>("especie"));
-    	colunaAlimentacao.setCellValueFactory(new PropertyValueFactory<>("alimentacao"));
-    	colunaDono.setCellValueFactory(new PropertyValueFactory<>("nomeDono"));
+    	colunaEspecie.setCellValueFactory(new PropertyValueFactory<>("Especie"));
+    	colunaAlimentacao.setCellValueFactory(new PropertyValueFactory<>("Alimentacao"));
+    	colunaDono.setCellValueFactory(new PropertyValueFactory<>("Dono"));
     	
-    	Animal a = new Animal("Ze",new Usuario("Fulano", "111", "123", "fulo123", new Date().from(Instant.now())), Alimentacao.CARNIVORO, Especie.CANINO, Genero.MACHO, TempoDeVida.ADULTO);
-    	Animal b = new Animal("Zezinho", new Usuario("Beltrano", "222", "123", "belt123", new Date().from(Instant.now())), Alimentacao.HERBIVORO, Especie.ROEDOR, Genero.MACHO, TempoDeVida.ADULTO);
-    	
-    	listaDeAnimais.add(a);
-    	listaDeAnimais.add(b);
+    	listaDeAnimais.addAll(s.getArrayAnimal());
+   
     	
     	listaOb = (ObservableListBase<Animal>) FXCollections.observableArrayList(listaDeAnimais);
     	tabela.setItems(listaOb);
