@@ -84,7 +84,7 @@ public class GetInformacao {
 	public void cadastrarAtendente(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException, ElementoJaExisteException, ElementoNaoExisteException {
 		Atendente a = new Atendente(nomeS, cpfS, senhaS, loginS, dataD);
 		List<Atendente> b = s.getArrayAtendente();
-		if(s.procurarAtendentePorLogin(loginS) != null) {
+		if(s.procurarAtendentePorLogin(loginS) == null) {
 			s.cadastrarAtendente(a);
 		}else {
 			throw new ElementoJaExisteException(a); 
@@ -93,7 +93,7 @@ public class GetInformacao {
 	
 	public void CadastrarUsuario(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws NullException, ElementoNaoExisteException, ElementoJaExisteException {
 		Usuario u = new Usuario(nomeS, cpfS, senhaS, loginS, dataD);
-		if(s.procurarUsuarioPorLogin(loginS) != null) {
+		if(s.procurarUsuarioPorLogin(loginS) == null) {
 			s.cadastrarUsuario(u);
 		}else {
 			throw new ElementoJaExisteException(u);
@@ -102,7 +102,7 @@ public class GetInformacao {
 
 	public void cadastrarMedico(String nomeS, String cpfS, String senhaS, String loginS, Date dataD, String especialidade) throws ExisteException, NullException, ElementoJaExisteException, ElementoNaoExisteException {
 		Medico m = new Medico(nomeS, cpfS, senhaS, loginS, especialidade,dataD);
-		if(s.procurarMedicoPorLogin(loginS) != null) {
+		if(s.procurarMedicoPorLogin(loginS) == null) {
 			s.cadastrarMedico(m);
 		}else {
 			throw new ElementoJaExisteException(m); 
