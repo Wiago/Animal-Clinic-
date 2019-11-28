@@ -11,6 +11,7 @@ import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
+import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.TipoUsuario;
@@ -78,7 +79,7 @@ public class ControladorTelaCadastro implements Initializable{
     }
 
     @FXML
-    void cadastrar(ActionEvent event) throws ParseException, ExisteException, NullException, IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, ElementoJaExisteException {
+    void cadastrar(ActionEvent event) throws ParseException, ExisteException, NullException, IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, ElementoJaExisteException, ElementoNaoExisteException {
     	String loginS = null;
     	String senhaS = null;
     	String nomeS = null;
@@ -104,15 +105,15 @@ public class ControladorTelaCadastro implements Initializable{
         	
         	switch (usuario.getCategoria()) {
     		case 1:
-    			i.cadastrarA(nomeS, cpfS, senhaS, loginS, dataD);
+    			i.cadastrarAtendente(nomeS, cpfS, senhaS, loginS, dataD);
     			i.salvar();
     			break;
     		case 2:
-    			i.cadastrarM(nomeS, cpfS, senhaS, loginS, dataD, esp);
+    			i.cadastrarMedico(nomeS, cpfS, senhaS, loginS, dataD, esp);
     			i.salvar();
     			break;
     		case 3:
-    			i.cadastrarU(nomeS, cpfS, senhaS, loginS, dataD);
+    			i.CadastrarUsuario(nomeS, cpfS, senhaS, loginS, dataD);
     			i.salvar();
     			break;
 
@@ -137,6 +138,18 @@ public class ControladorTelaCadastro implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		try {
+			i.salvar();
+		} catch (CsvDataTypeMismatchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CsvRequiredFieldEmptyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		usuarios.setItems(itens);
 		
 	}

@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
+import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
@@ -41,39 +43,37 @@ public class GetInformacao {
 	}
 	public void cadastrarU(String nome, String cpf, String senha, String login, Date data) throws ExisteException, NullException, ElementoJaExisteException {
 		Usuario u = new Usuario(nome, cpf, senha, login, data);
-		//u.setId(3); 
 		System.out.println(u.getId());
 		s.cadastrarUsuario(u);
 	}
 	
-	public String loginUser(String login, String senha) throws NullException {
-		String id = s.procurarIdPorLogin(login);
-		if(id != null) {
-			switch(id.charAt(0)) {
-				case '1':
-					Usuario a = s.efetuarLogin(login);
-					if(a != null && a.getSenha().equals(senha)) {
-						return a.getId();
-					}
-					break;
-				case '2':
-					Usuario m = s.efetuarLogin(login);
-					if(m != null && m.getSenha().equals(senha)) {
-						return m.getId();
-					}
-					break;
-				case '3':
-					Usuario u = s.efetuarLogin(login);
-					if(u != null && u.getSenha().equals(senha)) {
-						return u.getId();
-					}
-					break;
+	public String loginUser(String login, String senha) throws NullException, ElementoNaoExisteException {
+		Usuario u = null;
+		Medico m = null;
+		Atendente a = null;
+		
+		if(login != null && senha != null) {
+			if(s.procurarUsuarioPorLogin(login) != null) {
+				u = s.procurarUsuarioPorLogin(login);
+				if(u.getId().charAt(0) == '3') {
+					return u.getId();
+				}
 			}
+			if(s.procurarMedicoPorLogin(login) != null) {
+				m = s.procurarMedicoPorLogin(login);
+				if(u.getId().charAt(0) == '2') {
+					return u.getId();
+				}
+			}
+			if(s.procurarAtendentePorLogin(login) != null) {
+				a = s.procurarAtendentePorLogin(login);
+				if(a.getId().charAt(0) == '1') {
+					return a.getId();
+				}
 			
+			}
 		}
-		
 		return null;
-		
 	}
 	
 	public void salvar() throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
@@ -81,25 +81,41 @@ public class GetInformacao {
 	}
 	
 	
-	public void cadastrarA(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException, ElementoJaExisteException {
-		Usuario a = new Atendente(nomeS, cpfS, senhaS, loginS, dataD);
-		//a.setId(1);
-		System.out.println(a.getId());
-		s.cadastrarUsuario(a);
-	}
-
-	public void cadastrarM(String nomeS, String cpfS, String senhaS, String loginS, Date dataD, String especialidade) throws ExisteException, NullException, ElementoJaExisteException {
-		Usuario m = new Medico(nomeS, cpfS, senhaS, loginS, dataD);
-		m.setXmedicoEspecialidade(especialidade);
-		System.out.println(m);
-		//m.setId(2);
-		System.out.println(m.getId());
-		s.cadastrarUsuario(m);
+	public void cadastrarAtendente(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException, ElementoJaExisteException, ElementoNaoExisteException {
+		Atendente a = new Atendente(nomeS, cpfS, senhaS, loginS, dataD);
+		List<Atendente> b = s.getArrayAtendente();
+		if(s.procurarAtendentePorLogin(loginS) != null) {
+			s.cadastrarAtendente(a);
+		}else {
+			throw new ElementoJaExisteException(a); 
+		}
 	}
 	
-	public void cadastrarAn(String nome, Usuario dono, Alimentacao alimentacao, Especie especie, Genero genero, TempoDeVida tempoDeVida) throws ExisteException {
+	public void CadastrarUsuario(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws NullException, ElementoNaoExisteException, ElementoJaExisteException {
+		Usuario u = new Usuario(nomeS, cpfS, senhaS, loginS, dataD);
+		if(s.procurarUsuarioPorLogin(loginS) != null) {
+			s.cadastrarUsuario(u);
+		}else {
+			throw new ElementoJaExisteException(u);
+		}
+	}
+
+	public void cadastrarMedico(String nomeS, String cpfS, String senhaS, String loginS, Date dataD, String especialidade) throws ExisteException, NullException, ElementoJaExisteException, ElementoNaoExisteException {
+		Medico m = new Medico(nomeS, cpfS, senhaS, loginS, especialidade,dataD);
+		if(s.procurarMedicoPorLogin(loginS) != null) {
+			s.cadastrarMedico(m);
+		}else {
+			throw new ElementoJaExisteException(m); 
+		}
+	}
+	
+	public void cadastrarAnimal(String nome, Usuario dono, Alimentacao alimentacao, Especie especie, Genero genero, TempoDeVida tempoDeVida) throws ExisteException, ElementoJaExisteException, ElementoNaoExisteException {
 		Animal a = new Animal(nome, dono, alimentacao, especie, genero, tempoDeVida);
-		s.cadastrarAnimal(a);
+		if(s.procurarAnimalPorNome(nome) != null) {
+			s.cadastrarAnimal(a);
+		}else {
+			throw new ElementoJaExisteException(a);
+		}
 	}
 	
 	public void cadastrarCir(Animal animal, Medico medico, Date data) throws NullException, ExisteException {
@@ -127,39 +143,30 @@ public class GetInformacao {
 	}
 	
 	public ArrayList<Cirurgia> getCirurgias(){
-		return s.getCirurgias();
+		//return s.getCirurgias();
+		return null;
 	}
 	
-	public void removerAn(Animal a) throws NullException {
-		s.removerAnimal(a.getNome(), a.getDono().getLogin());
+	public void removerAn(Animal a) throws NullException, ElementoNaoExisteException {
+		s.removerAnimal(a);
 	}
 	
 	public void carregarDados() throws ClassNotFoundException, IOException, NotFoundException, ExisteException {
-		s.carregarDados();
+		s.getInstancia();
 	}
-	public ArrayList<Usuario> getDadosUsuarios(){
-		return s.getDadosUsuarios();
+	public List<Usuario> getDadosUsuarios(){
+		return s.getArrayUsuario();
 	}
 	
-	public ArrayList<Animal> getDadosAnimais(){
-		return s.getDadosAnimais();
+	public List<Animal> getDadosAnimais(){
+		return s.getArrayAnimal();
 	}
-	public String getLogin() {
-		return login;
+	
+	public List<Medico> getDadosMedicos(){
+		return s.getArrayMedico();
 	}
-	public void setLogin(String login) {
-		this.login = login;
-	}
-	public Animal getA() {
-		return a;
-	}
-	public void setA(Animal a) {
-		this.a = a;
-	}
-	public Usuario getU() {
-		return u;
-	}
-	public void setU(Usuario u) {
-		this.u = u;
+	
+	public List<Atendente> getDadosAtendetes(){
+		return s.getArrayAtendente();
 	}
 }

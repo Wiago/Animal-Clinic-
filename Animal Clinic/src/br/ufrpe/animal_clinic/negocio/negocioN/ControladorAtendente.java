@@ -14,7 +14,7 @@ public class ControladorAtendente {
     private static ControladorAtendente instance;
     
     private ControladorAtendente() {
-        this.repositorioAtendentes = new RepositorioGenerico<>("atendentes.txt");
+        this.repositorioAtendentes = new RepositorioGenerico<>("atendentes.dat");
     }
 
     public static ControladorAtendente getInstance() {

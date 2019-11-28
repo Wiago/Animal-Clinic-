@@ -14,7 +14,7 @@ public class ControladorMedico {
     private static ControladorMedico instance;
     
     private ControladorMedico() {
-        this.repositorioMedicos = new RepositorioGenerico<>("medicos.txt");
+        this.repositorioMedicos = new RepositorioGenerico<>("medicos.dat");
     }
 
     public static ControladorMedico getInstance() {

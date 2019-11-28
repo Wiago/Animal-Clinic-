@@ -104,13 +104,7 @@ public class RepositorioUsuarios implements Serializable{
 			}
 		}
 		else if(u.getId().startsWith("2")) {
-			Medico m = new Medico(u.getNome(),u.getCpf(),u.getSenha(),u.getLogin(),u.getData());
-			m.setIdCSV(u.getId());
-			m.setXmedicoEspecialidade(u.getXmedicoEspecialidade());
-			if(!medicos.contains(m)) {
-				medicos.add(m);
-			}
-			System.out.println(medicos);
+	
 		}
 	}
 	public void cadastrarMedicoOuAtendente(ArrayList<Usuario> us) throws ExisteException {
@@ -123,12 +117,8 @@ public class RepositorioUsuarios implements Serializable{
 				}
 			}
 			else if(u.getId().startsWith("2")) {
-				Medico m = new Medico(u.getNome(),u.getCpf(),u.getSenha(),u.getLogin(),u.getData());
-				m.setIdCSV(u.getId());
-				m.setXmedicoEspecialidade(u.getXmedicoEspecialidade());
-				if(!medicos.contains(m)) {
-					medicos.add(m);
-				}
+				
+				
 			}
 		}
 	}

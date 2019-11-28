@@ -13,8 +13,9 @@ public class Medico extends Usuario implements Serializable{
 	private String especialidade;
 	private ArrayList <Animal> pacientesDoDia = new ArrayList();
 
-	public Medico(String nome, String cpf, String senha,String login, Date dataNas) {
+	public Medico(String nome, String cpf, String senha,String login, String especialidade,Date dataNas) {
 		super(nome, cpf, senha, login, dataNas);
+		this.especialidade = especialidade;
 		this.setId(2);
 	}
 

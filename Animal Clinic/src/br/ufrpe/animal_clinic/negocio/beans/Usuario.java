@@ -23,7 +23,6 @@ public class Usuario implements Serializable{
 	private Date dataNas;
 	private String dataNasS;
 	private String id;
-	private String xmedicoEspecialidade; //Para fins de ARQUIVO
 	//static Id a = new Id();
 	
 	public Usuario() {
@@ -99,13 +98,6 @@ public class Usuario implements Serializable{
 		this.login = login;
 	}
 	
-	public String getXmedicoEspecialidade() {
-		return xmedicoEspecialidade;
-	}
-	public void setXmedicoEspecialidade(String xmedicoEspecialidade) {
-		this.xmedicoEspecialidade = xmedicoEspecialidade;
-	}
-	
 	@Override
 	public String toString() {
 		return "Usuário [Nome = " + getNome() + "/"+"Login = " + getLogin() + "/CPF = " + getCpf() + "/Senha = " + getSenha()
@@ -127,7 +119,7 @@ public class Usuario implements Serializable{
 			u.setLogin(dados[4].replaceAll(oldString,""));
 			u.setNome(dados[5].replaceAll(oldString,""));
 			u.setSenha(dados[6].replaceAll(oldString,""));
-			u.setXmedicoEspecialidade(dados[8].replaceAll(oldString,""));
+			
 		} catch (Exception e) {
 //			System.err.println("Erro ao converter linha do CSV em um usuário! | Linha lida: " + linha);
 //			e.printStackTrace();

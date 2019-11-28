@@ -15,7 +15,7 @@ public class ControladorAnimal {
     private static ControladorUsuario repositorioUsuarios;
     
     private ControladorAnimal() {
-        this.repositorioAnimals = new RepositorioGenerico<>("animais.txt");
+        this.repositorioAnimals = new RepositorioGenerico<>("animais.dat");
     }
 
     public static ControladorAnimal getInstance() {
