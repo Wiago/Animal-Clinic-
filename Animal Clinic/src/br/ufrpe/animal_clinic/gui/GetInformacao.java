@@ -31,6 +31,7 @@ public class GetInformacao {
 	
 	private static GetInformacao instancia;
 	private String login;
+	private String nomeAnimal;
 	private Servico s;
 
 	private GetInformacao() {
@@ -175,5 +176,11 @@ public class GetInformacao {
 	}
 	public void setLogin(String login) {
 		this.login = login;
+	}
+	public String getNomeAnimal() {
+		return nomeAnimal;
+	}
+	public void setNomeAnimal(String nomeAnimal) {
+		this.nomeAnimal = nomeAnimal;
 	}
 }
