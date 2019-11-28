@@ -16,10 +16,6 @@ import br.ufrpe.animal_clinic.negocio.beans.IServico;
 import br.ufrpe.animal_clinic.negocio.beans.Login;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorAnimal;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorAtendente;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorMedico;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorUsuario;
 
 import java.util.ArrayList;
 import java.util.List;

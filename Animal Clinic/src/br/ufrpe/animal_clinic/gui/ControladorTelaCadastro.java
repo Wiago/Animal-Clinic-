@@ -87,7 +87,16 @@ public class ControladorTelaCadastro implements Initializable{
     	String nomeS = null;
     	String cpfS = null;
     	String dataS = data.getText();
-    	Date dataD = f.parse(dataS);
+    	Date dataD = null;
+    	try {
+    		dataD = f.parse(dataS);
+    	}catch (ParseException e) {
+    		Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erro no Cadastro");
+            alert.setHeaderText("Informacoes vazias na data de Nascimento.");
+            alert.setContentText("Coloque uma data valida.");
+            alert.showAndWait();
+		}
     	
     	if(!"".equals(login.getText()) || !"".equals(senha.getText()) 
     								   || !"".equals(nome.getText()) 
