@@ -1,6 +1,7 @@
 package br.ufrpe.animal_clinic.negocio;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
 import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
@@ -18,14 +19,14 @@ import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 import br.ufrpe.animal_clinic.negocio.negocioN.ControladorAnimal;
 import br.ufrpe.animal_clinic.negocio.negocioN.ControladorAtendente;
+import br.ufrpe.animal_clinic.negocio.negocioN.ControladorConsulta;
 import br.ufrpe.animal_clinic.negocio.negocioN.ControladorMedico;
 import br.ufrpe.animal_clinic.negocio.negocioN.ControladorUsuario;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 
 
 public class Servico implements IServico{
@@ -37,6 +38,9 @@ public class Servico implements IServico{
 	private ControladorMedico medico;
 	private ControladorAtendente atendente;
 	private ControladorAnimal animal;
+	private ControladorConsulta consulta;
+	//private ControladorExame exame;
+	//private ControladorProntuario prontuario;
 	
 	
 	private Servico() {
@@ -44,6 +48,7 @@ public class Servico implements IServico{
 		medico = ControladorMedico.getInstance();
 		atendente = ControladorAtendente.getInstance();
 		animal = ControladorAnimal.getInstance();
+		consulta = ControladorConsulta.getInstance();
 	}
 	
 	public static Servico getInstancia() {
@@ -72,8 +77,8 @@ public class Servico implements IServico{
 	}
 
 	@Override
-	public void cadastrarConsulta(Consulta c) throws NullException, ExisteException {
-		//this.consultas.criarConsulta(c);
+	public void cadastrarConsulta(Consulta c) throws NullException, ExisteException, ElementoJaExisteException {
+		this.consulta.inserir(c);
 	}
 
 	@Override
@@ -100,9 +105,9 @@ public class Servico implements IServico{
 	}
 
 	@Override
-	public void desmarcarConsulta(String id) throws NullException {
-		//this.consultas.getRepositorio().remover(this.consultas.procurar(id));;
-		
+	public void desmarcarConsulta(String id) throws NullException, ElementoNaoExisteException {
+		Consulta c = this.consulta.procurarPorId(id);
+		this.consulta.remover(c);
 	}
 
 	@Override
@@ -111,16 +116,6 @@ public class Servico implements IServico{
 		
 	}
 
-	@Override
-	public void carregarDados() throws IOException, NotFoundException, ClassNotFoundException, ExisteException {
-		
-		//this.exames.getRepositorio().carregarDados("HistoricoDeExames.txt");
-		//this.prontuarios.getRepositorio().carregarDados("HistoricoDeProntuarios.txt");
-		//this.usuarios.getRepositorio().carregarDados("HistoricoDeUsuarios.csv");
-		//this.usuarios.getRepositorioAnimais().carregarDados("HistoricoDeAnimais.csv");
-		//this.cirurgias.getRepositorio().carregarDados("HistoricoDeCirurgias.csv");
-		//this.consultas.getRepositorio().carregarDados("HistoricoDeConsultas.csv");
-	}
 
 
 	@Override
@@ -219,7 +214,7 @@ public class Servico implements IServico{
 	}
 	
 	@Override
-	public void salvarDados() throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+	public void salvarDados() throws IOException{
 		try {	
 		//this.exames.getRepositorio().salvarDados("HistoricoDeExames.txt");
 		//this.prontuarios.getRepositorio().salvarDados("HistoricoDeProntuarios.txt");*/
@@ -281,6 +276,13 @@ public class Servico implements IServico{
 		return animal.procurarDono(login);
 	}
 	
+	public Consulta procurarConsultaPorId(String id) throws ElementoNaoExisteException {
+		return this.consulta.procurarPorId(id);
+	}
+	
+	public Consulta procurarConsultaPorDataHora(LocalDate data, String hora) throws ElementoNaoExisteException {
+		return this.consulta.procurarPorDataHora(data, hora);
+	}
 	
 
 }

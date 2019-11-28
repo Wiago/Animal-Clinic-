@@ -6,8 +6,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 
 import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
 import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
@@ -64,7 +63,7 @@ public class ControladorTelaCadastroAnimal implements Initializable{
     ObservableList<Alimentacao> alimentos = FXCollections.observableArrayList(Alimentacao.values());
     
     @FXML
-    void cadastrar(ActionEvent event) throws NullException, ExisteException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException, ElementoNaoExisteException, ElementoJaExisteException {
+    void cadastrar(ActionEvent event) throws NullException, ExisteException, IOException, ElementoNaoExisteException, ElementoJaExisteException {
     	Especie e = especie.getValue();
 		Genero g = genero.getValue();
 		TempoDeVida t = tempoDeVida.getValue();

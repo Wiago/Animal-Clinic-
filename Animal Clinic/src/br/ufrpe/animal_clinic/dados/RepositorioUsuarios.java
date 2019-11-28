@@ -19,10 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NotFoundException;
@@ -290,56 +287,4 @@ public class RepositorioUsuarios implements Serializable{
 		return b;
 	}
 	
-	public void salvarDados(String file) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
-        Writer writer = Files.newBufferedWriter(Paths.get(file));
-        StatefulBeanToCsv<Usuario> beanToCsv = new StatefulBeanToCsvBuilder<Usuario>(writer).build();
-       
-        beanToCsv.write(usuarios);
-        System.out.println(usuarios);
-        writer.flush();
-        writer.close();
-	}
-	
-	public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException, ExisteException {
-	    
-		ArrayList<Usuario> users = new ArrayList<Usuario>();
-		BufferedReader csvReader = null;
-		String csvLine = null;
-		
-		try {
-			csvReader = new BufferedReader(new FileReader(file));
-			csvReader.readLine(); // ignore header!
-			System.out.println("Linhas no arquivo (Usuários):");
-			while ((csvLine = csvReader.readLine()) != null) {
-				System.out.println(csvLine);
-				users.add(Usuario.of(csvLine)); // create usuario object and add to repository
-			}
-
-		} catch (Exception e) {
-			System.out.println("Erro ao ler arquivo!! | Linha lida: " + csvLine);
-			e.printStackTrace();
-
-		} finally {
-			closeFile(csvReader);
-		}
-		
-		usuarios.addAll(users);
-		cadastrarMedicoOuAtendente(usuarios);
-		System.out.println("Usuários no Arquivo (toString):");
-		System.out.println(usuarios);
-		System.out.println("Usuários no Arquivo (Key,Login):");
-		for(Usuario us: usuarios) {
-			loginId.put(us.getLogin(), us.getId());
-			System.out.println(us.getLogin()+","+loginId.get(us.getLogin()));
-		}		
-	}
-	
-	private static void closeFile(BufferedReader csvReader) {
-		try {
-			csvReader.close();
-		} catch (IOException e) {
-			System.out.println("Erro ao fechar arquivo!!");
-			e.printStackTrace();
-		}
-	}
 }

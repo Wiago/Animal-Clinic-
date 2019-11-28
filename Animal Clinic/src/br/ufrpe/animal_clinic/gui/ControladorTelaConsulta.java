@@ -1,13 +1,18 @@
 package br.ufrpe.animal_clinic.gui;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
 import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
+import br.ufrpe.animal_clinic.exception.ExisteException;
+import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.Servico;
 import br.ufrpe.animal_clinic.negocio.beans.Animal;
+import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 import javafx.collections.FXCollections;
@@ -64,18 +69,28 @@ public class ControladorTelaConsulta implements Initializable {
     private Button btAtualizar;
 
     @FXML
-    void marcarConsulta(ActionEvent event) throws ElementoNaoExisteException {
+    void marcarConsulta(ActionEvent event) throws ElementoNaoExisteException, NullException, ExisteException, ElementoJaExisteException {
     	Animal a = null;
-    	try{
-    		s.procurarAnimalPorNome(i.getNomeAnimal());
-    	}catch (ElementoNaoExisteException e) {
+    	Medico medico = null;
+    	LocalDate data = null;
+    	String hora = null;
+    	String descricao = null;
+    	a = s.procurarAnimalPorNome(i.getNomeAnimal());
+    	medico = tabelaMedico.getSelectionModel().getSelectedItem();
+    	hora = horaConsulta.getText();
+    	descricao = relatoSintomas.getText();
+    	
+    	data = dataConsulta.getValue();
+    	Consulta c = new Consulta(a, medico, data, hora, descricao);
+    	try {
+    		s.cadastrarConsulta(c);
+    	}catch(ElementoJaExisteException e) {
     		Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro na Marcacao");
             alert.setHeaderText("Informacoes nao existem.");
-            alert.setContentText("Tente um novo animal.");
+            alert.setContentText("A consulta ja existe.");
             alert.showAndWait();
-		}
-    	Medico medico = tabelaMedico.getSelectionModel().getSelectedItem();
+    	}
     }
 
     @FXML

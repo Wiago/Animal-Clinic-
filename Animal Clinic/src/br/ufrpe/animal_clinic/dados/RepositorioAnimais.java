@@ -12,10 +12,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
@@ -163,74 +159,5 @@ public class RepositorioAnimais implements Serializable{
 		}
         
     }
-	
-	public void salvarDados(String file) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
-		System.out.println(animais);
-
-        Writer writer = Files.newBufferedWriter(Paths.get(file));
-        StatefulBeanToCsv<Animal> beanToCsv = new StatefulBeanToCsvBuilder<Animal>(writer).build();
-        
-        
-        beanToCsv.write(animais);
-        writer.flush();
-        writer.close();
-	}
-	
-	public void carregarDados(String file) throws ClassNotFoundException, FileNotFoundException {
-		ArrayList<Animal> animals = new ArrayList<Animal>();
-		BufferedReader csvReader = null;
-		String csvLine = null;
-		try {
-			csvReader = new BufferedReader(new FileReader(file));
-			csvReader.readLine(); // ignore header!
-			System.out.println("Linhas no arquivo(Animais):");
-			while ((csvLine = csvReader.readLine()) != null) {
-				System.out.println(csvLine);
-				animals.add(RepositorioAnimais.of(csvLine)); // create animal object and add to repository
-			}
-
-		} catch (Exception e) {
-			System.out.println("Erro ao ler arquivo!! | Linha lida: " + csvLine);
-			e.printStackTrace();
-
-		} finally {
-			closeFile(csvReader);
-		}
-		animais.addAll(animals);
-		System.out.println("Animais no arquivo (toString):");
-		System.out.println(animais);
-	}
-	
-	public static Animal of(String csvLine) throws ParseException, NullException {
-		// 0 1 2 3 4 5 6 7 8 9 10
-		// "alimentacao","dono","especie","estaVivo","genero","idDono","nome","nomeDono","oAnimalEMae","serialVersionUID","tempoDeVida"
-		// String nome, Usuario dono, Alimentacao alimentacao, Especie especie, Genero genero, TempoDeVida tempoDeVida
-		String[] dados = csvLine.split(",");
-		String oldString = String.valueOf('"');
-		Usuario user1 = donos.procurar(dados[5].replaceAll(oldString,""));
-		Animal a = new Animal(null,user1,null,null,null,null);
-		try {
-			a.setNome(dados[6].replaceAll(oldString,""));
-			a.setAlimentacao(Alimentacao.valueOf(dados[0].replaceAll(oldString,"")));
-			a.setEspecie(Especie.valueOf(dados[2].replaceAll(oldString,"")));
-			a.setGenero(Genero.valueOf(dados[4].replaceAll(oldString,"")));
-			a.setTempoDeVida(TempoDeVida.valueOf(dados[10].replaceAll(oldString,"")));
-		} catch (Exception e) {
-//			System.err.println("Erro ao converter linha do CSV em um usuário! | Linha lida: " + linha);
-//			e.printStackTrace();
-			
-			return null;
-		}
-		return a;
-	}
-	
-	private static void closeFile(BufferedReader csvReader) {
-		try {
-			csvReader.close();
-		} catch (IOException e) {
-			System.out.println("Erro ao fechar arquivo!!");
-			e.printStackTrace();
-		}
-	}
 	
 }

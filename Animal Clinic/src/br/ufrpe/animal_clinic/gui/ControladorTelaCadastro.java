@@ -7,8 +7,6 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
 import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
@@ -81,7 +79,7 @@ public class ControladorTelaCadastro implements Initializable{
     }
 
     @FXML
-    void cadastrar(ActionEvent event) throws ParseException, ExisteException, NullException, IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, ElementoJaExisteException, ElementoNaoExisteException {
+    void cadastrar(ActionEvent event) throws ParseException, ExisteException, NullException, IOException, ElementoJaExisteException, ElementoNaoExisteException {
     	String loginS = null;
     	String senhaS = null;
     	String nomeS = null;
@@ -169,12 +167,6 @@ public class ControladorTelaCadastro implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
 			i.salvar();
-		} catch (CsvDataTypeMismatchException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (CsvRequiredFieldEmptyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -2,12 +2,11 @@ package br.ufrpe.animal_clinic.gui;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
 import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
@@ -43,11 +42,7 @@ public class GetInformacao {
 		}
 		return instancia;
 	}
-	public void cadastrarU(String nome, String cpf, String senha, String login, Date data) throws ExisteException, NullException, ElementoJaExisteException {
-		Usuario u = new Usuario(nome, cpf, senha, login, data);
-		System.out.println(u.getId());
-		s.cadastrarUsuario(u);
-	}
+
 	
 	public String loginUser(String login, String senha) throws NullException, ElementoNaoExisteException {
 		Usuario u = null;
@@ -78,7 +73,7 @@ public class GetInformacao {
 		return null;
 	}
 	
-	public void salvar() throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+	public void salvar() throws IOException{
 		s.salvarDados();
 	}
 	
@@ -122,26 +117,12 @@ public class GetInformacao {
 	
 	public void cadastrarCir(Animal animal, Medico medico, Date data) throws NullException, ExisteException {
 		Cirurgia c = new Cirurgia(animal,medico,data);
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
-	    String strDate = formatter.format(data); 
-	    c.setDataS(strDate);
-	    c.setIdDonoAnimal(animal.getIdDono());
-	    c.setIdMedico(medico.getId());
-	    c.setNomeAnimal(animal.getNome());
-		System.out.println(c);
 		s.cadastrarCirurgia(c);
 	}
-	public void cadastrarCon(Animal animal, Medico medico, Date data) throws NullException, ExisteException {
-		Consulta c = new Consulta(animal,medico,data);
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
-	    String strDate = formatter.format(data); 
-	    c.setDataS(strDate);
-	    c.setIdDonoAnimal(animal.getIdDono());
-	    c.setIdMedico(medico.getId());
-	    c.setNomeAnimal(animal.getNome());
-		System.out.println(c);
+	public void cadastrarCon(Animal animal, Medico medico, LocalDate data, String hora, String descricao) throws NullException, ExisteException, ElementoJaExisteException, ElementoNaoExisteException {
+		Consulta c = new Consulta(animal, medico, data, hora, descricao);
+		Consulta p = s.procurarConsultaPorDataHora(data, hora);
 		s.cadastrarConsulta(c);
-		
 	}
 	
 	public ArrayList<Cirurgia> getCirurgias(){
