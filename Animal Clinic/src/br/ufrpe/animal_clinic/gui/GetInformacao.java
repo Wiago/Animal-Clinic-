@@ -30,6 +30,7 @@ import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 public class GetInformacao {
 	
 	private static GetInformacao instancia;
+	private String login;
 	private Servico s;
 
 	private GetInformacao() {
@@ -111,7 +112,7 @@ public class GetInformacao {
 	
 	public void cadastrarAnimal(String nome, Usuario dono, Alimentacao alimentacao, Especie especie, Genero genero, TempoDeVida tempoDeVida) throws ExisteException, ElementoJaExisteException, ElementoNaoExisteException {
 		Animal a = new Animal(nome, dono, alimentacao, especie, genero, tempoDeVida);
-		if(s.procurarAnimalPorNome(nome) != null) {
+		if(s.procurarAnimalPorNome(nome) == null) {
 			s.cadastrarAnimal(a);
 		}else {
 			throw new ElementoJaExisteException(a);
@@ -168,5 +169,11 @@ public class GetInformacao {
 	
 	public List<Atendente> getDadosAtendetes(){
 		return s.getArrayAtendente();
+	}
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
 	}
 }

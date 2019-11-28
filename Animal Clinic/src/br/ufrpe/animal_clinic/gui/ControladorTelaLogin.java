@@ -1,23 +1,38 @@
 package br.ufrpe.animal_clinic.gui;
 
+import java.awt.List;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
+import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
+import br.ufrpe.animal_clinic.negocio.Servico;
+import br.ufrpe.animal_clinic.negocio.beans.Atendente;
+import br.ufrpe.animal_clinic.negocio.beans.Medico;
+import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 
 
 public class ControladorTelaLogin implements Initializable{
-	
 	private static GetInformacao i = GetInformacao.getInstancia();
+	private static Servico s = Servico.getInstancia();
+	java.util.List<Atendente> a = null;
+	java.util.List<Usuario> u = null;
+	java.util.List<Medico> m = null;
+	
 	@FXML
     private PasswordField senha;
 
@@ -34,33 +49,59 @@ public class ControladorTelaLogin implements Initializable{
     private Button cadastrar;
     
     
+    
     @FXML
-    void login(ActionEvent event) throws NullException, ClassNotFoundException, IOException, NotFoundException {
+    void login(ActionEvent event) throws NullException, ClassNotFoundException, IOException, NotFoundException, ElementoNaoExisteException {
     	String loginS = id.getText();
     	String senhaS = senha.getText();
-    	String idLogin = i.loginUser(loginS, senhaS);
-    	System.out.println(idLogin);
-    	if(idLogin != null) {
-			switch(idLogin.charAt(0)) {
-				case '1':
-					Main.trocaCena(2);
-					id.clear();
-					senha.clear();
-					break;
-				case '2':
-					Main.trocaCena(3);
-					id.clear();
-					senha.clear();
-					break;
-				case '3':
-					i.setLogin(loginS);
-					Main.trocaCena(4);
-					id.clear();
-					senha.clear();
-					break;
-			}
-		}
     	
+		String id = i.loginUser(loginS, senhaS);
+		switch (id.charAt(0)) {
+		case '1':
+			try{
+				Atendente a = s.procurarAtendentePorLogin(loginS);
+				Main.trocaCena(2);
+			}catch (ElementoNaoExisteException e) {
+				Alert alert = new Alert(AlertType.ERROR);
+	            alert.setTitle("Erro no Login");
+	            alert.setHeaderText("Informacoes nao existem.");
+	            alert.setContentText("Nao existe este usuario cadastrado.");
+	            alert.showAndWait();
+			}
+			break;
+		case '2':
+			try{
+				Medico m = s.procurarMedicoPorLogin(loginS);
+				Main.trocaCena(3);
+			}catch (ElementoNaoExisteException e){
+				Alert alert = new Alert(AlertType.ERROR);
+	            alert.setTitle("Erro no Login");
+	            alert.setHeaderText("Informacoes nao existem.");
+	            alert.setContentText("Nao existe este usuario cadastrado.");
+	            alert.showAndWait();
+			}
+			break;
+		case '3':
+			try{
+				Usuario u = s.procurarUsuarioPorLogin(loginS);
+				i.setLogin(loginS);
+				Main.trocaCena(4);
+			}catch (ElementoNaoExisteException e){
+				Alert alert = new Alert(AlertType.ERROR);
+	            alert.setTitle("Erro no Login");
+	            alert.setHeaderText("Informacoes nao existem.");
+	            alert.setContentText("Nao existe este usuario cadastrado.");
+	            alert.showAndWait();
+			}
+			break;
+		default:
+			Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erro no Login");
+            alert.setHeaderText("Informacoes nao existem.");
+            alert.setContentText("Nao existe este usuario cadastrado.");
+            alert.showAndWait();
+			break;
+		}
     }
 
     @FXML
@@ -79,21 +120,17 @@ public class ControladorTelaLogin implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-			i.carregarDados();
-		} catch (ClassNotFoundException e) {
+			i.salvar();
+		} catch (CsvDataTypeMismatchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CsvRequiredFieldEmptyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExisteException e){
-			
-			e.printStackTrace();
 		}
-		
 	}
 
 }

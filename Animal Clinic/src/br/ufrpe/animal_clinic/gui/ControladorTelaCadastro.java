@@ -20,6 +20,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -105,15 +107,40 @@ public class ControladorTelaCadastro implements Initializable{
         	
         	switch (usuario.getCategoria()) {
     		case 1:
-    			i.cadastrarAtendente(nomeS, cpfS, senhaS, loginS, dataD);
+    			try {
+    				i.cadastrarAtendente(nomeS, cpfS, senhaS, loginS, dataD);
+    			}catch (ElementoJaExisteException e) {
+    				Alert alert = new Alert(AlertType.ERROR);
+    	            alert.setTitle("Erro no Cadastro");
+    	            alert.setHeaderText("Informacoes ja existem.");
+    	            alert.setContentText("Tente um novo login.");
+    	            alert.showAndWait();
+				}
+    			
     			i.salvar();
     			break;
     		case 2:
-    			i.cadastrarMedico(nomeS, cpfS, senhaS, loginS, dataD, esp);
+    			try{
+    				i.cadastrarMedico(nomeS, cpfS, senhaS, loginS, dataD, esp);
+    			}catch(ElementoJaExisteException e){
+    				Alert alert = new Alert(AlertType.ERROR);
+    	            alert.setTitle("Erro no Cadastro");
+    	            alert.setHeaderText("Informacoes ja existem.");
+    	            alert.setContentText("Tente um novo login.");
+    	            alert.showAndWait();
+    			}
     			i.salvar();
     			break;
     		case 3:
-    			i.CadastrarUsuario(nomeS, cpfS, senhaS, loginS, dataD);
+    			try{
+    				i.CadastrarUsuario(nomeS, cpfS, senhaS, loginS, dataD);
+    			}catch(ElementoJaExisteException e) {
+    				Alert alert = new Alert(AlertType.ERROR);
+    	            alert.setTitle("Erro no Cadastro");
+    	            alert.setHeaderText("Informacoes ja existem.");
+    	            alert.setContentText("Tente um novo login.");
+    	            alert.showAndWait();
+    			}
     			i.salvar();
     			break;
 

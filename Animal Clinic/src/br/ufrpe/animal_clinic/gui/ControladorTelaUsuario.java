@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import br.ufrpe.animal_clinic.dados.RepositorioUsuarios;
+import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.Servico;
 import br.ufrpe.animal_clinic.negocio.beans.Alimentacao;
@@ -23,11 +24,13 @@ import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ControladorTelaUsuario implements Initializable {
@@ -96,7 +99,7 @@ public class ControladorTelaUsuario implements Initializable {
     private ObservableListBase<Animal> listaOb;
     private ObservableListBase<Usuario> listaObs;
     
-    public void preencherTabela() throws NullException {
+    public void preencherTabela() throws NullException, ElementoNaoExisteException {
     	colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
     	colunaTempo.setCellValueFactory(new PropertyValueFactory<>("TempoDeVida"));
     	colunaEspecie.setCellValueFactory(new PropertyValueFactory<>("Especie"));
@@ -109,7 +112,7 @@ public class ControladorTelaUsuario implements Initializable {
     	
     	String login = i.getLogin();
 		Usuario dono = s.procurarUsuarioPorLogin(login);
-    	
+		
 		for(Animal a: i.getDadosAnimais()) {
 			if(a.getIdDono().equals(dono.getId())) {
 				if (listaDeAnimais.contains(a) == false) {
@@ -140,12 +143,20 @@ public class ControladorTelaUsuario implements Initializable {
     }
 
     @FXML
-    void remove(ActionEvent event) throws NullException {
+    void remove(ActionEvent event) throws  ElementoNaoExisteException, NullException {
     	Animal animal = tabela.getSelectionModel().getSelectedItem();
     	listaDeAnimais.remove(animal);
     	listaOb.remove(animal);
     	
-    	i.removerAn(animal);
+    	try{
+    		i.removerAn(animal);
+    	}catch (ElementoNaoExisteException e) {
+    		Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erro na Remocao");
+            alert.setHeaderText("Informacoes nao existem.");
+            alert.setContentText("Tente um novo animal.");
+            alert.showAndWait();
+		}
     }
 
     @FXML
@@ -156,7 +167,7 @@ public class ControladorTelaUsuario implements Initializable {
     }
     
     @FXML
-    void atualizar(ActionEvent event) throws NullException {
+    void atualizar(ActionEvent event) throws NullException, ElementoNaoExisteException {
     	preencherTabela();
     }
 

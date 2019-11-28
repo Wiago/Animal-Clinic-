@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
+import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
+import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
 import br.ufrpe.animal_clinic.exception.ExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.Servico;
@@ -62,7 +64,7 @@ public class ControladorTelaCadastroAnimal implements Initializable{
     ObservableList<Alimentacao> alimentos = FXCollections.observableArrayList(Alimentacao.values());
     
     @FXML
-    void cadastrar(ActionEvent event) throws NullException, ExisteException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException {
+    void cadastrar(ActionEvent event) throws NullException, ExisteException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException, ElementoNaoExisteException, ElementoJaExisteException {
     	Especie e = especie.getValue();
 		Genero g = genero.getValue();
 		TempoDeVida t = tempoDeVida.getValue();
@@ -70,17 +72,9 @@ public class ControladorTelaCadastroAnimal implements Initializable{
 		
 		String login = i.getLogin();
 		Usuario dono = s.procurarUsuarioPorLogin(login);
-		Animal ani = new Animal(nomePet.getText(), dono, a, e, g, t);
 		
-		i.cadastrarAn(nomePet.getText(), dono, a, e, g, t);
-		
-		Cirurgia c = new Cirurgia(ani, s.procurarMedicoPorLogin("bbb123"), Date.from(Instant.now()));
-
-		i.cadastrarCir(ani, s.procurarMedicoPorLogin("bbb123"), Date.from(Instant.now()));
-		i.cadastrarCon(ani, s.procurarMedicoPorLogin("eee123"), Date.from(Instant.now()));
+		i.cadastrarAnimal(nomePet.getText(), dono, a, e, g, t);
 		i.salvar();
-		
-		i.setU(dono);
 		
 		Main.trocaCena(4);
     }
