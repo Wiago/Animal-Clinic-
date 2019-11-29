@@ -125,13 +125,16 @@ public class GetInformacao {
 		s.cadastrarConsulta(c);
 	}
 	
-	public ArrayList<Cirurgia> getCirurgias(){
-		//return s.getCirurgias();
-		return null;
+	public List<Consulta> getConsultas(){
+		return s.getArrayConsultas();
 	}
 	
 	public void removerAn(Animal a) throws NullException, ElementoNaoExisteException {
 		s.removerAnimal(a);
+	}
+	
+	public void removerConsulta(Consulta c) throws NullException, ElementoNaoExisteException {
+		s.desmarcarConsulta(c.getId());
 	}
 	
 	public void carregarDados() throws ClassNotFoundException, IOException, NotFoundException, ExisteException {

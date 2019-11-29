@@ -82,15 +82,7 @@ public class ControladorTelaConsulta implements Initializable {
     	
     	data = dataConsulta.getValue();
     	Consulta c = new Consulta(a, medico, data, hora, descricao);
-    	try {
-    		s.cadastrarConsulta(c);
-    	}catch(ElementoJaExisteException e) {
-    		Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Erro na Marcacao");
-            alert.setHeaderText("Informacoes nao existem.");
-            alert.setContentText("A consulta ja existe.");
-            alert.showAndWait();
-    	}
+    	s.cadastrarConsulta(c);
     }
 
     @FXML

@@ -74,6 +74,7 @@ public class ControladorTelaLogin implements Initializable{
 			case '2':
 				try{
 					Medico m = s.procurarMedicoPorLogin(loginS);
+					i.setLogin(loginS);
 					Main.trocaCena(3);
 				}catch (ElementoNaoExisteException e){
 					Alert alert = new Alert(AlertType.ERROR);

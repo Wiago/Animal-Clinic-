@@ -17,15 +17,9 @@ import br.ufrpe.animal_clinic.negocio.beans.IServico;
 import br.ufrpe.animal_clinic.negocio.beans.Login;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorAnimal;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorAtendente;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorConsulta;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorMedico;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorUsuario;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 
@@ -39,9 +33,6 @@ public class Servico implements IServico{
 	private ControladorAtendente atendente;
 	private ControladorAnimal animal;
 	private ControladorConsulta consulta;
-	//private ControladorExame exame;
-	//private ControladorProntuario prontuario;
-	
 	
 	private Servico() {
 		usuario = ControladorUsuario.getInstance();
@@ -80,6 +71,10 @@ public class Servico implements IServico{
 	public void cadastrarConsulta(Consulta c) throws NullException, ExisteException, ElementoJaExisteException {
 		this.consulta.inserir(c);
 	}
+	
+	public List<Consulta> listat(){
+		return this.consulta.listar();
+	}
 
 	@Override
 	public void cadastrarCirurgia(Cirurgia c) throws NullException, ExisteException {
@@ -115,8 +110,6 @@ public class Servico implements IServico{
 		//this.cirurgias.getRepositorio().remover(this.cirurgias.procurar(id));
 		
 	}
-
-
 
 	@Override
 	public Usuario efetuarLoginUsuario(String login, String senha) throws NullException {
@@ -213,6 +206,10 @@ public class Servico implements IServico{
 		return animal.listar();
 	}
 	
+	public List<Consulta> getArrayConsultas(){
+		return consulta.listar();
+	}
+	
 	@Override
 	public void salvarDados() throws IOException{
 		try {	
@@ -275,14 +272,12 @@ public class Servico implements IServico{
 	public Usuario procurarDonoAnimal(String login) throws ElementoNaoExisteException {
 		return animal.procurarDono(login);
 	}
-	
-	public Consulta procurarConsultaPorId(String id) throws ElementoNaoExisteException {
-		return this.consulta.procurarPorId(id);
+
+	public Consulta procurarConsultaPorDataHora(LocalDate data, String hora) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
-	public Consulta procurarConsultaPorDataHora(LocalDate data, String hora) throws ElementoNaoExisteException {
-		return this.consulta.procurarPorDataHora(data, hora);
-	}
 	
 
 }

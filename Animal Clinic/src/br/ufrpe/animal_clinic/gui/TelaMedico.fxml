@@ -28,11 +28,11 @@
                            </font>
                         </Label>
                         <Button fx:id="voltar" layoutX="40.0" layoutY="311.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />
-                        <TableView layoutX="40.0" layoutY="81.0" prefHeight="200.0" prefWidth="284.0">
+                        <TableView fx:id="tabelaMedico" layoutX="40.0" layoutY="81.0" prefHeight="200.0" prefWidth="284.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Nome" />
-                            <TableColumn prefWidth="125.0" text="Especialidade" />
-                              <TableColumn prefWidth="83.0" text="Login" />
+                            <TableColumn fx:id="nomeMedico" prefWidth="75.0" text="Nome" />
+                            <TableColumn fx:id="especialidadeMedico" prefWidth="125.0" text="Especialidade" />
+                              <TableColumn fx:id="loginMedico" prefWidth="83.0" text="Login" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
@@ -65,7 +65,7 @@
                           </columns>
                         </TableView>
                         <Button fx:id="btConsultar" layoutX="419.0" layoutY="163.0" mnemonicParsing="false" onAction="#consultar" text="Realizar Consulta" />
-                        <Button fx:id="btAtualizar" layoutX="447.0" layoutY="286.0" mnemonicParsing="false" onAction="#preencherTabela" text="Atualizar" />
+                        <Button fx:id="btAtualizar" layoutX="447.0" layoutY="286.0" mnemonicParsing="false" onAction="#atualizar" text="Atualizar" />
                      </children>
                   </AnchorPane>
                </content>
