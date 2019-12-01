@@ -86,6 +86,8 @@ public class ControladorTelaCadastro implements Initializable{
     	String cpfS = null;
     	String dataS = data.getText();
     	Date dataD = null;
+    	boolean loginB = false;
+    	String idTeste = null;
     	try {
     		dataD = f.parse(dataS);
     	}catch (ParseException e) {
@@ -104,6 +106,16 @@ public class ControladorTelaCadastro implements Initializable{
     		nomeS = nome.getText();
     		cpfS = cpf.getText();
     		
+    		idTeste = i.loginUser(loginS, senhaS);
+    		if(idTeste != null) {
+    			loginB = true;
+    			Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Erro no Cadastro");
+                alert.setHeaderText("Ja existe um usuario cadastrado com o login passado");
+                alert.setContentText("Tente outro login.");
+                alert.showAndWait();
+    		}
+    		
     		TipoUsuario usuario = usuarios.getValue();
     		System.out.println(usuario.getCategoria());
         	
@@ -113,50 +125,51 @@ public class ControladorTelaCadastro implements Initializable{
         		System.out.println(esp);
         	}
         	
-        	switch (usuario.getCategoria()) {
-    		case 1:
-    			System.out.println();
-    			try {
-    				i.cadastrarAtendente(nomeS, cpfS, senhaS, loginS, dataD);
-    			}catch (ElementoJaExisteException e) {
-    				Alert alert = new Alert(AlertType.ERROR);
-    	            alert.setTitle("Erro no Cadastro");
-    	            alert.setHeaderText("Informacoes ja existem.");
-    	            alert.setContentText("Tente um novo login.");
-    	            alert.showAndWait();
-				}
-    			
-    			i.salvar();
-    			break;
-    		case 2:
-    			try{
-    				i.cadastrarMedico(nomeS, cpfS, senhaS, loginS, dataD, esp);
-    			}catch(ElementoJaExisteException e){
-    				Alert alert = new Alert(AlertType.ERROR);
-    	            alert.setTitle("Erro no Cadastro");
-    	            alert.setHeaderText("Informacoes ja existem.");
-    	            alert.setContentText("Tente um novo login.");
-    	            alert.showAndWait();
-    			}
-    			i.salvar();
-    			break;
-    		case 3:
-    			try{
-    				i.cadastrarUsuario(nomeS, cpfS, senhaS, loginS, dataD);
-    			}catch(ElementoJaExisteException e) {
-    				Alert alert = new Alert(AlertType.ERROR);
-    	            alert.setTitle("Erro no Cadastro");
-    	            alert.setHeaderText("Informacoes ja existem.");
-    	            alert.setContentText("Tente um novo login.");
-    	            alert.showAndWait();
-    			}
-    			i.salvar();
-    			break;
-
-    		default:
-    			break;
-    		}
-    		
+        	if(loginB == false) {
+	        	switch (usuario.getCategoria()) {
+	    		case 1:
+	    			System.out.println();
+	    			try {
+	    				i.cadastrarAtendente(nomeS, cpfS, senhaS, loginS, dataD);
+	    			}catch (ElementoJaExisteException e) {
+	    				Alert alert = new Alert(AlertType.ERROR);
+	    	            alert.setTitle("Erro no Cadastro");
+	    	            alert.setHeaderText("Informacoes ja existem.");
+	    	            alert.setContentText("Tente um novo login.");
+	    	            alert.showAndWait();
+					}
+	    			
+	    			i.salvar();
+	    			break;
+	    		case 2:
+	    			try{
+	    				i.cadastrarMedico(nomeS, cpfS, senhaS, loginS, dataD, esp);
+	    			}catch(ElementoJaExisteException e){
+	    				Alert alert = new Alert(AlertType.ERROR);
+	    	            alert.setTitle("Erro no Cadastro");
+	    	            alert.setHeaderText("Informacoes ja existem.");
+	    	            alert.setContentText("Tente um novo login.");
+	    	            alert.showAndWait();
+	    			}
+	    			i.salvar();
+	    			break;
+	    		case 3:
+	    			try{
+	    				i.cadastrarUsuario(nomeS, cpfS, senhaS, loginS, dataD);
+	    			}catch(ElementoJaExisteException e) {
+	    				Alert alert = new Alert(AlertType.ERROR);
+	    	            alert.setTitle("Erro no Cadastro");
+	    	            alert.setHeaderText("Informacoes ja existem.");
+	    	            alert.setContentText("Tente um novo login.");
+	    	            alert.showAndWait();
+	    			}
+	    			i.salvar();
+	    			break;
+	
+	    		default:
+	    			break;
+	    		}
+        	}
     	}
     	
     	if(!login.getText().trim().isEmpty() || !senha.getText().trim().isEmpty()) {
