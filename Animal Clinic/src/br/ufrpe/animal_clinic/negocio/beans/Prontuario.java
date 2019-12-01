@@ -11,7 +11,7 @@ public class Prontuario implements Serializable{
 	private Consulta consulta;
 	private String relatorio;
 	private String id;
-	static Id a = new Id();
+	//static Id a = new Id();
 	
 	public Prontuario(Consulta consulta, String relatorio) {
 		this.consulta = consulta;

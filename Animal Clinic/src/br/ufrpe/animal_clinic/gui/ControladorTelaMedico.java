@@ -149,6 +149,13 @@ public class ControladorTelaMedico implements Initializable{
     }
     
     @FXML
+    void marcarExame(ActionEvent event) {
+    	Animal animal = tabela.getSelectionModel().getSelectedItem();
+    	i.setNomeAnimal(animal.getNome());
+    	Main.trocaCena(6);
+    	
+    }
+    @FXML
     public void preencherTabela() throws NullException, ElementoNaoExisteException {
     	colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
     	colunaEspecie.setCellValueFactory(new PropertyValueFactory<>("Especie"));

@@ -1,4 +1,4 @@
-package br.ufrpe.animal_clinic.negocio;
+package br.ufrpe.animal_clinic.negocio.negocioN;
 
 import java.util.List;
 

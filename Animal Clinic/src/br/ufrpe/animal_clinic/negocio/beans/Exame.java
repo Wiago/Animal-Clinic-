@@ -1,6 +1,7 @@
 package br.ufrpe.animal_clinic.negocio.beans;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Exame implements Serializable{
@@ -10,27 +11,50 @@ public class Exame implements Serializable{
 	private static final long serialVersionUID = -2794882594816682264L;
 	private Animal animal;
 	private Medico medico;
-	private Date data;
+	private LocalDate data;
+	private String hora;
+	private String relatorio;
+	private Prontuario prontuario;
 	private String id;
-	static Id a = new Id();
+	//static Id a = new Id();
 	
-	public Exame(Animal animal, Medico medico, Date data) {
+	public Exame(Animal animal, Medico medico, LocalDate data, String hora) {
 		this.animal = animal;
 		this.medico = medico;
 		this.data = data;
+		this.hora = hora;
 		this.setId();
 	}
+		
 	
+	public Prontuario getProntuario() {
+		return prontuario;
+	}
+	public void setProntuario(Prontuario prontuario) {
+		this.prontuario = prontuario;
+	}
+	public String getRelatorio() {
+		return relatorio;
+	}
+	public void setRelatorio(String relatorio) {
+		this.relatorio = relatorio;
+	}
+	public String getHora() {
+		return hora;
+	}
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
 	public Medico getMedico() {
 		return medico;
 	}
 	public void setMedico(Medico medico) {
 		this.medico = medico;
 	}
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 	public Animal getAnimal() {

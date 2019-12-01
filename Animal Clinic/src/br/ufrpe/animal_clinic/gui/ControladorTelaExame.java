@@ -13,8 +13,8 @@ import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.Servico;
 import br.ufrpe.animal_clinic.negocio.beans.Animal;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
+import br.ufrpe.animal_clinic.negocio.beans.Exame;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
-import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
@@ -27,12 +27,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ControladorTelaConsulta implements Initializable {
+public class ControladorTelaExame implements Initializable{
+	
 	static GetInformacao i = GetInformacao.getInstancia();
 	private Servico s = Servico.getInstancia();
 	
@@ -42,34 +41,34 @@ public class ControladorTelaConsulta implements Initializable {
 	private ObservableListBase<Medico> listaOb;
 	
 	@FXML
-    private TextField horaConsulta;
+    private TextField horaExame;
 
     @FXML
     private Button btVoltar;
 
     @FXML
-    private TextArea relatoSintomas;
+    private TextArea relatorio;
+    
+    @FXML
+    private TextArea relatorioProntuario;
 
     @FXML
-    private Button btConsulta;
+    private Button btExame;
 
     @FXML
-    private TableColumn<Medico, String> colunaEspecialidade;
+    private TableColumn<Medico, String> prontuarios;
 
     @FXML
-    private DatePicker dataConsulta;
+    private DatePicker dataExame;
 
     @FXML
-    private TableView<Medico> tabelaMedico;
-
-    @FXML
-    private TableColumn<Medico, String> colunaNome;
+    private TableView<Medico> tabelaprontuario;
     
     @FXML
     private Button btAtualizar;
 
     @FXML
-    void marcarConsulta(ActionEvent event) throws ElementoNaoExisteException, NullException, ExisteException, ElementoJaExisteException {
+    void marcarExame(ActionEvent event) throws ElementoNaoExisteException, NullException, ExisteException, ElementoJaExisteException {
     	Animal a = null;
     	Medico medico = null;
     	LocalDate data = null;
@@ -77,29 +76,28 @@ public class ControladorTelaConsulta implements Initializable {
     	String descricao = null;
     	try {
     		a = s.procurarAnimalPorNome(i.getNomeAnimal());
-        	medico = tabelaMedico.getSelectionModel().getSelectedItem();
-        	hora = horaConsulta.getText();
-        	descricao = relatoSintomas.getText();
+        	medico = s.procurarMedicoPorLogin(i.getLogin());
+        	hora = horaExame.getText();
+        	descricao = relatorio.getText();
     	}catch(ElementoNaoExisteException e) {
     		Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro na Marcacao");
             alert.setHeaderText("Informacoes nao existem.");
-            alert.setContentText("Tente outro animal, medico, hora ou descricao.");
+            alert.setContentText("Tente outro animal, medico, hora ou relatorio.");
             alert.showAndWait();
     	}
-    	data = dataConsulta.getValue();
-    	Consulta c = new Consulta(a, medico, data, hora, descricao);
-    	s.cadastrarConsulta(c);
+    	data = dataExame.getValue();
+    	Exame e = new Exame(a, medico, data, hora);
+    	s.cadastrarExame(e);
     }
 
     @FXML
     void voltar(ActionEvent event) {
-    	Main.trocaCena(5);
+    	Main.trocaCena(3);
     }
     
-    public void preencherTabela(){
-    	colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-    	colunaEspecialidade.setCellValueFactory(new PropertyValueFactory<>("especialidade"));
+    /*public void preencherTabela(){
+    	prontuarios.setCellValueFactory(new PropertyValueFactory<>("prontuario"));
     	
     	for(Medico m: s.getArrayMedico()) {
 			if (listaMedicos.contains(m) == false) {
@@ -109,11 +107,11 @@ public class ControladorTelaConsulta implements Initializable {
     	
     	listaOb = (ObservableListBase<Medico>) FXCollections.observableArrayList(listaMedicos);
     	tabelaMedico.setItems(listaOb);
-    }
+    }*/
     
     @FXML
     void atualizar(ActionEvent event) {
-    	preencherTabela();
+    	//preencherTabela();
     }
     
 	@Override
@@ -121,4 +119,5 @@ public class ControladorTelaConsulta implements Initializable {
 		// TODO Auto-generated method stub
 		
 	}
+
 }

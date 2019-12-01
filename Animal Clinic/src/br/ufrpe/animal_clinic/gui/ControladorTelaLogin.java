@@ -1,6 +1,6 @@
 package br.ufrpe.animal_clinic.gui;
 
-import java.awt.List;
+import java.util.List;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

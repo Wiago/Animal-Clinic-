@@ -20,6 +20,7 @@ import br.ufrpe.animal_clinic.negocio.beans.Atendente;
 import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 import br.ufrpe.animal_clinic.negocio.beans.Especie;
+import br.ufrpe.animal_clinic.negocio.beans.Exame;
 import br.ufrpe.animal_clinic.negocio.beans.Genero;
 import br.ufrpe.animal_clinic.negocio.beans.Login;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
@@ -93,7 +94,7 @@ public class GetInformacao {
 		}
 	}
 	
-	public void CadastrarUsuario(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws NullException, ElementoNaoExisteException, ElementoJaExisteException {
+	public void cadastrarUsuario(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws NullException, ElementoNaoExisteException, ElementoJaExisteException {
 		Usuario u = new Usuario(nomeS, cpfS, senhaS, loginS, dataD);
 		if(s.procurarUsuarioPorLogin(loginS) == null) {
 			s.cadastrarUsuario(u);
@@ -128,6 +129,11 @@ public class GetInformacao {
 		Consulta c = new Consulta(animal, medico, data, hora, descricao);
 		Consulta p = s.procurarConsultaPorDataHora(data, hora);
 		s.cadastrarConsulta(c);
+	}
+	public void cadastrarExame(Animal animal, Medico medico, LocalDate data, String hora, String relatorio) throws NullException, ExisteException, ElementoJaExisteException, ElementoNaoExisteException {
+		Exame c = new Exame(animal, medico, data, hora);
+		Exame p = s.procurarExamePorDataHora(data, hora);
+		s.cadastrarExame(c);
 	}
 	
 	public List<Consulta> getConsultas(){

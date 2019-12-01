@@ -18,6 +18,11 @@ import br.ufrpe.animal_clinic.negocio.beans.Login;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
+import br.ufrpe.animal_clinic.negocio.negocioN.ControladorAnimal;
+import br.ufrpe.animal_clinic.negocio.negocioN.ControladorAtendente;
+import br.ufrpe.animal_clinic.negocio.negocioN.ControladorExame;
+import br.ufrpe.animal_clinic.negocio.negocioN.ControladorMedico;
+import br.ufrpe.animal_clinic.negocio.negocioN.ControladorUsuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +40,7 @@ public class Servico implements IServico{
 	private ControladorAnimal animal;
 	private ControladorConsulta consulta;
 	private ControladorProntuario prontuario;
+	private ControladorExame exame;
 	
 	private Servico() {
 		usuario = ControladorUsuario.getInstance();
@@ -43,6 +49,7 @@ public class Servico implements IServico{
 		animal = ControladorAnimal.getInstance();
 		consulta = ControladorConsulta.getInstance();
 		prontuario = ControladorProntuario.getInstance();
+		exame = ControladorExame.getInstance();
 	}
 	
 	public static Servico getInstancia() {
@@ -73,6 +80,10 @@ public class Servico implements IServico{
 	@Override
 	public void cadastrarConsulta(Consulta c) throws NullException, ExisteException, ElementoJaExisteException {
 		this.consulta.inserir(c);
+	}
+	
+	public void cadastrarExame(Exame e) throws NullException, ExisteException, ElementoJaExisteException {
+		this.exame.inserir(e);
 	}
 	
 	public List<Consulta> listat(){
@@ -279,8 +290,12 @@ public class Servico implements IServico{
 		return animal.procurarDono(login);
 	}
 
-	public Consulta procurarConsultaPorDataHora(LocalDate data, String hora) {
-		// TODO Auto-generated method stub
+	public Consulta procurarConsultaPorDataHora(LocalDate data, String hora) throws ElementoNaoExisteException {
+		return this.consulta.procurarPorDataHora(data, hora);
+	}
+	
+	public Exame procurarExamePorDataHora(LocalDate data, String hora) throws ElementoNaoExisteException {
+		this.exame.procurarPorDataHora(data, hora);
 		return null;
 	}
 	
