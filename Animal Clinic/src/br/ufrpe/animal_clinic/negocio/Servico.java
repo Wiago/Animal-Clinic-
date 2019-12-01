@@ -227,6 +227,10 @@ public class Servico implements IServico{
 		return consulta.listar();
 	}
 	
+	public List<Prontuario> getArrayProntuarios(){
+		return prontuario.listar();
+	}
+	
 	@Override
 	public void salvarDados() throws IOException{
 		try {	

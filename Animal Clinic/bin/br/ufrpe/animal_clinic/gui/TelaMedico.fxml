@@ -48,6 +48,7 @@
                           </columns>
                         </TableView>
                         <Button fx:id="btMarcarExame" layoutX="91.0" layoutY="332.0" mnemonicParsing="false" onAction="#marcarExame" text="Marcar Exame" />
+                        <Button fx:id="btAtualizarPacientes" layoutX="431.0" layoutY="332.0" mnemonicParsing="false" onAction="#atualizar" text="Atualizar" />
                      </children>
                   </AnchorPane>
             </content>

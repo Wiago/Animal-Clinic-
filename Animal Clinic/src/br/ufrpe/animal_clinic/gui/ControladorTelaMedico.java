@@ -89,6 +89,10 @@ public class ControladorTelaMedico implements Initializable{
     private Button btConsultar;
     
     @FXML
+    private Button btMarcarExame;
+
+    
+    @FXML
     private TextArea textRelatoConsulta;
     
     @FXML
@@ -102,6 +106,9 @@ public class ControladorTelaMedico implements Initializable{
     
     @FXML
     private Button btAtualizar;
+    
+    @FXML
+    private Button btAtualizarPacientes;
 
     @FXML
     void gerarProntuario(ActionEvent event) {
@@ -151,8 +158,8 @@ public class ControladorTelaMedico implements Initializable{
     @FXML
     void marcarExame(ActionEvent event) {
     	Animal animal = tabela.getSelectionModel().getSelectedItem();
-    	i.setNomeAnimal(animal.getNome());
-    	Main.trocaCena(6);
+    	gI.setNomeAnimal(animal.getNome());
+    	Main.trocaCena(7);
     	
     }
     @FXML
@@ -188,7 +195,12 @@ public class ControladorTelaMedico implements Initializable{
 			}
 		}
     	
-    	listaDeAnimais.addAll(s.getArrayAnimal());
+		for(Consulta a: gI.getConsultas()) {
+			if(a.getMedico().getLogin().equals(gI.getLogin())) {
+				listaDeAnimais.add(a.getAnimal());
+			}
+		}
+    	
   
     	System.out.println(s.getArrayConsultas());
     	

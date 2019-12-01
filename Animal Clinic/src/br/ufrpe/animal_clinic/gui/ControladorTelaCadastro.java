@@ -142,7 +142,7 @@ public class ControladorTelaCadastro implements Initializable{
     			break;
     		case 3:
     			try{
-    				i.CadastrarUsuario(nomeS, cpfS, senhaS, loginS, dataD);
+    				i.cadastrarUsuario(nomeS, cpfS, senhaS, loginS, dataD);
     			}catch(ElementoJaExisteException e) {
     				Alert alert = new Alert(AlertType.ERROR);
     	            alert.setTitle("Erro no Cadastro");

@@ -15,6 +15,7 @@ import br.ufrpe.animal_clinic.negocio.beans.Animal;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 import br.ufrpe.animal_clinic.negocio.beans.Exame;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
+import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
@@ -29,6 +30,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 public class ControladorTelaExame implements Initializable{
 	
@@ -37,8 +40,8 @@ public class ControladorTelaExame implements Initializable{
 	
 	private GetInformacao gI = GetInformacao.getInstancia();
 	
-	private List<Medico> listaMedicos = new ArrayList();
-	private ObservableListBase<Medico> listaOb;
+	private List<String> listaProntuarios = new ArrayList();
+	private ObservableListBase<String> listaOb;
 	
 	@FXML
     private TextField horaExame;
@@ -47,22 +50,22 @@ public class ControladorTelaExame implements Initializable{
     private Button btVoltar;
 
     @FXML
-    private TextArea relatorio;
+    private TextArea txtRelatorio;
     
     @FXML
-    private TextArea relatorioProntuario;
+    private Text relatorioProntuario;
 
     @FXML
     private Button btExame;
 
     @FXML
-    private TableColumn<Medico, String> prontuarios;
+    private TableColumn<Prontuario, String> prontuarios;
 
     @FXML
     private DatePicker dataExame;
 
     @FXML
-    private TableView<Medico> tabelaprontuario;
+    private TableView<String> tabelaprontuario;
     
     @FXML
     private Button btAtualizar;
@@ -78,7 +81,7 @@ public class ControladorTelaExame implements Initializable{
     		a = s.procurarAnimalPorNome(i.getNomeAnimal());
         	medico = s.procurarMedicoPorLogin(i.getLogin());
         	hora = horaExame.getText();
-        	descricao = relatorio.getText();
+        	descricao = txtRelatorio.getText();
     	}catch(ElementoNaoExisteException e) {
     		Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro na Marcacao");
@@ -96,22 +99,25 @@ public class ControladorTelaExame implements Initializable{
     	Main.trocaCena(3);
     }
     
-    /*public void preencherTabela(){
-    	prontuarios.setCellValueFactory(new PropertyValueFactory<>("prontuario"));
+    public void preencherTabela(){
+    	prontuarios.setCellValueFactory(new PropertyValueFactory<>("relatorio"));
     	
-    	for(Medico m: s.getArrayMedico()) {
-			if (listaMedicos.contains(m) == false) {
-	        	listaMedicos.add(m);
+    	for(Prontuario m: s.getArrayProntuarios()) {
+			if (listaProntuarios.contains(m.getRelatorio()) == false) {
+	        	if(m.getConsulta().getAnimal().getNome().equals(gI.getNomeAnimal())) {
+	        		listaProntuarios.add(m.getRelatorio());
+	        		relatorioProntuario.setText(m.getConsulta().getAnimal().getNome());
+	        	}
 	    	}
 		}
     	
-    	listaOb = (ObservableListBase<Medico>) FXCollections.observableArrayList(listaMedicos);
-    	tabelaMedico.setItems(listaOb);
-    }*/
+    	listaOb = (ObservableListBase<String>) FXCollections.observableArrayList(listaProntuarios);
+    	tabelaprontuario.setItems(listaOb);
+    }
     
     @FXML
     void atualizar(ActionEvent event) {
-    	//preencherTabela();
+    	preencherTabela();
     }
     
 	@Override

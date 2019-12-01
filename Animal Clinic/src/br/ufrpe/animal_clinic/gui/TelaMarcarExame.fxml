@@ -8,24 +8,24 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.animal_clinic.gui.ControladorTelaExame">
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="33.0" layoutY="351.0" mnemonicParsing="false" text="Voltar" />
-            <Button layoutX="269.0" layoutY="351.0" mnemonicParsing="false" text="Atualizar" />
+            <Button fx:id="btVoltar" layoutX="33.0" layoutY="351.0" mnemonicParsing="false" text="Voltar" />
+            <Button fx:id="btAtualizar" layoutX="269.0" layoutY="351.0" mnemonicParsing="false" onAction="#atualizar" text="Atualizar" />
             <TextArea layoutX="351.0" layoutY="45.0" prefHeight="200.0" prefWidth="200.0" promptText="Digite aqui observacoes do exame." />
             <DatePicker layoutX="349.0" layoutY="276.0" prefHeight="25.0" prefWidth="200.0" promptText="Data" />
             <TextField layoutX="375.0" layoutY="314.0" promptText="Hora" />
             <Button layoutX="423.0" layoutY="351.0" mnemonicParsing="false" text="Exame" />
-            <TableView layoutX="33.0" layoutY="45.0" prefHeight="149.0" prefWidth="298.0">
+            <TableView fx:id="colunaProntuario" layoutX="33.0" layoutY="45.0" prefHeight="149.0" prefWidth="298.0">
               <columns>
                 <TableColumn prefWidth="297.0" text="Prontuarios" />
               </columns>
             </TableView>
-            <TextArea layoutX="34.0" layoutY="200.0" prefHeight="130.0" prefWidth="297.0" promptText="Exibir relatorio" />
+            <Text fx:id="relatorioProntuario" layoutX="34.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="296.13671875" />
          </children>
       </Pane>
    </center>
