@@ -16,6 +16,7 @@ import br.ufrpe.animal_clinic.negocio.beans.Exame;
 import br.ufrpe.animal_clinic.negocio.beans.IServico;
 import br.ufrpe.animal_clinic.negocio.beans.Login;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
+import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class Servico implements IServico{
 	private ControladorAtendente atendente;
 	private ControladorAnimal animal;
 	private ControladorConsulta consulta;
+	private ControladorProntuario prontuario;
 	
 	private Servico() {
 		usuario = ControladorUsuario.getInstance();
@@ -40,6 +42,7 @@ public class Servico implements IServico{
 		atendente = ControladorAtendente.getInstance();
 		animal = ControladorAnimal.getInstance();
 		consulta = ControladorConsulta.getInstance();
+		prontuario = ControladorProntuario.getInstance();
 	}
 	
 	public static Servico getInstancia() {
@@ -81,7 +84,10 @@ public class Servico implements IServico{
 		//this.cirurgias.criarCirurgia(c);
 	}
 	
-
+	public void gerarProntuario(Prontuario p) throws ElementoJaExisteException {
+		this.prontuario.inserir(p);
+	}
+	
 	@Override
 	public void removerUsuario(Usuario u) throws NullException, ElementoNaoExisteException {
 		this.usuario.remover(u);

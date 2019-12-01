@@ -8,33 +8,31 @@ public class Prontuario implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Animal animal;
-	private Medico medico;
-	private Date data;
+	private Consulta consulta;
+	private String relatorio;
 	private String id;
 	static Id a = new Id();
 	
-	public Prontuario(Animal animal, Medico medico, Date data) {
-		this.animal = animal;
-		this.medico = medico;
-		this.data = data;
+	public Prontuario(Consulta consulta, String relatorio) {
+		this.consulta = consulta;
+		this.relatorio = relatorio;
 		this.setId();
 	}
-
-	public Date getData() {
-		return data;
+	
+	public Consulta getConsulta() {
+		return consulta;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setConsulta(Consulta consulta) {
+		this.consulta = consulta;
 	}
 
-	public Animal getAnimal() {
-		return animal;
+	public String getRelatorio() {
+		return relatorio;
 	}
 
-	public Medico getMedico() {
-		return medico;
+	public void setRelatorio(String relatorio) {
+		this.relatorio = relatorio;
 	}
 
 	public String getId() {
@@ -47,10 +45,10 @@ public class Prontuario implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Prontuário [Médico =(" + getMedico().getNome()+ ";" + getMedico().getEspecialidade() 
-				+ ")/ Data=(" + getData() + ")/ "
-				+ "Animal=" + getAnimal().getNome() + "/" + getAnimal().getTempoDeVida() + "/" +getAnimal().getEspecie() + "/" +getAnimal().getGenero() + "/" +getAnimal().getAlimentacao() + "/ Dono =(" +getAnimal().getDono().getNome() + ";" +getAnimal().getDono().getCpf() + ")" + "]\n\n";
+		return "Prontuário [Consulta =(" + getConsulta().getAnimal()+ ";" 
+										+ getConsulta().getMedico() + ";" 
+										+ getConsulta().getData() + ";" 
+										+ getConsulta().getHora()+")" 
+										+ ";" + getRelatorio(); 
 	}
-
-	
 }

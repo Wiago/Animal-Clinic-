@@ -10,7 +10,7 @@ import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 
 public class ControladorConsulta {
-	 private IRepositorioGenerico<Consulta> repositorioConsultas;
+	 	private IRepositorioGenerico<Consulta> repositorioConsultas;
 	    private static ControladorConsulta instance;
 	    
 	    private ControladorConsulta() {

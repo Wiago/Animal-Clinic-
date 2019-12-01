@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
 import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.Servico;
@@ -16,6 +17,7 @@ import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 import br.ufrpe.animal_clinic.negocio.beans.Especie;
 import br.ufrpe.animal_clinic.negocio.beans.Genero;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
+import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
 import br.ufrpe.animal_clinic.negocio.beans.TempoDeVida;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 import javafx.collections.FXCollections;
@@ -27,6 +29,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -37,6 +40,8 @@ public class ControladorTelaMedico implements Initializable{
 	private List<Animal> listaDeAnimais = new ArrayList();
     private List<Consulta> listaDeConsultas = new ArrayList();
     private List<Medico> listaDoMedico = new ArrayList();
+    private List<Consulta> listaDeProntuario = new ArrayList();
+    private ObservableListBase<Consulta> listaObsss;
     private ObservableListBase<Animal> listaOb;
     private ObservableListBase<Consulta> listaObs;
     private ObservableListBase<Medico> listaObss;
@@ -82,10 +87,38 @@ public class ControladorTelaMedico implements Initializable{
 
     @FXML
     private Button btConsultar;
-
+    
+    @FXML
+    private TextArea textRelatoConsulta;
+    
+    @FXML
+    private TableView<Consulta> tabelaProntuario;
+    
+    @FXML
+    private Button btProntuario;
+    
+    @FXML
+    private TableColumn<Consulta, Animal> colunaConsultas;
+    
     @FXML
     private Button btAtualizar;
 
+    @FXML
+    void gerarProntuario(ActionEvent event) {
+    	String relatorio = textRelatoConsulta.getText();
+    	Consulta consulta = tabelaProntuario.getSelectionModel().getSelectedItem();
+    	
+    	try {
+			gI.novoProntuario(consulta, relatorio);
+		} catch (ElementoJaExisteException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erro na geracao do Prontuario");
+            alert.setHeaderText("Informacoes ja existem.");
+            alert.setContentText("Tente novamente com um novo elemento.");
+            alert.showAndWait();
+		}
+    }
+    
     @FXML
     void voltar(ActionEvent event) {
     	Main.trocaCena(0);
@@ -96,6 +129,8 @@ public class ControladorTelaMedico implements Initializable{
     	Consulta consulta = tabelaConsultas.getSelectionModel().getSelectedItem();
     	listaDeConsultas.remove(consulta);
     	listaObs.remove(consulta);
+    	listaObsss.add(consulta);
+    	tabelaProntuario.setItems(listaObsss);
     	
     	try{
     		gI.removerConsulta(consulta);
@@ -127,6 +162,9 @@ public class ControladorTelaMedico implements Initializable{
     	colinaHorario.setCellValueFactory(new PropertyValueFactory<>("data"));
     	colunaNomeAnimal.setCellValueFactory(new PropertyValueFactory<>("Animal"));
     	
+    	colunaConsultas.setCellValueFactory(new PropertyValueFactory<>("Animal"));
+    	
+    	
     	String login = gI.getLogin();
 		Medico medico = s.procurarMedicoPorLogin(login);
 		
@@ -150,6 +188,7 @@ public class ControladorTelaMedico implements Initializable{
     	listaObs = (ObservableListBase<Consulta>) FXCollections.observableArrayList(listaDeConsultas);
     	listaOb = (ObservableListBase<Animal>) FXCollections.observableArrayList(listaDeAnimais);
     	listaObss = (ObservableListBase<Medico>) FXCollections.observableArrayList(listaDoMedico);
+    	listaObsss = (ObservableListBase<Consulta>) FXCollections.observableArrayList(listaDeProntuario);
     	
     	tabela.setItems(listaOb);
     	tabelaConsultas.setItems(listaObs);

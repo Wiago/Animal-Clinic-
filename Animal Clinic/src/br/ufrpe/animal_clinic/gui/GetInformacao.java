@@ -23,6 +23,7 @@ import br.ufrpe.animal_clinic.negocio.beans.Especie;
 import br.ufrpe.animal_clinic.negocio.beans.Genero;
 import br.ufrpe.animal_clinic.negocio.beans.Login;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
+import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
 import br.ufrpe.animal_clinic.negocio.beans.TempoDeVida;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 
@@ -77,6 +78,10 @@ public class GetInformacao {
 		s.salvarDados();
 	}
 	
+	public void novoProntuario(Consulta c, String s) throws ElementoJaExisteException {
+		Prontuario p = new Prontuario(c,s);
+		this.s.gerarProntuario(p);
+	}
 	
 	public void cadastrarAtendente(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException, ElementoJaExisteException, ElementoNaoExisteException {
 		Atendente a = new Atendente(nomeS, cpfS, senhaS, loginS, dataD);

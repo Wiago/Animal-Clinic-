@@ -70,10 +70,24 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Mensagens">
+            <Tab text="Prontuario">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tabelaProntuario" layoutX="41.0" layoutY="51.0" prefHeight="264.0" prefWidth="258.0">
+                          <columns>
+                            <TableColumn fx:id="colunaConsultas" prefWidth="257.0" text="Consultas" />
+                          </columns>
+                        </TableView>
+                        <TextArea fx:id="textRelatoConsulta" layoutX="331.0" layoutY="51.0" prefHeight="200.0" prefWidth="232.0" promptText="Relato da Consulta" />
+                        <Button fx:id="btProntuario" layoutX="382.0" layoutY="284.0" mnemonicParsing="false" onAction="#gerarProntuario" text="Gerar Prontuario" />
+                     </children></AnchorPane>
               </content>
+            </Tab>
+            <Tab text="Mensagens">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
             </Tab>
         </tabs>
       </TabPane>
