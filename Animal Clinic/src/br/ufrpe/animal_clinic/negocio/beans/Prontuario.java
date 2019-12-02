@@ -45,10 +45,10 @@ public class Prontuario implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Prontuário [Consulta =(" + getConsulta().getAnimal()+ ";" 
-										+ getConsulta().getMedico() + ";" 
-										+ getConsulta().getData() + ";" 
-										+ getConsulta().getHora()+")" 
-										+ ";" + getRelatorio(); 
+		return "Prontuário [Consulta =(" + this.getConsulta().getAnimal()+ ";" 
+										+ this.getConsulta().getMedico() + ";" 
+										+ this.getConsulta().getData() + ";" 
+										+ this.getConsulta().getHora()+")" 
+										+ ";" + this.getRelatorio()+ "]";
 	}
 }
