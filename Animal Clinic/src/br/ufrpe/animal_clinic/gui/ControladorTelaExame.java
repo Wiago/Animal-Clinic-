@@ -104,12 +104,14 @@ public class ControladorTelaExame implements Initializable{
     	
     	for(Prontuario m: s.getArrayProntuarios()) {
 			if (listaProntuarios.contains(m.getRelatorio()) == false) {
-	        	if(m.getConsulta().getAnimal().getNome().equals(gI.getNomeAnimal())) {
+	        	if(m.getConsulta().getAnimal().getNome().equals(gI.getNomeAnimal())){
 	        		listaProntuarios.add(m.getRelatorio());
 	        		relatorioProntuario.setText(m.getConsulta().getAnimal().getNome());
 	        	}
 	    	}
 		}
+    	
+    	System.out.println(s.getArrayProntuarios());
     	
     	listaOb = (ObservableListBase<String>) FXCollections.observableArrayList(listaProntuarios);
     	tabelaprontuario.setItems(listaOb);
