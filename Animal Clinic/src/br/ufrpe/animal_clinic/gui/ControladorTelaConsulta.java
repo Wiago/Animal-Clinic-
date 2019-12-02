@@ -1,5 +1,6 @@
 package br.ufrpe.animal_clinic.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class ControladorTelaConsulta implements Initializable {
     private Button btAtualizar;
 
     @FXML
-    void marcarConsulta(ActionEvent event) throws ElementoNaoExisteException, NullException, ExisteException, ElementoJaExisteException {
+    void marcarConsulta(ActionEvent event) throws ElementoNaoExisteException, NullException, ExisteException, ElementoJaExisteException, IOException {
     	Animal a = null;
     	Medico medico = null;
     	LocalDate data = null;
@@ -89,12 +90,13 @@ public class ControladorTelaConsulta implements Initializable {
     	}
     	data = dataConsulta.getValue();
     	Consulta c = new Consulta(a, medico, data, hora, descricao);
-    	s.cadastrarConsulta(c);
+    	s.solicitarConsulta(c);
+    	s.salvarDados();
     }
 
     @FXML
     void voltar(ActionEvent event) {
-    	Main.trocaCena(5);
+    	Main.trocaCena(4);
     }
     
     public void preencherTabela(){

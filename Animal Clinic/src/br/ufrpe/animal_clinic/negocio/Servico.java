@@ -2,11 +2,11 @@ package br.ufrpe.animal_clinic.negocio;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import br.ufrpe.animal_clinic.exception.ElementoJaExisteException;
 import br.ufrpe.animal_clinic.exception.ElementoNaoExisteException;
 import br.ufrpe.animal_clinic.exception.ExisteException;
-import br.ufrpe.animal_clinic.exception.NotFoundException;
 import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.beans.Animal;
 import br.ufrpe.animal_clinic.negocio.beans.Atendente;
@@ -14,18 +14,9 @@ import br.ufrpe.animal_clinic.negocio.beans.Cirurgia;
 import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 import br.ufrpe.animal_clinic.negocio.beans.Exame;
 import br.ufrpe.animal_clinic.negocio.beans.IServico;
-import br.ufrpe.animal_clinic.negocio.beans.Login;
 import br.ufrpe.animal_clinic.negocio.beans.Medico;
 import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorAnimal;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorAtendente;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorExame;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorMedico;
-import br.ufrpe.animal_clinic.negocio.negocioN.ControladorUsuario;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 
@@ -41,6 +32,8 @@ public class Servico implements IServico{
 	private ControladorConsulta consulta;
 	private ControladorProntuario prontuario;
 	private ControladorExame exame;
+	private ControladorSolicitarConsulta consultaS;
+	private ControladorSolicitarExame exameS;
 	
 	private Servico() {
 		usuario = ControladorUsuario.getInstance();
@@ -50,6 +43,8 @@ public class Servico implements IServico{
 		consulta = ControladorConsulta.getInstance();
 		prontuario = ControladorProntuario.getInstance();
 		exame = ControladorExame.getInstance();
+		consultaS = ControladorSolicitarConsulta.getInstance();
+		exameS = ControladorSolicitarExame.getInstance();
 	}
 	
 	public static Servico getInstancia() {
@@ -76,7 +71,11 @@ public class Servico implements IServico{
 	public void cadastrarAnimal(Animal a) throws ElementoJaExisteException {
 		this.animal.inserir(a);
 	}
-
+	
+	public void solicitarConsulta(Consulta c) throws NullException, ExisteException, ElementoJaExisteException {
+		this.consultaS.inserir(c);
+	}
+	
 	@Override
 	public void cadastrarConsulta(Consulta c) throws NullException, ExisteException, ElementoJaExisteException {
 		this.consulta.inserir(c);
@@ -88,6 +87,10 @@ public class Servico implements IServico{
 	
 	public List<Consulta> listat(){
 		return this.consulta.listar();
+	}
+	
+	public List<Consulta> listar(){
+		return this.consultaS.listar();
 	}
 
 	@Override
@@ -240,6 +243,9 @@ public class Servico implements IServico{
 			this.atendente = ControladorAtendente.getInstance();
 			this.medico = ControladorMedico.getInstance();
 			this.usuario = ControladorUsuario.getInstance();
+			this.consulta = ControladorConsulta.getInstance();
+			this.consultaS = ControladorSolicitarConsulta.getInstance();
+			this.exameS = ControladorSolicitarExame.getInstance();
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block

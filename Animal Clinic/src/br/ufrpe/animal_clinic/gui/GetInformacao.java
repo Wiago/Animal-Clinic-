@@ -84,6 +84,10 @@ public class GetInformacao {
 		this.s.gerarProntuario(p);
 	}
 	
+	public List<Consulta> getListaDeSConsultas(){
+		return s.listar();
+	}
+	
 	public void cadastrarAtendente(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException, ElementoJaExisteException, ElementoNaoExisteException {
 		Atendente a = new Atendente(nomeS, cpfS, senhaS, loginS, dataD);
 		List<Atendente> b = s.getArrayAtendente();
@@ -130,6 +134,11 @@ public class GetInformacao {
 		Consulta p = s.procurarConsultaPorDataHora(data, hora);
 		s.cadastrarConsulta(c);
 	}
+	
+	public void cadastrarConsulta(Consulta c) throws NullException, ExisteException, ElementoJaExisteException {
+		s.cadastrarConsulta(c);
+	}
+	
 	public void cadastrarExame(Animal animal, Medico medico, LocalDate data, String hora, String relatorio) throws NullException, ExisteException, ElementoJaExisteException, ElementoNaoExisteException {
 		Exame c = new Exame(animal, medico, data, hora);
 		Exame p = s.procurarExamePorDataHora(data, hora);

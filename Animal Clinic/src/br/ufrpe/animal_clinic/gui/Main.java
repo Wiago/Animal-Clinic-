@@ -18,6 +18,7 @@ public class Main extends Application implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private static ArrayList<Scene> cenas = new ArrayList<Scene>();
+	private static GetInformacao i = GetInformacao.getInstancia();
     private static Stage stage;
 	
 	public void criaCena(String doc) throws Exception {
@@ -42,6 +43,7 @@ public class Main extends Application implements Serializable{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		i.carregarDados();
 		stage = primaryStage;
 		criaCena("TelaLogin.fxml");            //0
 		criaCena("TelaCadastro.fxml");         //1     

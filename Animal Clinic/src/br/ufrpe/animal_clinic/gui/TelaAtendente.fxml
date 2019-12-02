@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -10,7 +14,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.animal_clinic.gui.ControladorTelaAtendente">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.animal_clinic.gui.ControladorTelaAtendente">
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -31,16 +35,54 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tabela" editable = "true" layoutX="11.0" layoutY="22.0" prefHeight="277.0" prefWidth="580.0">
+                        <TableView fx:id="tabela" editable="true" layoutX="12.0" layoutY="14.0" prefHeight="158.0" prefWidth="286.0">
                           <columns>
-                            <TableColumn fx:id="colunaNome" prefWidth="122.0" text="Nome" />
-                            <TableColumn fx:id="colunaCPF" prefWidth="111.0" text="CPF" />
-                              <TableColumn fx:id="colunaEAnimal" prefWidth="131.0" text="EspecieAnimal" />
+                            <TableColumn fx:id="colunaNome" prefWidth="86.0" text="Nome" />
+                            <TableColumn fx:id="colunaCPF" prefWidth="105.0" text="Dono" />
+                              <TableColumn fx:id="colunaEAnimal" prefWidth="94.0" text="Especie" />
                           </columns>
+                        </TableView>
+                        <TableView fx:id="tabelaUsuarios" layoutX="314.0" layoutY="14.0" prefHeight="159.0" prefWidth="270.0">
+                          <columns>
+                            <TableColumn fx:id="colunaNomeU" prefWidth="75.0" text="Nome" />
+                            <TableColumn fx:id="colunaCpU" prefWidth="110.0" text="CPF" />
+                              <TableColumn fx:id="colunaLoginU" prefWidth="73.0" text="Login" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="tabelaMedicos" layoutX="136.0" layoutY="181.0" prefHeight="173.0" prefWidth="329.0">
+                           <columns>
+                              <TableColumn fx:id="coluaNomeM" prefWidth="75.0" text="Nome" />
+                              <TableColumn fx:id="colunaCpfM" prefWidth="75.0" text="CPF" />
+                              <TableColumn fx:id="colunaLoginM" prefWidth="75.0" text="Login" />
+                              <TableColumn fx:id="colunaEspecialidadeM" prefWidth="103.0" text="Especialidade" />
+                           </columns>
                         </TableView>
                      </children></AnchorPane>
             </content>
           </Tab>
+            <Tab text="Solicitações">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tabelaConsulta" layoutX="26.0" layoutY="27.0" prefHeight="244.0" prefWidth="229.0">
+                          <columns>
+                            <TableColumn fx:id="colunaConsultaA" prefWidth="75.0" text="Animal" />
+                            <TableColumn fx:id="colunaDataC" prefWidth="75.0" text="Data" />
+                              <TableColumn fx:id="colunaMedicoC" prefWidth="75.0" text="Medico" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="tabelaExame" layoutX="339.0" layoutY="27.0" prefHeight="244.0" prefWidth="229.0">
+                           <columns>
+                              <TableColumn fx:id="colunaConsultaE" prefWidth="75.0" text="Consulta" />
+                              <TableColumn fx:id="colunaDataE" prefWidth="75.0" text="Data" />
+                              <TableColumn fx:id="colunaMedicoE" prefWidth="75.0" text="Medico" />
+                           </columns>
+                        </TableView>
+                        <Button fx:id="btMarcar" layoutX="267.0" layoutY="296.0" mnemonicParsing="false" onAction="#marcar" text="Marcar" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
    </center>
