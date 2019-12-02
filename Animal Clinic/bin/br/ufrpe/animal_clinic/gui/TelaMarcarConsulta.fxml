@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.animal_clinic.gui.ControladorTelaConsulta">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.animal_clinic.gui.ControladorTelaConsulta">
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btConsulta" layoutX="415.0" layoutY="346.0" mnemonicParsing="false" onAction="#marcarConsulta" text="Marcar Consulta " />
+            <Button fx:id="btConsulta" layoutX="452.0" layoutY="346.0" mnemonicParsing="false" onAction="#marcarConsulta" text="Consulta" />
             <DatePicker fx:id="dataConsulta" layoutX="359.0" layoutY="296.0" promptText="Data da Consulta" />
             <TextField fx:id="horaConsulta" layoutX="359.0" layoutY="253.0" promptText="Hora" />
             <Button fx:id="btVoltar" layoutX="72.0" layoutY="346.0" mnemonicParsing="false" onAction="#voltar" text="Voltar" />

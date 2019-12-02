@@ -62,7 +62,6 @@ public class ControladorTelaLogin implements Initializable{
 			case '1':
 				try{
 					Atendente a = s.procurarAtendentePorLogin(loginS);
-					i.setLogin(loginS);
 					Main.trocaCena(2);
 				}catch (ElementoNaoExisteException e) {
 					Alert alert = new Alert(AlertType.ERROR);

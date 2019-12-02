@@ -88,6 +88,14 @@ public class GetInformacao {
 		return s.listar();
 	}
 	
+	public List<Exame> getListaSExame(){
+		return s.listarE();
+	}
+	
+	public void cadastrarExame (Exame e) throws NullException, ExisteException, ElementoJaExisteException {
+		s.cadastrarExame(e);
+	}
+	
 	public void cadastrarAtendente(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException, ElementoJaExisteException, ElementoNaoExisteException {
 		Atendente a = new Atendente(nomeS, cpfS, senhaS, loginS, dataD);
 		List<Atendente> b = s.getArrayAtendente();

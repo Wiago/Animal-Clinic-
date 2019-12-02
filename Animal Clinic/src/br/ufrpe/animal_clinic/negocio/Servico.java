@@ -93,6 +93,10 @@ public class Servico implements IServico{
 		return this.consultaS.listar();
 	}
 
+	public List<Exame> listarE(){
+		return this.exameS.listar();
+	}
+	
 	@Override
 	public void cadastrarCirurgia(Cirurgia c) throws NullException, ExisteException {
 		//this.cirurgias.criarCirurgia(c);

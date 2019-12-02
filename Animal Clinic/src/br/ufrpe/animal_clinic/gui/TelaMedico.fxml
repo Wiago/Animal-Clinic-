@@ -63,7 +63,7 @@
                             <TableColumn fx:id="colinaHorario" prefWidth="167.0" text="Horario" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btConsultar" layoutX="425.0" layoutY="166.0" mnemonicParsing="false" onAction="#consultar" text="Realizar Consulta" />
+                        <Button fx:id="btConsultar" layoutX="419.0" layoutY="163.0" mnemonicParsing="false" onAction="#consultar" text="Realizar Consulta" />
                         <Button fx:id="btAtualizar" layoutX="447.0" layoutY="286.0" mnemonicParsing="false" onAction="#atualizar" text="Atualizar" />
                      </children>
                   </AnchorPane>
@@ -79,7 +79,7 @@
                           </columns>
                         </TableView>
                         <TextArea fx:id="textRelatoConsulta" layoutX="331.0" layoutY="51.0" prefHeight="200.0" prefWidth="232.0" promptText="Relato da Consulta" />
-                        <Button fx:id="btProntuario" layoutX="395.0" layoutY="290.0" mnemonicParsing="false" onAction="#gerarProntuario" text="Gerar Prontuario" />
+                        <Button fx:id="btProntuario" layoutX="382.0" layoutY="284.0" mnemonicParsing="false" onAction="#gerarProntuario" text="Gerar Prontuario" />
                      </children></AnchorPane>
               </content>
             </Tab>

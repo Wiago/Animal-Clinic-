@@ -38,7 +38,10 @@ public class ControladorTelaAtendente implements Initializable{
 	
 	@FXML
     private Button voltar;
-
+	
+	@FXML
+	private Button marcarExame;
+	
     @FXML
     private TableView<Animal> tabela;
 
@@ -78,7 +81,6 @@ public class ControladorTelaAtendente implements Initializable{
     @FXML
     private TableColumn<Usuario, String> colunaCpU;
 
-
     @FXML
     private TableColumn<Consulta, Date> colunaDataC;
 
@@ -103,6 +105,22 @@ public class ControladorTelaAtendente implements Initializable{
     @FXML
     private TableColumn<Exame, Consulta> colunaMedicoE;
 
+    @FXML
+    void marcarExame(ActionEvent event) throws NullException, ExisteException {
+    	Exame exame = null;
+		
+    	try{
+    		exame = tabelaExame.getSelectionModel().getSelectedItem();
+    		System.out.println(exame);
+    		gI.cadastrarExame(exame);
+    	}catch (ElementoJaExisteException e) {
+			Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erro na Marcacao");
+            alert.setHeaderText("Informacoes ja existem.");
+            alert.setContentText("Tente outro Exame.");
+            alert.showAndWait();
+		}
+    }
         
     @FXML
     void voltar(ActionEvent event) {
@@ -138,11 +156,15 @@ public class ControladorTelaAtendente implements Initializable{
     	colunaMedicoC.setCellValueFactory(new PropertyValueFactory<>("medico"));
     	colunaConsultaA.setCellValueFactory(new PropertyValueFactory<>("animal"));
     	
+    	colunaConsultaE.setCellValueFactory(new PropertyValueFactory<>("consuta"));
+    	colunaEAnimal.setCellValueFactory(new PropertyValueFactory<>("animal"));
+    	colunaDataE.setCellValueFactory(new PropertyValueFactory<>("data"));
+    	
+    	listaDeSExame.addAll(gI.getListaSExame());
     	listaDeSConsuta.addAll(gI.getListaDeSConsultas());
     	listaDeAnimais.addAll(gI.getDadosAnimais());
     	listaDeMedicos.addAll(gI.getDadosMedicos());
     	listaDeUsuarios.addAll(gI.getDadosUsuarios());
-    	
     	
     	listaObSC = (ObservableListBase<Consulta>) FXCollections.observableArrayList(listaDeSConsuta);
     	tabelaConsulta.setItems(listaObSC);
@@ -155,6 +177,10 @@ public class ControladorTelaAtendente implements Initializable{
     	
     	listaObM = (ObservableListBase<Medico>) FXCollections.observableArrayList(listaDeMedicos);
     	tabelaMedicos.setItems(listaObM);
+    	
+    	listaDeSExame = (ObservableListBase<Exame>) FXCollections.observableArrayList(listaDeSExame);
+    	tabelaExame.setItems(listaObSE);
+    	
     }
     
     public void animalSelecionado(Animal animal) {

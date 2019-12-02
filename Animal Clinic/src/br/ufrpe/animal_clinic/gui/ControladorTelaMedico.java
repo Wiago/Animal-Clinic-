@@ -111,41 +111,22 @@ public class ControladorTelaMedico implements Initializable{
     private Button btAtualizarPacientes;
 
     @FXML
-    void gerarProntuario(ActionEvent event) throws ElementoNaoExisteException {
+    void gerarProntuario(ActionEvent event) {
     	String relatorio = textRelatoConsulta.getText();
     	Consulta consulta = tabelaProntuario.getSelectionModel().getSelectedItem();
-    	boolean confirm = false;
     	
     	try {
 			gI.novoProntuario(consulta, relatorio);
+			((List<Animal>) tabelaProntuario).remove(consulta);
+			listaDeProntuario.remove(consulta);
+			Main.trocaCena(7);
 		} catch (ElementoJaExisteException e) {
-			confirm = true;
 			Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro na geracao do Prontuario");
             alert.setHeaderText("Informacoes ja existem.");
             alert.setContentText("Tente novamente com um novo elemento.");
             alert.showAndWait();
 		}
-    	
-    	if(confirm == false && consulta != null) {
-    		try{
-        		gI.removerConsulta(consulta);
-        	}catch (NullException e) {
-        		Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Erro na Remocao da Consulta");
-                alert.setHeaderText("Informacoes nao existem.");
-                alert.setContentText("Tente uma nova consulta.");
-                alert.showAndWait();
-    		}
-    	}
-    	else if(consulta == null) {
-    		Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Erro na Remocao da Consulta");
-            alert.setHeaderText("Selecao invalida.");
-            alert.setContentText("Tente clicar em uma consulta valida.");
-            alert.showAndWait();
-    	}
-    	System.out.println(s.getArrayProntuarios());
     }
     
     @FXML
@@ -161,10 +142,15 @@ public class ControladorTelaMedico implements Initializable{
     	listaObsss.add(consulta);
     	tabelaProntuario.setItems(listaObsss);
     	
-    	Alert alert = new Alert(AlertType.WARNING);
-    	alert.setTitle("Gerar Prontuario!");
-        alert.setContentText("Gere o prontuario para encerrar a consulta (Proxima pagina).");
-        alert.showAndWait();
+    	try{
+    		gI.removerConsulta(consulta);
+    	}catch (NullException e) {
+    		Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erro na Remocao");
+            alert.setHeaderText("Informacoes nao existem.");
+            alert.setContentText("Tente uma nova consulta.");
+            alert.showAndWait();
+		}
     }
     
     @FXML
@@ -212,11 +198,9 @@ public class ControladorTelaMedico implements Initializable{
 			}
 		}
     	
-		for(Consulta a: s.getArrayConsultas()) {
+		for(Consulta a: gI.getConsultas()) {
 			if(a.getMedico().getLogin().equals(gI.getLogin())) {
-				if (listaDeAnimais.contains(a) == false) {
-					listaDeAnimais.add(a.getAnimal());
-				}
+				listaDeAnimais.add(a.getAnimal());
 			}
 		}
     	
