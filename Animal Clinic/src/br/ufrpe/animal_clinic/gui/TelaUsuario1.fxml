@@ -60,9 +60,18 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Mensagens">
+            <Tab text="Prontuarios Dos Pets">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tabelaProntuario" layoutX="19.0" layoutY="42.0" prefHeight="253.0" prefWidth="559.0">
+                          <columns>
+                            <TableColumn fx:id="colunaNomeAnimal" prefWidth="175.0" text="Animal" />
+                            <TableColumn fx:id="colunaRelatoMedico" prefWidth="379.0" text="Paricer Do Medico" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="btAtualizar" layoutX="74.0" layoutY="306.0" mnemonicParsing="false" onAction="#atualizarT" text="Atualizar" />
+                     </children></AnchorPane>
                </content>
             </Tab>
         </tabs>

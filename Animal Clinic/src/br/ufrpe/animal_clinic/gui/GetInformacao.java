@@ -96,6 +96,10 @@ public class GetInformacao {
 		s.cadastrarExame(e);
 	}
 	
+	public List<Prontuario> getProntuarios(){
+		return s.getArrayProntuarios();
+	}
+	
 	public void cadastrarAtendente(String nomeS, String cpfS, String senhaS, String loginS, Date dataD) throws ExisteException, NullException, ElementoJaExisteException, ElementoNaoExisteException {
 		Atendente a = new Atendente(nomeS, cpfS, senhaS, loginS, dataD);
 		List<Atendente> b = s.getArrayAtendente();

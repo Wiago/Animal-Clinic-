@@ -11,8 +11,10 @@ import br.ufrpe.animal_clinic.exception.NullException;
 import br.ufrpe.animal_clinic.negocio.Servico;
 import br.ufrpe.animal_clinic.negocio.beans.Alimentacao;
 import br.ufrpe.animal_clinic.negocio.beans.Animal;
+import br.ufrpe.animal_clinic.negocio.beans.Consulta;
 import br.ufrpe.animal_clinic.negocio.beans.Especie;
 import br.ufrpe.animal_clinic.negocio.beans.Genero;
+import br.ufrpe.animal_clinic.negocio.beans.Prontuario;
 import br.ufrpe.animal_clinic.negocio.beans.TempoDeVida;
 import br.ufrpe.animal_clinic.negocio.beans.Usuario;
 import javafx.collections.FXCollections;
@@ -81,17 +83,48 @@ public class ControladorTelaUsuario implements Initializable {
     @FXML
     private Button btAtualizaU;
     
+    @FXML
+    private Button btAtualizar;
+    
+    @FXML
+    private TableView<Prontuario> tabelaProntuario;
+
+    @FXML
+    private TableColumn<Prontuario, String> colunaRelatoMedico;
+
+
+    @FXML
+    private TableColumn<Prontuario, Consulta> colunaNomeAnimal;
+
     
     public void voltar() {
     	Main.trocaCena(0);
     }
     
     private List<Animal> listaDeAnimais = new ArrayList();
-
+    private List<Prontuario> listaDeProntuarios = new ArrayList();
     private List<Usuario> listaDeUsuario = new ArrayList();
     
+    private ObservableListBase<Prontuario> listaObP;
     private ObservableListBase<Animal> listaOb;
     private ObservableListBase<Usuario> listaObs;
+    
+    public void atualizarT() throws NullException, ElementoNaoExisteException {
+    	String login = i.getLogin();
+		Usuario dono = s.procurarUsuarioPorLogin(login);
+    	
+    	for(Prontuario p: i.getProntuarios()) {
+			if(p.getConsulta().getAnimal().getDono().getId().equals(dono.getId())) {
+				if(listaDeProntuarios.contains(p)==false) {
+					listaDeProntuarios.add(p);
+				}
+			}
+		}
+		
+		listaObP = (ObservableListBase<Prontuario>) FXCollections.observableArrayList(listaDeProntuarios);
+    	tabelaProntuario.setItems(listaObP);
+    	
+    }
     
     public void preencherTabela() throws NullException, ElementoNaoExisteException {
     	colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -104,6 +137,9 @@ public class ControladorTelaUsuario implements Initializable {
     	colunaLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
     	colunaData.setCellValueFactory(new PropertyValueFactory<>("data"));
     	
+    	colunaRelatoMedico.setCellValueFactory(new PropertyValueFactory<>("relatorio"));
+    	colunaNomeAnimal.setCellValueFactory(new PropertyValueFactory<>("consulta"));
+
     	String login = i.getLogin();
 		Usuario dono = s.procurarUsuarioPorLogin(login);
 		
@@ -115,7 +151,7 @@ public class ControladorTelaUsuario implements Initializable {
 			}
 		}
 		
-    	
+		
 		if(listaDeUsuario.contains(dono) == false) {
 	    	listaDeUsuario.add(dono);
 		}
@@ -156,8 +192,17 @@ public class ControladorTelaUsuario implements Initializable {
     @FXML
     void solicitarMarcar(ActionEvent event) {
     	Animal animal = tabela.getSelectionModel().getSelectedItem();
-    	i.setNomeAnimal(animal.getNome());
-    	Main.trocaCena(6);
+    	try{
+    		i.setNomeAnimal(animal.getNome());
+    		Main.trocaCena(6);
+    	}catch (NullPointerException e) {
+    		Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erro na Marcacao");
+            alert.setHeaderText("Informacoes nao existem.");
+            alert.setContentText("Tente um novo animal.");
+            alert.showAndWait();
+		}
+    	
     	
     }
     
@@ -168,6 +213,6 @@ public class ControladorTelaUsuario implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//tabela.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> animalSelecionado(newValue));
+		
 	}
 }

@@ -117,9 +117,10 @@ public class ControladorTelaMedico implements Initializable{
     	
     	try {
 			gI.novoProntuario(consulta, relatorio);
-			((List<Animal>) tabelaProntuario).remove(consulta);
-			listaDeProntuario.remove(consulta);
 			Main.trocaCena(7);
+			listaDeProntuario.remove(consulta);
+			tabelaProntuario.setItems(listaObsss);
+			
 		} catch (ElementoJaExisteException e) {
 			Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro na geracao do Prontuario");
