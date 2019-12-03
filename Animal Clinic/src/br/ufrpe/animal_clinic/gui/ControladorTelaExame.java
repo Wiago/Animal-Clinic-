@@ -59,13 +59,13 @@ public class ControladorTelaExame implements Initializable{
     private Button btExame;
 
     @FXML
-    private TableColumn<Prontuario, String> prontuarios;
+    private Text nomeAnimal;
+
+    @FXML
+    private Text prontuarioRelatorio;
 
     @FXML
     private DatePicker dataExame;
-
-    @FXML
-    private TableView<String> tabelaprontuario;
     
     @FXML
     private Button btAtualizar;
@@ -77,12 +77,14 @@ public class ControladorTelaExame implements Initializable{
     	LocalDate data = null;
     	String hora = null;
     	String descricao = null;
+    	boolean exameBool = false;
     	try {
     		a = s.procurarAnimalPorNome(i.getNomeAnimal());
         	medico = s.procurarMedicoPorLogin(i.getLogin());
         	hora = horaExame.getText();
         	descricao = txtRelatorio.getText();
     	}catch(ElementoNaoExisteException e) {
+    		exameBool = true;
     		Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro na Marcacao");
             alert.setHeaderText("Informacoes nao existem.");
@@ -91,7 +93,13 @@ public class ControladorTelaExame implements Initializable{
     	}
     	data = dataExame.getValue();
     	Exame e = new Exame(a, medico, data, hora);
-    	s.cadastrarExame(e);
+    	if(exameBool = false) {
+    		s.cadastrarExame(e);
+    		Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Exame Marcado");
+            alert.setContentText("Exame marcado com sucesso.");
+            alert.showAndWait();
+    	}
     }
 
     @FXML
@@ -99,25 +107,20 @@ public class ControladorTelaExame implements Initializable{
     	Main.trocaCena(3);
     }
     
-    public void preencherTabela(){
-    	prontuarios.setCellValueFactory(new PropertyValueFactory<>("relatorio"));
-    	
-    	for(Prontuario m: s.getArrayProntuarios()) {
-			if (listaProntuarios.contains(m.getRelatorio()) == false) {
-	        	if(m.getConsulta().getAnimal().getNome().equals(gI.getNomeAnimal())) {
-	        		listaProntuarios.add(m.getRelatorio());
-	        		relatorioProntuario.setText(m.getConsulta().getAnimal().getNome());
+    public void preencherDados(){
+    	List<Prontuario> prontuarios = s.getArrayProntuarios();
+    	for(Prontuario m: prontuarios) {
+	        	if(m.getNomeAnimal().equals(gI.getNomeAnimal())) {
+	        		nomeAnimal.setText(gI.getNomeAnimal());
+	        		prontuarioRelatorio.setText(m.getRelatorio());
 	        	}
-	    	}
 		}
-    	
-    	listaOb = (ObservableListBase<String>) FXCollections.observableArrayList(listaProntuarios);
-    	tabelaprontuario.setItems(listaOb);
+
     }
     
     @FXML
     void atualizar(ActionEvent event) {
-    	preencherTabela();
+    	preencherDados();
     }
     
 	@Override

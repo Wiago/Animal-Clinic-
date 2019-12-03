@@ -76,12 +76,14 @@ public class ControladorTelaConsulta implements Initializable {
     	LocalDate data = null;
     	String hora = null;
     	String descricao = null;
+    	boolean conBool = false;
     	try {
     		a = s.procurarAnimalPorNome(i.getNomeAnimal());
         	medico = tabelaMedico.getSelectionModel().getSelectedItem();
         	hora = horaConsulta.getText();
         	descricao = relatoSintomas.getText();
     	}catch(ElementoNaoExisteException e) {
+    		conBool = true;
     		Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro na Marcacao");
             alert.setHeaderText("Informacoes nao existem.");
@@ -89,9 +91,20 @@ public class ControladorTelaConsulta implements Initializable {
             alert.showAndWait();
     	}
     	data = dataConsulta.getValue();
-    	Consulta c = new Consulta(a, medico, data, hora, descricao);
-    	s.solicitarConsulta(c);
-    	s.salvarDados();
+    	
+    	if(conBool == false) {
+	    	Consulta c = new Consulta(a, medico, data, hora, descricao);
+	    	s.solicitarConsulta(c);
+	    	
+	    	Alert alert = new Alert(AlertType.INFORMATION);
+	        alert.setTitle("Solicitacao de Consulta");
+	        alert.setHeaderText("Consulta Solicitada");
+	        alert.setContentText("Sua consulta será marcada em breve.");
+	        alert.showAndWait();
+	    	
+	    	s.salvarDados();
+    	}
+    	
     }
 
     @FXML

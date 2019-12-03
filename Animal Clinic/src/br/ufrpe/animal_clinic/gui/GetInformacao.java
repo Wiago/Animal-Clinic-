@@ -79,8 +79,8 @@ public class GetInformacao {
 		s.salvarDados();
 	}
 	
-	public void novoProntuario(Consulta c, String s) throws ElementoJaExisteException {
-		Prontuario p = new Prontuario(c,s);
+	public void novoProntuario(Consulta c, String s, String nA) throws ElementoJaExisteException {
+		Prontuario p = new Prontuario(c, s, nA);
 		this.s.gerarProntuario(p);
 	}
 	

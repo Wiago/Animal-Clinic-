@@ -116,10 +116,10 @@ public class ControladorTelaMedico implements Initializable{
     	Consulta consulta = tabelaProntuario.getSelectionModel().getSelectedItem();
     	
     	try {
-			gI.novoProntuario(consulta, relatorio);
+			gI.novoProntuario(consulta, relatorio, gI.getNomeAnimal());
+			gI.setNomeAnimal(consulta.getAnimal().getNome());
 			Main.trocaCena(7);
 			listaDeProntuario.remove(consulta);
-			tabelaProntuario.setItems(listaObsss);
 			
 		} catch (ElementoJaExisteException e) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -138,6 +138,7 @@ public class ControladorTelaMedico implements Initializable{
     @FXML
     void consultar(ActionEvent event) throws NullException, ElementoNaoExisteException {
     	Consulta consulta = tabelaConsultas.getSelectionModel().getSelectedItem();
+    	boolean conBool = false;
     	listaDeConsultas.remove(consulta);
     	listaObs.remove(consulta);
     	listaObsss.add(consulta);
@@ -146,12 +147,19 @@ public class ControladorTelaMedico implements Initializable{
     	try{
     		gI.removerConsulta(consulta);
     	}catch (NullException e) {
+    		conBool = true;
     		Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro na Remocao");
             alert.setHeaderText("Informacoes nao existem.");
             alert.setContentText("Tente uma nova consulta.");
             alert.showAndWait();
 		}
+    	if(conBool == false) {
+    		Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Animal Consultado.");
+            alert.setContentText("Por favor, prossiga para a tela seguinte para gerar um prontuario.");
+            alert.showAndWait();
+    	}
     }
     
     @FXML

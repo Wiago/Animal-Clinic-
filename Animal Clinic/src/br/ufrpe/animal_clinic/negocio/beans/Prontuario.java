@@ -10,15 +10,29 @@ public class Prontuario implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Consulta consulta;
 	private String relatorio;
+	private String nomeAnimal;
 	private String id;
 	//static Id a = new Id();
 	
-	public Prontuario(Consulta consulta, String relatorio) {
+	public Prontuario(Consulta consulta, String relatorio, String nomeAnimal) {
 		this.consulta = consulta;
 		this.relatorio = relatorio;
+		this.nomeAnimal = nomeAnimal;
 		this.setId();
 	}
-	
+
+	public String getNomeAnimal() {
+		return nomeAnimal;
+	}
+
+
+
+	public void setNomeAnimal(String nomeAnimal) {
+		this.nomeAnimal = nomeAnimal;
+	}
+
+
+
 	public Consulta getConsulta() {
 		return consulta;
 	}

@@ -87,6 +87,7 @@ public class ControladorTelaCadastro implements Initializable{
     	String dataS = data.getText();
     	Date dataD = null;
     	boolean loginB = false;
+    	boolean loginB1 = false;
     	String idTeste = null;
     	try {
     		dataD = f.parse(dataS);
@@ -132,23 +133,36 @@ public class ControladorTelaCadastro implements Initializable{
 	    			try {
 	    				i.cadastrarAtendente(nomeS, cpfS, senhaS, loginS, dataD);
 	    			}catch (ElementoJaExisteException e) {
+	    				loginB1 = true;
 	    				Alert alert = new Alert(AlertType.ERROR);
 	    	            alert.setTitle("Erro no Cadastro");
 	    	            alert.setHeaderText("Informacoes ja existem.");
 	    	            alert.setContentText("Tente um novo login.");
 	    	            alert.showAndWait();
 					}
-	    			
+	    			if(loginB1 == false) {
+	    				Alert alert = new Alert(AlertType.INFORMATION);
+	    	            alert.setTitle("Atendente cadastrado(a)");
+	    	            alert.setContentText("Pode-se fazer o login com o(a) novo(a) Atendente.");
+	    	            alert.showAndWait();
+	    			}
 	    			i.salvar();
 	    			break;
 	    		case 2:
 	    			try{
 	    				i.cadastrarMedico(nomeS, cpfS, senhaS, loginS, dataD, esp);
 	    			}catch(ElementoJaExisteException e){
+	    				loginB1 = true;
 	    				Alert alert = new Alert(AlertType.ERROR);
 	    	            alert.setTitle("Erro no Cadastro");
 	    	            alert.setHeaderText("Informacoes ja existem.");
 	    	            alert.setContentText("Tente um novo login.");
+	    	            alert.showAndWait();
+	    			}
+	    			if(loginB1 == false) {
+	    				Alert alert = new Alert(AlertType.INFORMATION);
+	    	            alert.setTitle("Medico(a) cadastrado(a)");
+	    	            alert.setContentText("Pode-se fazer o login com o(a) novo(a) Medico.");
 	    	            alert.showAndWait();
 	    			}
 	    			i.salvar();
@@ -157,10 +171,17 @@ public class ControladorTelaCadastro implements Initializable{
 	    			try{
 	    				i.cadastrarUsuario(nomeS, cpfS, senhaS, loginS, dataD);
 	    			}catch(ElementoJaExisteException e) {
+	    				loginB1 = true;
 	    				Alert alert = new Alert(AlertType.ERROR);
 	    	            alert.setTitle("Erro no Cadastro");
 	    	            alert.setHeaderText("Informacoes ja existem.");
 	    	            alert.setContentText("Tente um novo login.");
+	    	            alert.showAndWait();
+	    			}
+	    			if(loginB1 == false) {
+	    				Alert alert = new Alert(AlertType.INFORMATION);
+	    	            alert.setTitle("Cliente cadastrado(a)");
+	    	            alert.setContentText("Pode-se fazer o login com o(a) novo(a) Cliente.");
 	    	            alert.showAndWait();
 	    			}
 	    			i.salvar();
